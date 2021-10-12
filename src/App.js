@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          JK Test
+          JK Test 2
         </a>
       </header>
     </div>
