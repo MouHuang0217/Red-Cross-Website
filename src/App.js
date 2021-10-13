@@ -1,19 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {Component} from 'react';
-import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
-import {About} from './components/About'
+import Routes from './components/Routes';
 
-function App() {
+//function App() {
+export default class App extends Component {
+  render(){
   return (
     <div className="App">
-      <React.Fragment>
-      <Router>
-        <Switch>
-          <Route path="/about" component={About} />
-        </Switch>
-      </Router>
-      <header className="App-header">
+      <Routes />
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -25,10 +21,8 @@ function App() {
         >
           JK Test
         </a>
-      </header>
-      </React.Fragment>
+      </header> */}
     </div>
   );
 }
-
-export default App;
+}
