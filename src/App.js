@@ -7,6 +7,7 @@ import {About} from './components/About'
 function App() {
   return (
     <div className="App">
+      <React.Fragment>
       <Router>
         <Switch>
           <Route path="/about" component={About} />
@@ -25,6 +26,7 @@ function App() {
           JK Test
         </a>
       </header>
+      </React.Fragment>
     </div>
   );
 }
