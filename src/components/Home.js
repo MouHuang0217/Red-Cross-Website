@@ -20,6 +20,7 @@ export default class Home extends Component {
       <div className="formbody">
       <Navigation/> {/*calling the navigation component to display*/}
       {/* <TextingForm /> calling the texting form component to display */}
+      <center><a href="/about">About Page</a></center>
       </div>
     );
   }
