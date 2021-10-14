@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login } = useAuth()
+    const { login, signInWithGoogle } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -30,7 +30,21 @@ export default function Login() {
 
         setLoading(false)
     }
+    async function handleGoogleSignIn(e) {
+        e.preventDefault()
 
+        try {
+            setError("")
+            setLoading(true)
+            await signInWithGoogle()
+            history.push('/')
+            setLoggedIn(true);
+        } catch {
+            setError("Failed to Log in")
+        }
+
+        setLoading(false)
+    }
     return (
         <Container
             className="d-flex align-items-center justify-content-center"
@@ -58,6 +72,9 @@ export default function Login() {
                             </Form>
                         </Card.Body>
                     </Card>
+                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
+                        Log In With Google
+                    </Button>
                     <div className="w-100 text-center mt-2">
                         Need an account? <Link to='/Register'>Sign Up </Link>
                     </div>
