@@ -28,9 +28,19 @@ export default function Signup() {
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
             history.push("/") //redirects page to Home after signup function completes
-        } catch {
-            setError("Failed to create an account")
         }
+        catch (error) {
+            console.log(error);
+            if (error.code == 'auth/weak-password') {
+                setError("Failed to create an account: weak password")
+            }
+            else if (error.code == 'auth/email-already-in-use')
+                setError("Email already in use, please log in instead");
+            else {
+                setError("Failed to create an account")
+            }
+        }
+
 
         setLoading(false)
     }
