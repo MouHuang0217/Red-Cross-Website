@@ -5,7 +5,7 @@ import fire from './firebase';
 import { collection, getDocs } from 'firebase/firestore'
 import { getFirestore } from '@firebase/firestore'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from './Login'
+import Routes from './components/Routes';
 function Events() {
     // const [users, setUsers] = useState([]);
     // const db = getFirestore(fire);

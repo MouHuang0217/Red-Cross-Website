@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import fire from "./firebase";
+import fire from "../firebase";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithRedirect } from "firebase/auth";
 
