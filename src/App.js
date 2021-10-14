@@ -9,7 +9,6 @@ import Events from './Events'
 import Signup from './components/Signup'
 import { AuthProvider } from './contexts/AuthContext';
 import { Container } from 'react-bootstrap'
-import React, {Component} from 'react';
 import Routes from './components/Routes';
 
 //function App() {
