@@ -12,8 +12,8 @@ export default class MainNavigation extends Component {
         <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <NavItem pullRight>
-              <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>
-              <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>
+              <Button className="loginbutton" variant="dark" href="/Login">LOGIN</Button>
+              <Button className="registerbutton" variant="dark" href="/Signup">REGISTER</Button>
             </NavItem>
           </Navbar.Collapse>
         </Navbar>
