@@ -1,3 +1,4 @@
+import firebase from 'firebase'
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from "../firebase"
 
@@ -9,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
+
     //signup
     function signup(email, password) {
         console.log("in signup");
@@ -21,6 +23,17 @@ export function AuthProvider({ children }) {
     //logout
     function logout() {
         return auth.signOut();
+    }
+    function signInWithGoogle() {
+        var google_provider = new firebase.auth.GoogleAuthProvider();
+        console.log(google_provider);
+        auth.signInWithPopup(google_provider)
+            .then((re) => {
+                console.log(re);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
     }
     //what happens when first initialized
     useEffect(() => {
@@ -36,7 +49,8 @@ export function AuthProvider({ children }) {
         currentUser,
         login,
         signup,
-        logout
+        logout,
+        signInWithGoogle
     }
     //export all the values and do not load children if loading is not done.
     return (
