@@ -12,7 +12,7 @@ export default function Signup() {
     const { signup, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const history = useHistory();
+    const history = useHistory(); //using for redirection
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -25,7 +25,7 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/")
+            history.push("/") //redirects page to Home after signup function completes
         } catch {
             setError("Failed to create an account")
         }
