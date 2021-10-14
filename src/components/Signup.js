@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom'
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom'
+
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -16,11 +18,11 @@ export default function Signup() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+        //if password and confirmation is different set an error
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError("Passwords do not match")
         }
-
+        //loading is to tell user that it is currently loading
         try {
             setError("")
             setLoading(true)
@@ -64,7 +66,7 @@ export default function Signup() {
                         </Card.Body>
                     </Card>
                     <div className="w-100 text-center mt-2">
-                        Already have an account? Log In
+                        Already have an account? <Link to='/Login'>Log In </Link>
                     </div>
                 </>
             </div>
