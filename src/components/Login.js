@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
+import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -52,6 +53,11 @@ export default function Login() {
         >
             <div className="w-100">
                 <>
+                    <center>
+                        <a href="/">
+                            <img alt="logo" src={Logo} className="logo" />
+                        </a>
+                    </center>
                     <Card>
                         <Card.Body>
                             <h2 className="text-center mb-4">Log In</h2>
