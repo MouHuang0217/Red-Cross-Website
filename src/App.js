@@ -1,25 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React-dustin
-        </a>
-      </header>
-    </div>
-  );
-}
+import React, { Component, useState, useEffect } from "react";
+// import { collection, getDocs } from 'firebase/firestore'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-export default App;
+import { AuthProvider } from './contexts/AuthContext';
+import { Container } from 'react-bootstrap'
+import Routes from './components/Routes';
+
+//function App() {
+export default class App extends Component {
+  render() {
+    return (
+      // DO NOT DELETE AuthProvider! This allows all components to gain access to firebase
+      <AuthProvider>
+        <div className="App">
+          <Routes />
+          {
+
+          }
+        </div>
+      </AuthProvider>
+    );
+  }
+}
