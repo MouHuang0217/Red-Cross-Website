@@ -32,10 +32,10 @@ export default function Signup() {
         }
         catch (error) {
             console.log(error);
-            if (error.code == 'auth/weak-password') {
+            if (error.code === 'auth/weak-password') {
                 setError("Failed to create an account: weak password")
             }
-            else if (error.code == 'auth/email-already-in-use')
+            else if (error.code === 'auth/email-already-in-use')
                 setError("Email already in use, please log in instead");
             else {
                 setError("Failed to create an account")
