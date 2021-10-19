@@ -7,11 +7,9 @@ import { Link, useHistory } from 'react-router-dom'
 
 export default function ChangePassword() {
     const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login, signInWithGoogle } = useAuth()
+    const { changePassword } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
     async function handleSubmit(e) {
         e.preventDefault()
@@ -19,33 +17,18 @@ export default function ChangePassword() {
         try {
             setError("")
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
+            await changePassword(emailRef.current.value)
+            alert('Check email for password reset instructions')
             history.push({
-                pathname: "/",
-                state: { isLoggedIn: loggedIn }
+                pathname: "/Login"
             })
-            setLoggedIn(true);
         } catch {
             setError("Failed to Log in")
         }
 
         setLoading(false)
     }
-    async function handleGoogleSignIn(e) {
-        e.preventDefault()
-
-        try {
-            setError("")
-            setLoading(true)
-            await signInWithGoogle()
-            history.push('/')
-            setLoggedIn(true);
-        } catch {
-            setError("Failed to Log in")
-        }
-
-        setLoading(false)
-    }
+    
     return (
         <Container
             className="d-flex align-items-center justify-content-center"
@@ -60,27 +43,21 @@ export default function ChangePassword() {
                     </center>
                     <Card>
                         <Card.Body>
-                            <h2 className="text-center mb-4">Log In</h2>
+                            <h2 className="text-center mb-4">Change Password</h2>
                             {error && <Alert variant="danger">{error}</Alert>}
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control type="email" ref={emailRef} required />
                                 </Form.Group>
-                                <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required />
-                                </Form.Group>
+
 
                                 <Button disabled={loading} className="w-100" type="submit">
-                                    Log In
+                                    Submit
                                 </Button>
                             </Form>
                         </Card.Body>
                     </Card>
-                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
-                        Log In With Google
-                    </Button>
                     <div className="w-100 text-center mt-2">
                         Need an account? <Link to='/Register'>Sign Up </Link>
                     </div>
