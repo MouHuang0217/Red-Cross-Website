@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
 import { About } from "./About";
-import Signup from './Signup'
-import Login from './Login'
+import Signup from './Signup';
+import Login from './Login';
+import ChangePassword from './ChangePassword';
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class Routes extends Component {
           <Route path="/about" component={About} />
           <Route path="/Login" component={Login} />
           <Route path="/Register" component={Signup} />
+          <Route path="/ChangePassword" component={ChangePassword} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>

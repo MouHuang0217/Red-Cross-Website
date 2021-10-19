@@ -5,7 +5,7 @@ import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
-export default function Login() {
+export default function ChangePassword() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login, signInWithGoogle } = useAuth()
@@ -83,9 +83,6 @@ export default function Login() {
                     </Button>
                     <div className="w-100 text-center mt-2">
                         Need an account? <Link to='/Register'>Sign Up </Link>
-                    </div>
-                    <div className="w-100 text-center mt-2">
-                        Need to change your password? <Link to='/ChangePassword'>Change Password </Link>
                     </div>
                 </>
             </div>
