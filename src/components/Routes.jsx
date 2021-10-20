@@ -6,6 +6,7 @@ import { About } from "./About";
 import Signup from './Signup';
 import Login from './Login';
 import ChangePassword from './ChangePassword';
+import AdminLogin from "./AdminLogin";
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class Routes extends Component {
           <Route path="/Login" component={Login} />
           <Route path="/Register" component={Signup} />
           <Route path="/ChangePassword" component={ChangePassword} />
+          <Route path="/Admin" component={AdminLogin} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>

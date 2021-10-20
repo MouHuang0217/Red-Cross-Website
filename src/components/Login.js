@@ -1,69 +1,94 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import fire from "../firebase";
-import { GoogleAuthProvider } from "firebase/auth";
-import { getAuth, signInWithRedirect } from "firebase/auth";
+import React, { useRef, useState } from 'react'
+import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import "bootstrap/dist/css/bootstrap.min.css"
+import Logo from "../arc_logo.png";
+import { useAuth } from '../contexts/AuthContext'
+import { Link, useHistory } from 'react-router-dom'
 
-function Login() {
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-
+export default function Login() {
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const { login, signInWithGoogle } = useAuth()
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
-    const SignInWithGoogle = () => {
-        var provider = new fire.auth.GoogleAuthProvider();
-        provider.addScope('profile');
-        provider.addScope('email');
-        fire.auth().signInWithPopup(provider).then(function (result) {
-            // This gives you a Google Access Token.
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-        });
-    }
-    const handleLogin = () => {
-        fire.auth().signInWithEmailAndPassword(email, password)
-            .catch(err => {
-                switch (err.code) {
-                    case "auth/invalid-email":
-                    case "auth/user-disabled":
-                    case "auth/user-not-found":
-                        setEmailError(err.message);
-                        break;
-                    case "auth/wrong-password":
-                        setPasswordError(err.message);
-                        break;
-                        console.log("in handleLogin");
-                }
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        try {
+            setError("")
+            setLoading(true)
+            await login(emailRef.current.value, passwordRef.current.value)
+            history.push({
+                pathname: "/",
+                state: { isLoggedIn: loggedIn }
             })
+            setLoggedIn(true);
+        } catch {
+            setError("Failed to Log in")
+        }
+
+        setLoading(false)
+    }
+    async function handleGoogleSignIn(e) {
+        e.preventDefault()
+
+        try {
+            setError("")
+            setLoading(true)
+            await signInWithGoogle()
+            history.push('/')
+            setLoggedIn(true);
+        } catch {
+            setError("Failed to Log in")
+        }
+
+        setLoading(false)
     }
     return (
-        <div className="login">
-            <div className="login__container">
-                <input
-                    type="text"
-                    className="login__textBox"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="E-mail Address"
-                />
-                <input
-                    type="password"
-                    className="login__textBox"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                />
-                <button
-                    className="login__btn"
-                    onClick={() => SignInWithGoogle(email, password)}
-                >
-                    Login
-                </button>
+        <Container
+            className="d-flex align-items-center justify-content-center"
+            style={{ minHeight: "100vh" }}
+        >
+            <div className="w-100">
+                <>
+                    <center>
+                        <a href="/">
+                            <img alt="logo" src={Logo} className="logo" />
+                        </a>
+                    </center>
+                    <Card>
+                        <Card.Body>
+                            <h2 className="text-center mb-4">Log In</h2>
+                            {error && <Alert variant="danger">{error}</Alert>}
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group id="email">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="email" ref={emailRef} required />
+                                </Form.Group>
+                                <Form.Group id="password">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" ref={passwordRef} required />
+                                </Form.Group>
+
+                                <Button disabled={loading} className="w-100" type="submit">
+                                    Log In
+                                </Button>
+                            </Form>
+                        </Card.Body>
+                    </Card>
+                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
+                        Log In With Google
+                    </Button>
+                    <div className="w-100 text-center mt-2">
+                        Need an account? <Link to='/Register'>Sign Up </Link>
+                    </div>
+                    <div className="w-100 text-center mt-2">
+                        Need to change your password? <Link to='/ChangePassword'>Change Password </Link>
+                    </div>
+                </>
             </div>
-        </div>
-    );
+        </Container>
+    )
 }
-export default Login;
