@@ -11,8 +11,9 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { signup, currentUser } = useAuth()
+    const { signup, currentUser, sendVerificationEmail } = useAuth()
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
 
@@ -27,21 +28,22 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/") //redirects page to Home after signup function completes
+            setSuccess("Please check your e-mail and verify")
+            sendVerificationEmail()
+            // history.push("/") //redirects page to Home after signup function completes
         }
         catch (error) {
             console.log(error);
             if (error.code == 'auth/weak-password') {
                 setError("Failed to create an account: weak password")
             }
-            else if (error.code == 'auth/email-already-in-use')
+            else if (error.code == 'auth/email-already-in-use') {
                 setError("Email already in use, please log in instead");
+            }
             else {
                 setError("Failed to create an account")
             }
         }
-
-
         setLoading(false)
     }
 
@@ -56,6 +58,8 @@ export default function Signup() {
                         <Card.Body>
                             <h2 className="text-center mb-4">Sign Up</h2>
                             {error && <Alert variant="danger">{error}</Alert>}
+                            {success && <Alert variant="success">{success}</Alert>}
+
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>
