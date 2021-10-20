@@ -4,6 +4,7 @@ import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 import "bootstrap/dist/css/bootstrap.min.css"
+import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
@@ -34,10 +35,10 @@ export default function Signup() {
         }
         catch (error) {
             console.log(error);
-            if (error.code == 'auth/weak-password') {
+            if (error.code === 'auth/weak-password') {
                 setError("Failed to create an account: weak password")
             }
-            else if (error.code == 'auth/email-already-in-use') {
+            else if (error.code === 'auth/email-already-in-use') {
                 setError("Email already in use, please log in instead");
             }
             else {
@@ -54,6 +55,12 @@ export default function Signup() {
         >
             <div className="w-100">
                 <>
+                    <center>
+                        <a href="/">
+                            <img alt="logo" src={Logo} className="logo" />
+                        </a>
+                    </center>
+
                     <Card>
                         <Card.Body>
                             <h2 className="text-center mb-4">Sign Up</h2>

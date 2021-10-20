@@ -43,6 +43,14 @@ export function AuthProvider({ children }) {
                 console.log(error)
             })
     }
+
+    //change password
+    function changePassword(email) {
+        console.log("in changePassword");
+        return auth.sendPasswordResetEmail(email);
+    }
+
+
     //what happens when first initialized
     useEffect(() => {
         //firebase sets local storage/tokens for you need setLoading
@@ -60,7 +68,8 @@ export function AuthProvider({ children }) {
         logout,
         signInWithGoogle,
         sendVerificationEmail,
-        getUID
+        getUID,
+        changePassword
     }
     //export all the values and do not load children if loading is not done.
     return (
