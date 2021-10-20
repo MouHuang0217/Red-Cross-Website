@@ -1,6 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/auth"
-
+// create your own.env.local, and put in your keys from firebase
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,

@@ -1,7 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+
+import { useHistory } from 'react-router-dom'
+
 import "bootstrap/dist/css/bootstrap.min.css"
+import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom'
+
 export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -9,21 +15,33 @@ export default function Signup() {
     const { signup, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const history = useHistory(); //using for redirection
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+        //if password and confirmation is different set an error
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
             return setError("Passwords do not match")
         }
-
+        //loading is to tell user that it is currently loading
         try {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-        } catch {
-            setError("Failed to create an account")
+            history.push("/") //redirects page to Home after signup function completes
         }
+        catch (error) {
+            console.log(error);
+            if (error.code === 'auth/weak-password') {
+                setError("Failed to create an account: weak password")
+            }
+            else if (error.code === 'auth/email-already-in-use')
+                setError("Email already in use, please log in instead");
+            else {
+                setError("Failed to create an account")
+            }
+        }
+
 
         setLoading(false)
     }
@@ -35,6 +53,12 @@ export default function Signup() {
         >
             <div className="w-100">
                 <>
+                    <center>
+                        <a href="/">
+                            <img alt="logo" src={Logo} className="logo" />
+                        </a>
+                    </center>
+
                     <Card>
                         <Card.Body>
                             <h2 className="text-center mb-4">Sign Up</h2>
@@ -59,7 +83,7 @@ export default function Signup() {
                         </Card.Body>
                     </Card>
                     <div className="w-100 text-center mt-2">
-                        Already have an account? Log In
+                        Already have an account? <Link to='/Login'>Log In </Link>
                     </div>
                 </>
             </div>
