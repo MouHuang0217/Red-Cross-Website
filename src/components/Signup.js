@@ -29,8 +29,12 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
-            setSuccess("Please check your e-mail and verify")
-            sendVerificationEmail()
+            setSuccess("Check e-mail for verification link.")
+            await sendVerificationEmail()
+            setSuccess("Redirecting to log in page.")
+            setTimeout(() => {
+                history.push("/Login");
+            }, 4000); //redirects page to Log In after 4 milliseconds
             // history.push("/") //redirects page to Home after signup function completes
         }
         catch (error) {

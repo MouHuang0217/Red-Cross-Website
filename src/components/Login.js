@@ -87,6 +87,9 @@ export default function Login() {
                     <div className="w-100 text-center mt-2">
                         Need to change your password? <Link to='/ChangePassword'>Change Password </Link>
                     </div>
+                    <div className="w-100 text-center mt-2">
+                        Admin? <Link to='/Admin'>Admin Log In </Link>
+                    </div>
                 </>
             </div>
         </Container>
