@@ -28,7 +28,8 @@ export default function MainNavigation() {
             <NavItem pullRight>
               {(!currentUser && <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>)}
               {(!currentUser && <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>)}
-              {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}
+              {(currentUser && <Button className="loginbutton" variant="dark" href="/profile">Profile</Button>)}
+              {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}              
             </NavItem>
           </Navbar.Collapse>
         </Navbar>
