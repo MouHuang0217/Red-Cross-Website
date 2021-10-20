@@ -16,6 +16,11 @@ export function AuthProvider({ children }) {
         console.log("in signup");
         return auth.createUserWithEmailAndPassword(email, password);
     }
+    //send email
+    function sendVerificationEmail() {
+        console.log("in verification")
+        return auth.currentUser.sendEmailVerification();
+    }
     //login
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
@@ -23,6 +28,9 @@ export function AuthProvider({ children }) {
     //logout
     function logout() {
         return auth.signOut();
+    }
+    function getUID() {
+        return auth.getUID();
     }
     function signInWithGoogle() {
         var google_provider = new firebase.auth.GoogleAuthProvider();
@@ -59,6 +67,8 @@ export function AuthProvider({ children }) {
         signup,
         logout,
         signInWithGoogle,
+        sendVerificationEmail,
+        getUID,
         changePassword
     }
     //export all the values and do not load children if loading is not done.

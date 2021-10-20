@@ -26,7 +26,6 @@ export default function MainNavigation() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <NavItem pullRight>
-
               {(!currentUser && <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>)}
               {(!currentUser && <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>)}
               {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}
