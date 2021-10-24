@@ -34,7 +34,9 @@ export default function MainNavigation() {
           </Navbar.Collapse>
         </Navbar>
       </div>
-      {(currentUser && <div>{currentUser.email}</div>)}
+      <div>
+        {(currentUser && <div>{currentUser.email}</div>)}
+      </div>
     </div>
 
 
