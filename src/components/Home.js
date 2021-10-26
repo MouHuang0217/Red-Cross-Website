@@ -24,6 +24,7 @@ export default class Home extends Component {
         <Posts /> {/*show posts from database*/}
         {/* <TextingForm /> calling the texting form component to display */}
         <center><a href="/about">About Page</a></center>
+        <center><a href="/CreatePosts">Create Post</a></center>
       </div>
     );
   }

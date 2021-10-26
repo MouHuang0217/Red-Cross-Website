@@ -9,6 +9,8 @@ import ChangePassword from './ChangePassword';
 import AdminLogin from "./AdminLogin";
 
 import Profile from "./Profile";
+import CreatePosts from "./CreatePosts";
+
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
   render() {
@@ -22,6 +24,7 @@ export default class Routes extends Component {
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
           <Route path="/Profile" component={Profile}/>
+          <Route path="/CreatePosts" component={CreatePosts}/>
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>
