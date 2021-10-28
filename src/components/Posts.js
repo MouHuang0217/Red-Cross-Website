@@ -14,7 +14,7 @@ export default function Posts() {
   const [error, setError] = useState('');
   const [posts, setPosts] = useState([]);
   const history = useHistory()
-  
+
   const [loading, setLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   //const postsCollectionRef = collection(fs, "posts")
@@ -95,13 +95,13 @@ export default function Posts() {
     <div>
       {(currentUser && <div>{currentUser.email}</div>)}
       <div>
-      {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
+        {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
           Show Posts
       </Button> */}
-      <div id="postsList">
-      </div>
+        <div id="postsList">
+        </div>
 
-      {/* {posts !== [] ? (
+        {/* {posts !== [] ? (
         <div>
           {posts.map((post) => {
             return <div>
@@ -118,7 +118,7 @@ export default function Posts() {
         )} */}
 
 
-        </div>
+      </div>
     </div>
 
 

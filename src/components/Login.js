@@ -75,12 +75,13 @@ export default function Login() {
                                 <Button disabled={loading} className="w-100" type="submit">
                                     Log In
                                 </Button>
+                                <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
+                                    Log In With Google
+                                </Button>
                             </Form>
                         </Card.Body>
                     </Card>
-                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
-                        Log In With Google
-                    </Button>
+
                     <div className="w-100 text-center mt-2">
                         Need an account? <Link to='/Register'>Sign Up </Link>
                     </div>
