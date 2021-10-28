@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from './contexts/AuthContext';
 import { Container } from 'react-bootstrap'
 import Routes from './components/Routes';
-
+import PrivateRoute from './components/PrivateRoute';
 //function App() {
 export default class App extends Component {
   render() {

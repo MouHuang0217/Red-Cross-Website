@@ -14,7 +14,7 @@ export default function Posts() {
   const [error, setError] = useState('');
   const [posts, setPosts] = useState([]);
   const history = useHistory()
-  
+
   const [loading, setLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   //const postsCollectionRef = collection(fs, "posts")
@@ -69,7 +69,7 @@ export default function Posts() {
   //       {querySnapshot.forEach(function(doc) {
   //       //doc.data() is never undefined for query doc snapshots
   //       var list = document.createElement("ul");
-      
+
   //       var name = document.createElement("li");
   //       var nameCell = document.createTextNode(doc.data().name);
   //       name.appendChild(nameCell);
@@ -89,13 +89,13 @@ export default function Posts() {
     <div>
       {(currentUser && <div>{currentUser.email}</div>)}
       <div>
-      {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
+        {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
           Show Posts
       </Button> */}
-      <div id="postsList">
-      </div>
+        <div id="postsList">
+        </div>
 
-      {/* {posts !== [] ? (
+        {/* {posts !== [] ? (
         <div>
           {posts.map((post) => {
             return <div>
@@ -112,7 +112,7 @@ export default function Posts() {
         )} */}
 
 
-        </div>
+      </div>
     </div>
 
 

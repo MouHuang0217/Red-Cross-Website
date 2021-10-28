@@ -41,7 +41,7 @@ export default function Signup() {
     //     // console.log(data2);
     //     fs.collection(postType).add(postDetails)
     //     .catch(e => {console.log("Error adding document: ", e);});
-        
+
     //     // for (var i = 0; i < data.size; i++) {
     //     //     // console.log(data2[i]);
     //     //     // console.log(currentUser.getUID);
@@ -91,13 +91,13 @@ export default function Signup() {
         }
         //loading is to tell user that it is currently loading
         const postDetails = {
-            name : postNameRef.current.value,
-            date : postDateRef.current.value,
-            time : postTimeRef.current.value,
-            location : postLocationRef.current.value,
-            link : postLinkRef.current.value,
-            description : postDescriptionRef.current.value,
-            type : postTypeRef.current.value
+            name: postNameRef.current.value,
+            date: postDateRef.current.value,
+            time: postTimeRef.current.value,
+            location: postLocationRef.current.value,
+            link: postLinkRef.current.value,
+            description: postDescriptionRef.current.value,
+            type: postTypeRef.current.value
 
         }
         try {
@@ -110,26 +110,18 @@ export default function Signup() {
             // await createPost(postDetails)
             const collection = fs.collection("events")
             collection.add(postDetails)
-            .then(function(docRef){
-                console.log("Document written with ID: ", docRef.id);
-            })
-            // fs.collection("events").add(postDetails)
-            // .then(function(docRef){
-            //     console.log("Document written with ID: ", docRef.id);
-            // })
-            .catch(e => {console.log("Error adding document: ", e);});
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                // fs.collection("events").add(postDetails)
+                // .then(function(docRef){
+                //     console.log("Document written with ID: ", docRef.id);
+                // })
+                .catch(e => { console.log("Error adding document: ", e); });
         }
         catch (error) {
             console.log(error);
-            if (error.code === 'auth/weak-password') {
-                setError("Failed to create an account: weak password")
-            }
-            else if (error.code === 'auth/email-already-in-use') {
-                setError("Email already in use, please log in instead");
-            }
-            else {
-                setError("Failed to create an account")
-            }
+
         }
         setLoading(false)
         setSuccess("Post has been created.")
