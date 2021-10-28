@@ -63,27 +63,33 @@ export default function Posts() {
   //       setLoading(false)
   //   }
 
-  // useEffect(() => {
-  //   fs.collection("posts").where("isEvent", "==", true).get()
-  //     .then(function(querySnapshot)
-  //       {querySnapshot.forEach(function(doc) {
-  //       //doc.data() is never undefined for query doc snapshots
-  //       var list = document.createElement("ul");
+  useEffect(() => {
+    // fs.collection("posts").where("isEvent", "==", true).get()
+    fs.collection("events").get()
+      .then(function(querySnapshot)
+        {querySnapshot.forEach(function(doc) {
+        //doc.data() is never undefined for query doc snapshots
+        var list = document.createElement("ul");
+      
+        var name = document.createElement("li");
+        var nameCell = document.createTextNode(doc.data().name);
+        name.appendChild(nameCell);
 
-  //       var name = document.createElement("li");
-  //       var nameCell = document.createTextNode(doc.data().name);
-  //       name.appendChild(nameCell);
+        var date = document.createElement("li");
+        var dateCell = document.createTextNode(doc.data().date);
+        date.appendChild(dateCell);
 
-  //       var date = document.createElement("li");
-  //       var dateCell = document.createTextNode(doc.data().date.toDate().toDateString());
-  //       date.appendChild(dateCell);
+        var type = document.createElement("li");
+        var typeCell = document.createTextNode(doc.data().type);
+        type.appendChild(typeCell);
 
-  //       list.appendChild(name);
-  //       list.appendChild(date);
-  //       document.getElementById("postsList").appendChild(list);
-  //     })
-  //   })
-  // })
+        list.appendChild(name);
+        list.appendChild(date);
+        list.appendChild(type);
+        document.getElementById("postsList").appendChild(list);
+      })
+    })
+  })
 
   return (
     <div>
