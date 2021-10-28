@@ -29,14 +29,12 @@ export default function MainNavigation() {
               {(!currentUser && <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>)}
               {(!currentUser && <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>)}
               {(currentUser && <Button className="loginbutton" variant="dark" href="/profile">Profile</Button>)}
-              {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}              
+              {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}
             </NavItem>
           </Navbar.Collapse>
         </Navbar>
       </div>
-      <div>
-        {(currentUser && <div>{currentUser.email}</div>)}
-      </div>
+      {(currentUser && <div>{currentUser.email}</div>)}
     </div>
 
 

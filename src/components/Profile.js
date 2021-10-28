@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
 export default function Login() {
+    const { logout, currentUser } = useAuth()
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login, signInWithGoogle } = useAuth()
@@ -47,73 +48,46 @@ export default function Login() {
         setLoading(false)
     }
     return (
-        <Container
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
-            <div className="w-100">
-                <>
-                    <center>
-                        <a href="/">
-                            <img alt="logo" src={Logo} className="logo" />
-                        </a>
-                    </center>
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Profile Page</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
-                                </Form.Group>
-                                <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required />
-                                </Form.Group>
+        <Container class ="bg-light"
+            style={{}}>
+            <center>
+                <a href="/">
+                    <img alt="logo" src={Logo} className="logo" />
+                </a>
+            </center>
+            <body class="bg-light">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10 mt-5 pt-5">
+                        <div class="row z-depth-3">
+                            <div class="col-sm-4 bg-danger rounded-left">
+                                <div class="card-block text-center text-white">
+                                    <i class="fas fa-user-tie fa-7x mt-5"></i>
+                                    <h2 class="font-weight-bold mt-4">Mou Lue Huang</h2>
+                                    <p>Member</p>
+                                    <h6 class="text-black"> i love coding!</h6>
+                                    <i class="far fa-edit fa-2x mb-4"></i>
+                                </div>
+                            </div>
 
-                                <Button disabled={loading} className="w-100" type="submit">
-                                    Log In
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Demographics</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
-                                </Form.Group>
-                                <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required />
-                                </Form.Group>
-
-                                <Button disabled={loading} className="w-100" type="submit">
-                                    Log In
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-
-                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
-                        Log In With Google
-                    </Button>
-                    <div className="w-100 text-center mt-2">
-                        Need an account? <Link to='/Register'>Sign Up </Link>
+                            <div class="col-sm-8 bg-white rounded-right">
+                                <h3 class="mt-3 text-center">Information</h3>
+                                <hr class="badge-primary mt-0 w-30"></hr>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="font-weight-bold">Email:</p>
+                                        <h6 class="text-muted">{currentUser.email}</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="font-weight-bold">Nickname:</p>
+                                        <h6 class="text-muted">Mou Zedong</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="w-100 text-center mt-2">
-                        Need to change your password? <Link to='/ChangePassword'>Change Password </Link>
-                    </div>
-                    <div className="w-100 text-center mt-2">
-                        Admin? <Link to='/Admin'>Admin Log In </Link>
-                    </div>
-                </>
-            </div>
+                </div>
+
+            </body>
         </Container>
     )
 }
