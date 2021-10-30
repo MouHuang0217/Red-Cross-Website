@@ -19,29 +19,8 @@ export default function MainNavigation() {
     }
   }
   return (
-<<<<<<< HEAD
-    <div>
-      <div className="mainnavbar">
-        <Navbar collapseOnSelect fixedTop className="justify-content-between">
-          <Navbar.Brand href="/"><img alt="logo" src={Logo} className="logo" /></Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <NavItem pullRight>
-              {(!currentUser && <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>)}
-              {(!currentUser && <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>)}
-              {(currentUser && <Button className="loginbutton" variant="dark" href="/profile">Profile</Button>)}
-              {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}
-            </NavItem>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
-      {(currentUser && <div>{currentUser.email}</div>)}
-    </div>
 
-=======
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
->>>>>>> befe1eda40ef813a55e91b2e1ed8b02b2d76d690
-
       {/* <a class="navbar-brand" href="#">
             <img src={logo} alt="..." height="36"></img>
           </a> */}
