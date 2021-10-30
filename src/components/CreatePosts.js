@@ -28,6 +28,8 @@ export default function Signup() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
+    const { getUID, currentUser } = useAuth()
+
 
     // async function createPost(e, postDetails) {
     //     // e.preventDefault()
@@ -62,7 +64,22 @@ export default function Signup() {
     //     // // const users = await firebase.firestore.collection("users");
     //     // // console.log(users);
     // }
+    async function Testing(e) {
+        // fs.collection("posts").where("isEvent", "==", true).get()
+        fs.collection("users").get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    //doc.data() is never undefined for query doc snapshots
+                    // console.log(currentUser.uid)
+                    // console.log(currentUser.uid)
 
+                    if (doc.data()['UID'] == currentUser.uid) {
+                        console.log(doc.id)
+                        console.log(doc.data())
+                    }
+                })
+            })
+    }
     async function handleSubmit(e) {
         e.preventDefault()
         //if event has no name set an error
@@ -98,7 +115,6 @@ export default function Signup() {
             link: postLinkRef.current.value,
             description: postDescriptionRef.current.value,
             type: postTypeRef.current.value
-
         }
         try {
             setError("")
@@ -186,6 +202,9 @@ export default function Signup() {
                                     Create Post
                                 </Button>
                             </Form>
+                            <Button onClick={Testing} className="w-100" type="submit">
+                                Testing
+                            </Button>
                         </Card.Body>
                     </Card>
                 </>
