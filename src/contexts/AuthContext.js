@@ -25,6 +25,9 @@ export function AuthProvider({ children }) {
     function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
+    function isVerified() {
+        console.log(auth.currentUser.isVerified());
+    }
     //logout
     function logout() {
         return auth.signOut();
@@ -69,7 +72,8 @@ export function AuthProvider({ children }) {
         signInWithGoogle,
         sendVerificationEmail,
         getUID,
-        changePassword
+        changePassword,
+        isVerified
     }
     //export all the values and do not load children if loading is not done.
     return (

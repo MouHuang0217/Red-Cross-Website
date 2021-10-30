@@ -1,9 +1,9 @@
 import React, { Component, useState } from "react";
-import { Navbar, NavItem, Button } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap'
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-
+import logo from '../../src/Logo_Landscape.jpg';
 export default function MainNavigation() {
   const { logout, currentUser } = useAuth()
   const [error, setError] = useState('')
@@ -19,6 +19,7 @@ export default function MainNavigation() {
     }
   }
   return (
+<<<<<<< HEAD
     <div>
       <div className="mainnavbar">
         <Navbar collapseOnSelect fixedTop className="justify-content-between">
@@ -37,7 +38,59 @@ export default function MainNavigation() {
       {(currentUser && <div>{currentUser.email}</div>)}
     </div>
 
+=======
+    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+>>>>>>> befe1eda40ef813a55e91b2e1ed8b02b2d76d690
 
+      {/* <a class="navbar-brand" href="#">
+            <img src={logo} alt="..." height="36"></img>
+          </a> */}
+      <Navbar.Brand className="px-2" href="#home">Red Cross Website</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Container>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto pr-5">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/About">About Us</Nav.Link>
+            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown.Item href="/">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider className="d-sm-none" />
+              {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login">Login </NavDropdown.Item>)}
+              {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Register">Register </NavDropdown.Item>)}
+              {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/profile">Profile </NavDropdown.Item>)}
+              {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" onClick={handleLogOut}>Logout </NavDropdown.Item>)}
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+        {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/Login">Login</a>)}
+        {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/register">Register</a>)}
+        {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/profile">Profile</a>)}
+        {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" onClick={handleLogOut}>Log Out</a>)}
+      </Container>
+    </Navbar >
   )
 }
+{/* <div>
+    //   <div className="mainnavbar">
+    //     <Navbar collapseOnSelect fixedTop className="justify-content-between">
+    //       <Navbar.Brand href="/"><img alt="logo" src={Logo} className="logo" /></Navbar.Brand>
+    //       <Navbar.Toggle />
+    //       <Navbar.Collapse className="justify-content-end">
+    //         <NavItem pullRight>
+    //           {(!currentUser && <Button className="loginbutton" variant="dark" href="/login">LOGIN</Button>)}
+    //           {(!currentUser && <Button className="registerbutton" variant="dark" href="/register">REGISTER</Button>)}
+    //           {(currentUser && <Button className="loginbutton" variant="dark" href="/profile">Profile</Button>)}
+    //           {(currentUser && <Button className="registerbutton" variant="dark" onClick={handleLogOut}>Log Out</Button>)}
+    //         </NavItem>
+    //       </Navbar.Collapse>
+    //     </Navbar>
+    //   </div>
+    //   <div>
+    //     {(currentUser && <div>{currentUser.email}</div>)}
+    //   </div>
+    // </div> */}
+
+
 

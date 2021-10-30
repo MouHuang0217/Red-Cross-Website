@@ -2,13 +2,16 @@ import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
+import GoogleSignInButton from "../btn_google_signin_dark_pressed_web.png";
+
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+
 
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login, signInWithGoogle } = useAuth()
+    const { login, signInWithGoogle, currentUser, logout } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -19,17 +22,25 @@ export default function Login() {
         try {
             setError("")
             setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push({
-                pathname: "/",
-                state: { isLoggedIn: loggedIn }
-            })
+            await login(emailRef.current.value, passwordRef.current.value);
+            if (currentUser.emailVerified == false) {
+                console.log("isVerified", currentUser.emailVerified);
+                logout();
+                setError("Please verify your email")
+            }
+            else {
+                console.log("isVerified", currentUser.emailVerified);
+                history.push({
+                    pathname: "/",
+                    state: { isLoggedIn: loggedIn }
+                })
+            }
             setLoggedIn(true);
         } catch {
             setError("Failed to Log in")
         }
-
         setLoading(false)
+
     }
     async function handleGoogleSignIn(e) {
         e.preventDefault()
@@ -64,23 +75,23 @@ export default function Login() {
                             {error && <Alert variant="danger">{error}</Alert>}
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
+                                    <Form.Label className="mt-2">Email</Form.Label>
+                                    <Form.Control className="mt-2" type="email" ref={emailRef} required />
                                 </Form.Group>
                                 <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required />
+                                    <Form.Label className="mt-2">Password</Form.Label>
+                                    <Form.Control className="mt-2" type="password" ref={passwordRef} required />
                                 </Form.Group>
 
-                                <Button disabled={loading} className="w-100" type="submit">
+                                <Button disabled={loading} className="w-100 mt-3" type="submit">
                                     Log In
                                 </Button>
+                                {/* <button disabled={loading} className="w-100 mt-3" type="submit"><img src={GoogleSignInButton} onClick={handleGoogleSignIn} /></button> */}
+                                {/* <Button disabled={loading} className="w-100 mt-3" type="submit" onClick={handleGoogleSignIn}> </Button> */}
                             </Form>
                         </Card.Body>
                     </Card>
-                    <Button disabled={loading} className="w-100" type="submit" onClick={handleGoogleSignIn}>
-                        Log In With Google
-                    </Button>
+
                     <div className="w-100 text-center mt-2">
                         Need an account? <Link to='/Register'>Sign Up </Link>
                     </div>
@@ -92,6 +103,6 @@ export default function Login() {
                     </div>
                 </>
             </div>
-        </Container>
+        </Container >
     )
 }

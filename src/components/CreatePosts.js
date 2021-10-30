@@ -28,6 +28,8 @@ export default function Signup() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
+    const { getUID, currentUser } = useAuth()
+
 
     // async function createPost(e, postDetails) {
     //     // e.preventDefault()
@@ -41,7 +43,7 @@ export default function Signup() {
     //     // console.log(data2);
     //     fs.collection(postType).add(postDetails)
     //     .catch(e => {console.log("Error adding document: ", e);});
-        
+
     //     // for (var i = 0; i < data.size; i++) {
     //     //     // console.log(data2[i]);
     //     //     // console.log(currentUser.getUID);
@@ -62,7 +64,22 @@ export default function Signup() {
     //     // // const users = await firebase.firestore.collection("users");
     //     // // console.log(users);
     // }
+    async function Testing(e) {
+        // fs.collection("posts").where("isEvent", "==", true).get()
+        fs.collection("users").get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    //doc.data() is never undefined for query doc snapshots
+                    // console.log(currentUser.uid)
+                    // console.log(currentUser.uid)
 
+                    if (doc.data()['UID'] == currentUser.uid) {
+                        console.log(doc.id)
+                        console.log(doc.data())
+                    }
+                })
+            })
+    }
     async function handleSubmit(e) {
         e.preventDefault()
         //if event has no name set an error
@@ -91,14 +108,13 @@ export default function Signup() {
         }
         //loading is to tell user that it is currently loading
         const postDetails = {
-            name : postNameRef.current.value,
-            date : postDateRef.current.value,
-            time : postTimeRef.current.value,
-            location : postLocationRef.current.value,
-            link : postLinkRef.current.value,
-            description : postDescriptionRef.current.value,
-            type : postTypeRef.current.value
-
+            name: postNameRef.current.value,
+            date: postDateRef.current.value,
+            time: postTimeRef.current.value,
+            location: postLocationRef.current.value,
+            link: postLinkRef.current.value,
+            description: postDescriptionRef.current.value,
+            type: postTypeRef.current.value
         }
         try {
             setError("")
@@ -110,26 +126,18 @@ export default function Signup() {
             // await createPost(postDetails)
             const collection = fs.collection("events")
             collection.add(postDetails)
-            .then(function(docRef){
-                console.log("Document written with ID: ", docRef.id);
-            })
-            // fs.collection("events").add(postDetails)
-            // .then(function(docRef){
-            //     console.log("Document written with ID: ", docRef.id);
-            // })
-            .catch(e => {console.log("Error adding document: ", e);});
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                // fs.collection("events").add(postDetails)
+                // .then(function(docRef){
+                //     console.log("Document written with ID: ", docRef.id);
+                // })
+                .catch(e => { console.log("Error adding document: ", e); });
         }
         catch (error) {
             console.log(error);
-            if (error.code === 'auth/weak-password') {
-                setError("Failed to create an account: weak password")
-            }
-            else if (error.code === 'auth/email-already-in-use') {
-                setError("Email already in use, please log in instead");
-            }
-            else {
-                setError("Failed to create an account")
-            }
+
         }
         setLoading(false)
         setSuccess("Post has been created.")
@@ -194,6 +202,9 @@ export default function Signup() {
                                     Create Post
                                 </Button>
                             </Form>
+                            <Button onClick={Testing} className="w-100" type="submit">
+                                Testing
+                            </Button>
                         </Card.Body>
                     </Card>
                 </>
