@@ -23,18 +23,22 @@ export default function Login() {
             setError("")
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value);
-            if (currentUser.emailVerified == false) {
-                console.log("isVerified", currentUser.emailVerified);
-                logout();
-                setError("Please verify your email")
-            }
-            else {
-                console.log("isVerified", currentUser.emailVerified);
-                history.push({
-                    pathname: "/",
-                    state: { isLoggedIn: loggedIn }
-                })
-            }
+            // if (currentUser.emailVerified == false) {
+            //     console.log("isVerified", currentUser.emailVerified);
+            //     logout();
+            //     setError("Please verify your email")
+            // }
+            // else {
+            //     console.log("isVerified", currentUser.emailVerified);
+            //     history.push({
+            //         pathname: "/",
+            //         state: { isLoggedIn: loggedIn }
+            //     })
+            // }
+            history.push({
+                pathname: "/",
+                state: { isLoggedIn: loggedIn }
+            })
             setLoggedIn(true);
         } catch {
             setError("Failed to Log in")

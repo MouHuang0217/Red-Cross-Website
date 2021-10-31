@@ -8,19 +8,19 @@
 //     </p>
 //     </React.Fragment>
 // )
-
-import React, { Component } from 'react';
+import React, { Component, useRef, useState } from 'react'
 // import TextingForm from './TextingForm';
 import Navigation from './MainNavigation';
 import Posts from './Posts';
-
+import { Alert } from 'react-bootstrap'
+import ErrorMessage from './VerifyEmailError';
 /*Homepage, what everyone sees when they open the website*/
 export default class Home extends Component {
-
   render() {
     return (
       <div className="formbody">
         <Navigation /> {/*calling the navigation component to display*/}
+        <ErrorMessage />
         <Posts /> {/*show posts from database*/}
         {/* <TextingForm /> calling the texting form component to display */}
         <center><a href="/about">About Page</a></center>
