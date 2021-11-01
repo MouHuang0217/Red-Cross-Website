@@ -26,6 +26,7 @@ export default class Routes extends Component {
           <Route path="/Admin" component={AdminLogin} />
           <PrivateRoute path="/Profile" component={Profile} />
           <PrivateRoute path="/CreatePosts" component={CreatePosts} />
+          <PrivateRoute path="/AdminHome" component={Profile} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>

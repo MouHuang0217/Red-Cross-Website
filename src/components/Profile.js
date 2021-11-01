@@ -4,52 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 
-export default function Login() {
+export default () => {
+    //current user info
     const { logout, currentUser } = useAuth()
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const { login, signInWithGoogle } = useAuth()
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
-    const history = useHistory();
-    async function handleSubmit(e) {
-        e.preventDefault()
-
-        try {
-            setError("")
-            setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value)
-            history.push({
-                pathname: "/",
-                state: { isLoggedIn: loggedIn }
-            })
-            setLoggedIn(true);
-        } catch {
-            setError("Failed to Log in")
-        }
-
-        setLoading(false)
-    }
-    async function handleGoogleSignIn(e) {
-        e.preventDefault()
-
-        try {
-            setError("")
-            setLoading(true)
-            await signInWithGoogle()
-            history.push('/')
-            setLoggedIn(true);
-        } catch {
-            setError("Failed to Log in")
-        }
-
-        setLoading(false)
-    }
     return (
-        <Container class ="bg-light"
-            style={{}}>
+        <React.Fragment>
             <center>
                 <a href="/">
                     <img alt="logo" src={Logo} className="logo" />
@@ -62,9 +24,9 @@ export default function Login() {
                             <div class="col-sm-4 bg-danger rounded-left">
                                 <div class="card-block text-center text-white">
                                     <i class="fas fa-user-tie fa-7x mt-5"></i>
-                                    <h2 class="font-weight-bold mt-4">Mou Lue Huang</h2>
-                                    <p>Member</p>
-                                    <h6 class="text-black"> i love coding!</h6>
+
+                                    <EditText name="Name" type="name" style={{ width: '200px' }} defaultValue="First Name Last Name" inline />
+                                    <h6><EditText name="Bio" type="Bio" style={{ width: '200px' }} defaultValue="Bio" inline /></h6>
                                     <i class="far fa-edit fa-2x mb-4"></i>
                                 </div>
                             </div>
@@ -79,7 +41,7 @@ export default function Login() {
                                     </div>
                                     <div class="col-sm-6">
                                         <p class="font-weight-bold">Nickname:</p>
-                                        <h6 class="text-muted">Mou Zedong</h6>
+                                        <h6 class="text-muted"><EditText name="Nickname" type="nickname" style={{ width: '200px' }} defaultValue="Nickname" inline /></h6>
                                     </div>
                                 </div>
                             </div>
@@ -88,6 +50,6 @@ export default function Login() {
                 </div>
 
             </body>
-        </Container>
+        </React.Fragment>
     )
 }
