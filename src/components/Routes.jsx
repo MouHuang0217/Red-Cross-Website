@@ -9,6 +9,8 @@ import ChangePassword from './ChangePassword';
 import AdminLogin from "./AdminLogin";
 
 import Profile from "./Profile";
+// import EditProfile from "./EditProfile";
+
 import CreatePosts from "./CreatePosts";
 import PrivateRoute from './PrivateRoute';
 
@@ -25,6 +27,8 @@ export default class Routes extends Component {
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
           <PrivateRoute path="/Profile" component={Profile} />
+          {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
+
           <PrivateRoute path="/CreatePosts" component={CreatePosts} />
           <PrivateRoute path="/AdminHome" component={Profile} />
 

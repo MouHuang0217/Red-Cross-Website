@@ -65,8 +65,8 @@ export default function Signup() {
             firstName: firstName.current.value,
             lastName: lastName.current.value,
             email: emailRef.current.value,
+            nickname: "n/a",
             uid: uid,
-            name: "Mou Lue Huang",
             isAdmin: false
         }
         try {
