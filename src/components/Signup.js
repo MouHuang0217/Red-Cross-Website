@@ -67,7 +67,8 @@ export default function Signup() {
             email: emailRef.current.value,
             nickname: "n/a",
             uid: uid,
-            isAdmin: false
+            isAdmin: false,
+            bio: ""
         }
         try {
             setError("")
