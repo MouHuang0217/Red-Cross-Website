@@ -15,7 +15,7 @@ export default function Signup() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { signup, currentUser, sendVerificationEmail } = useAuth()
+    const { signup, currentUser, sendVerificationEmail, logout } = useAuth()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
@@ -39,6 +39,7 @@ export default function Signup() {
             setSuccess("Check e-mail for verification link.")
             await sendVerificationEmail()
             setSuccess("Redirecting to log in page.")
+            await logout()
             setTimeout(() => {
                 history.push("/Login");
             }, 4000); //redirects page to Log In after 4 milliseconds

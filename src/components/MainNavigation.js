@@ -31,12 +31,13 @@ export default function MainNavigation() {
           <Nav className="mx-auto pr-5">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/About">About Us</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item href="/">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider className="d-sm-none" />
-              {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login">Login </NavDropdown.Item>)}
+              {/* take out className to show items in divided dropdown */}
+              {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login">Login </NavDropdown.Item>)} 
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Register">Register </NavDropdown.Item>)}
               {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/profile">Profile </NavDropdown.Item>)}
               {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" onClick={handleLogOut}>Logout </NavDropdown.Item>)}
@@ -45,7 +46,7 @@ export default function MainNavigation() {
         </Navbar.Collapse>
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/Login">Login</a>)}
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/register">Register</a>)}
-        {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/profile">Profile</a>)}
+        {(currentUser && currentUser.emailVerified && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/profile">Profile</a>)}
         {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" onClick={handleLogOut}>Log Out</a>)}
       </Container>
     </Navbar >

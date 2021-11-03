@@ -83,9 +83,15 @@ export default function Posts() {
         var typeCell = document.createTextNode(doc.data().type);
         type.appendChild(typeCell);
 
+        var pic = document.createElement("li"); //refactor
+        var img = document.createElement("img"); //refactor
+        img.src = doc.data().pic; //refactor
+        pic.appendChild(img); //refactor
+
         list.appendChild(name);
         list.appendChild(date);
         list.appendChild(type);
+        list.appendChild(pic); //refactor
         document.getElementById("postsList").appendChild(list);
       })
     })
