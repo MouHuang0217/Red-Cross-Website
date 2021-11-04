@@ -8,7 +8,10 @@ import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
+import ProfilePic from '../profileDefaultPic.png';
+
 import { fs } from "../firebase"
+// import { storage } from "../firebase"
 
 export default function Signup() {
     const postNameRef = useRef()
@@ -21,6 +24,7 @@ export default function Signup() {
     const postLocationRef = useRef()
     const postLinkRef = useRef()
     const postDescriptionRef = useRef()
+    const postPicRef = useRef()
 
 
     // const { signup, currentUser, sendVerificationEmail } = useAuth()
@@ -28,6 +32,8 @@ export default function Signup() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
+    const { getUID, currentUser } = useAuth()
+
 
     // async function createPost(e, postDetails) {
     //     // e.preventDefault()
@@ -63,6 +69,40 @@ export default function Signup() {
     //     // // console.log(users);
     // }
 
+
+    async function clearPic(e) {
+        e.preventDefault();
+        document.getElementById("pic").value = "";
+        document.getElementById("profile-pic").src = ProfilePic;
+    }
+
+    async function previewPic(event) {
+        var pic = event.target; //get image from target event triggered by onChange
+        var fileRead = new FileReader();
+        fileRead.onload = function(){
+            document.getElementById("profile-pic").src = fileRead.result;
+        };
+        fileRead.readAsDataURL(pic.files[0]); //show preview of image
+    }
+
+
+
+    async function Testing(e) {
+        // fs.collection("posts").where("isEvent", "==", true).get()
+        fs.collection("users").get()
+            .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    //doc.data() is never undefined for query doc snapshots
+                    // console.log(currentUser.uid)
+                    // console.log(currentUser.uid)
+
+                    if (doc.data()['UID'] == currentUser.uid) {
+                        console.log(doc.id)
+                        console.log(doc.data())
+                    }
+                })
+            })
+    }
     async function handleSubmit(e) {
         e.preventDefault()
         //if event has no name set an error
@@ -89,6 +129,7 @@ export default function Signup() {
         if (postTypeRef.current.value === null) {
             return setError("Post must be event or a survey")
         }
+        var imgSrc = document.getElementById("profile-pic").src //refactor
         //loading is to tell user that it is currently loading
         const postDetails = {
             name: postNameRef.current.value,
@@ -97,8 +138,8 @@ export default function Signup() {
             location: postLocationRef.current.value,
             link: postLinkRef.current.value,
             description: postDescriptionRef.current.value,
-            type: postTypeRef.current.value
-
+            type: postTypeRef.current.value,
+            pic: imgSrc //refactor
         }
         try {
             setError("")
@@ -132,6 +173,7 @@ export default function Signup() {
         postLinkRef.current.value = "";
         postDescriptionRef.current.value = "";
         postTypeRef.current.value = "";
+        imgSrc = ""; //refactor
     }
 
     return (
@@ -176,16 +218,34 @@ export default function Signup() {
                                 </Form.Group>
                                 <Form.Group id="description">
                                     <Form.Label>Description</Form.Label>
-                                    <Form.Control type="text" ref={postDescriptionRef} required />
+                                    {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
+                                    <Form.Control as="textarea" rows={3} ref={postDescriptionRef} required />
                                 </Form.Group>
                                 <Form.Group id="type">
                                     <Form.Label>Post Type</Form.Label>
                                     <Form.Control type="text" ref={postTypeRef} required />
                                 </Form.Group>
+{/* refactor */}                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
+{/* refactor */}                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture."/>
+{/* refactor */}                <button onClick={clearPic}>Clear</button>
+                                {/* <Form.Group controlId="formFile" className="mb-3">
+                                    <Form.Label>Choose graphic for post</Form.Label>
+                                    <Form.Control type="file" allow="image/*" ref={postPicRef} />
+                                </Form.Group> */}
+
+                                {/* <Form.Group id="graphic">
+                                    <Form.Label>Picture</Form.Label>
+                                    <Form.Control type="file" accept="image/*" ref={postPicRef}/>
+                                </Form.Group> */}
+                                {/* <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
+                        <input type="file" id="pic" accept='image/*' onChange={this.previewPic} innerHTML="Choose profile picture."/> */}
                                 <Button disabled={loading} className="w-100" type="submit">
                                     Create Post
                                 </Button>
                             </Form>
+                            <Button onClick={Testing} className="w-100" type="submit">
+                                Testing
+                            </Button>
                         </Card.Body>
                     </Card>
                 </>

@@ -66,34 +66,40 @@ export default function Posts() {
   useEffect(() => {
     // fs.collection("posts").where("isEvent", "==", true).get()
     fs.collection("events").get()
-      .then(function(querySnapshot)
-        {querySnapshot.forEach(function(doc) {
-        //doc.data() is never undefined for query doc snapshots
-        var list = document.createElement("ul");
-      
-        var name = document.createElement("li");
-        var nameCell = document.createTextNode(doc.data().name);
-        name.appendChild(nameCell);
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          //doc.data() is never undefined for query doc snapshots
+          var list = document.createElement("ul");
 
-        var date = document.createElement("li");
-        var dateCell = document.createTextNode(doc.data().date);
-        date.appendChild(dateCell);
+          var name = document.createElement("li");
+          var nameCell = document.createTextNode(doc.data().name);
+          name.appendChild(nameCell);
 
-        var type = document.createElement("li");
-        var typeCell = document.createTextNode(doc.data().type);
-        type.appendChild(typeCell);
+          var date = document.createElement("li");
+          var dateCell = document.createTextNode(doc.data().date);
+          date.appendChild(dateCell);
 
-        list.appendChild(name);
-        list.appendChild(date);
-        list.appendChild(type);
-        document.getElementById("postsList").appendChild(list);
+          var type = document.createElement("li");
+          var typeCell = document.createTextNode(doc.data().type);
+          type.appendChild(typeCell);
+
+          var pic = document.createElement("li"); //refactor
+          var img = document.createElement("img"); //refactor
+          img.src = doc.data().pic; //refactor
+          pic.appendChild(img); //refactor
+
+          list.appendChild(name);
+          list.appendChild(date);
+          list.appendChild(type);
+          list.appendChild(pic); //refactor
+          document.getElementById("postsList").appendChild(list);
+        })
       })
-    })
   })
 
   return (
     <div>
-      {(currentUser && <div>{currentUser.email}</div>)}
+      {/* {(currentUser && <div>{currentUser.email}</div>)} */}
       <div>
         {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
           Show Posts
