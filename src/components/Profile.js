@@ -11,8 +11,8 @@ import { fs } from "../firebase"
 export default () => {
     //current user info
     const { logout, currentUser } = useAuth()
-    // const [firstName, setfirstName] = useState();
-    // const [lastName, setlastName] = useState();
+    const [firstName, setfirstName] = useState();
+    const [lastName, setlastName] = useState();
     const [name, setname] = useState();
 
     const [nickname, setnickname] = useState();
@@ -39,7 +39,9 @@ export default () => {
                             var lastName = doc.data().lastName;
                             var name = firstName + " " + lastName;
                             setname(name);
-                            // setname(doc.data().firstName)
+                            setfirstName(firstName)
+                            setlastName(lastName)
+
                             console.log(doc.data().firstName);
                             setnickname(doc.data().nickname);
 
@@ -65,7 +67,7 @@ export default () => {
     const onNickNameChange = (event) => {
         setisEditing(false);
         console.log(event);
-        setname(event);
+        setnickname(event);
 
         // setnickname(event);
     };
@@ -75,9 +77,9 @@ export default () => {
         console.log("docID", documentID);
         // console.log(firstName);
         const userDetails = {
-            // firstName: firstName,
-            firstName: name,
-            // lastName: lastName,
+            firstName: firstName,
+            // firstName: name,
+            lastName: lastName,
             email: currentUser.email,
             nickname: nickname,
             uid: currentUser.uid,
