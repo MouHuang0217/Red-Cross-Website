@@ -3,6 +3,7 @@ import React from 'react'
 import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
 import AdminNavigation from './AdminNavagationBar';
+import { Button, RadioButton } from 'react-bootstrap'
 
 function App() {
   const [spells, setSpells] = React.useState([])
@@ -29,7 +30,11 @@ function App() {
           <tr>
             {/* <th>#</th> */}
             <th>First Name</th>
+            <th>Last Name</th>
+
             <th>Email</th>
+            <th>IsAdmin</th>
+
             {/* <th>Username</th> */}
           </tr>
         </thead>
@@ -38,7 +43,9 @@ function App() {
 
             <tr key={spell.uid}>
               <td>{spell.firstName}</td>
+              <td>{spell.lastName}</td>
               <td>{spell.email}</td>
+              <td>{spell.isAdmin} <Button></Button></td>
             </tr>
           ))}
         </tbody>
