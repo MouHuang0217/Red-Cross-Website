@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import Navigation from './MainNavigation';
+import MainNavigation from './MainNavigation';
 
 export default function ChangePassword() {
     const emailRef = useRef()
@@ -28,39 +30,42 @@ export default function ChangePassword() {
 
         setLoading(false)
     }
-    
+
     return (
-        <Container
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
-            <div className="w-100">
-                <>
-                    <center>
-                        <a href="/">
-                            <img alt="logo" src={Logo} className="logo" />
-                        </a>
-                    </center>
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Change Password</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
-                                </Form.Group>
-                                <Button disabled={loading} className="w-100" type="submit">
-                                    Submit
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                    <div className="w-100 text-center mt-2">
-                        Need an account? <Link to='/Register'>Sign Up </Link>
-                    </div>
-                </>
-            </div>
-        </Container>
+        <div>
+            <MainNavigation />
+            <Container
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vh" }}
+            >
+                <div className="w-100">
+                    <>
+                        <center>
+                            <a href="/">
+                                <img alt="logo" src={Logo} className="logo" />
+                            </a>
+                        </center>
+                        <Card>
+                            <Card.Body>
+                                <h2 className="text-center mb-4">Change Password</h2>
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                <Form onSubmit={handleSubmit}>
+                                    <Form.Group id="email">
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control type="email" ref={emailRef} required />
+                                    </Form.Group>
+                                    <Button disabled={loading} className="w-100" type="submit">
+                                        Submit
+                                    </Button>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                        <div className="w-100 text-center mt-2">
+                            Need an account? <Link to='/Register'>Sign Up </Link>
+                        </div>
+                    </>
+                </div>
+            </Container>
+        </div>
     )
 }

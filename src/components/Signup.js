@@ -8,6 +8,7 @@ import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import { auth, fs } from "../firebase"
+import Navigation from './MainNavigation';
 
 export default function Signup() {
     const firstName = useRef()
@@ -94,56 +95,60 @@ export default function Signup() {
     }
 
     return (
-        <Container
-            className="d-flex align-items-center justify-content-center"
-            style={{ minHeight: "100vh" }}
-        >
-            <div className="w-100">
-                <>
-                    <center>
-                        <a href="/">
-                            <img alt="logo" src={Logo} className="logo" />
-                        </a>
-                    </center>
+        <div>
+            <Navigation />
 
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Sign Up</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            {success && <Alert variant="success">{success}</Alert>}
+            <Container
+                className="d-flex align-items-center justify-content-center"
+                style={{ minHeight: "100vh" }}
+            >
+                <div className="w-100">
+                    <>
+                        <center>
+                            <a href="/">
+                                <img alt="logo" src={Logo} className="logo" />
+                            </a>
+                        </center>
 
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="firstName">
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Control type="text" ref={firstName} required />
-                                </Form.Group>
-                                <Form.Group id="lastName">
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control type="text" ref={lastName} required />
-                                </Form.Group>
-                                <Form.Group id="email">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" ref={emailRef} required />
-                                </Form.Group>
-                                <Form.Group id="password">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" ref={passwordRef} required />
-                                </Form.Group>
-                                <Form.Group id="password-confirm">
-                                    <Form.Label>Password Confirmation</Form.Label>
-                                    <Form.Control type="password" ref={passwordConfirmRef} required />
-                                </Form.Group>
-                                <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                    Sign Up
-                                </Button>
-                            </Form>
-                        </Card.Body>
-                    </Card>
-                    <div className="w-100 text-center mt-2">
-                        Already have an account? <Link to='/Login'>Log In </Link>
-                    </div>
-                </>
-            </div>
-        </Container>
+                        <Card>
+                            <Card.Body>
+                                <h2 className="text-center mb-4">Sign Up</h2>
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                {success && <Alert variant="success">{success}</Alert>}
+
+                                <Form onSubmit={handleSubmit}>
+                                    <Form.Group id="firstName">
+                                        <Form.Label>First Name</Form.Label>
+                                        <Form.Control type="text" ref={firstName} required />
+                                    </Form.Group>
+                                    <Form.Group id="lastName">
+                                        <Form.Label>Last Name</Form.Label>
+                                        <Form.Control type="text" ref={lastName} required />
+                                    </Form.Group>
+                                    <Form.Group id="email">
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control type="email" ref={emailRef} required />
+                                    </Form.Group>
+                                    <Form.Group id="password">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control type="password" ref={passwordRef} required />
+                                    </Form.Group>
+                                    <Form.Group id="password-confirm">
+                                        <Form.Label>Password Confirmation</Form.Label>
+                                        <Form.Control type="password" ref={passwordConfirmRef} required />
+                                    </Form.Group>
+                                    <Button disabled={loading} className="w-100 mt-3" type="submit">
+                                        Sign Up
+                                    </Button>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                        <div className="w-100 text-center mt-2">
+                            Already have an account? <Link to='/Login'>Log In </Link>
+                        </div>
+                    </>
+                </div>
+            </Container>
+        </div>
     )
 }
