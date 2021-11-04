@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
+import AdminHome from "./AdminHome";
+
 import { About } from "./About";
 
 import Signup from './Signup';
@@ -30,7 +32,7 @@ export default class Routes extends Component {
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
 
           <PrivateRoute path="/CreatePosts" component={CreatePosts} />
-          <PrivateRoute path="/AdminHome" component={Profile} />
+          <PrivateRoute path="/AdminHome" component={AdminHome} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>
