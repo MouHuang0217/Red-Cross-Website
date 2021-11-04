@@ -24,7 +24,7 @@ export default function AdminNavigationBar() {
       {/* <a class="navbar-brand" href="#">
             <img src={logo} alt="..." height="36"></img>
           </a> */}
-      <Navbar.Brand className="px-2" href="#home">Red Cross Website</Navbar.Brand>
+      <Navbar.Brand className="px-2" href="/AdminHome">Red Cross Website</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Container>
         <Navbar.Collapse id="basic-navbar-nav">
