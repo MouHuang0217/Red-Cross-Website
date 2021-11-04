@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Navbar, NavItem, Button } from "react-bootstrap";
+import { Table, Navbar, NavItem, Button } from "react-bootstrap";
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
@@ -64,7 +64,13 @@ export default function Posts() {
   //   }
 
   useEffect(() => {
-    // fs.collection("posts").where("isEvent", "==", true).get()
+    // const fetchPosts = async => {
+    //   const data = fs.collection("events").get();
+    //   console.log(data);
+    //   // setPosts(data.docs.map(doc => doc.data()));
+    // }
+    // fetchPosts()
+    
     fs.collection("events").get()
       .then(function(querySnapshot)
         {querySnapshot.forEach(function(doc) {
@@ -96,16 +102,43 @@ export default function Posts() {
       })
     })
   })
+  // }), [])
 
   return (
     <div>
       {(currentUser && <div>{currentUser.email}</div>)}
-      <div>
+      {/* <div> */}
         {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
           Show Posts
       </Button> */}
         <div id="postsList">
         </div>
+        {/* {
+          posts.map(post => (
+            <li key = {post.name}>{post.name}</li>
+          ))
+        } */}
+        {/* <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      posts.map(post => (
+        <tr key = {post.name}>
+          <td>{post.name}</td>
+          <td>{post.date}</td>
+          <td>{post.type}</td>
+        </tr>        
+      ))
+    }
+
+  </tbody>
+</Table> */}
 
         {/* {posts !== [] ? (
         <div>
@@ -124,7 +157,7 @@ export default function Posts() {
         )} */}
 
 
-      </div>
+      {/* </div> */}
     </div>
 
 
