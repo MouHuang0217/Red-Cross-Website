@@ -40,7 +40,6 @@ function App() {
         </thead>
         <tbody>
           {spells.map(spell => (
-
             <tr key={spell.uid}>
               <td>{spell.firstName}</td>
               <td>{spell.lastName}</td>
