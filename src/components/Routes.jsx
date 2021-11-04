@@ -11,6 +11,7 @@ import AdminLogin from "./AdminLogin";
 import Profile from "./Profile";
 import CreatePosts from "./CreatePosts";
 import PrivateRoute from './PrivateRoute';
+import ListEmails from "./ListEmails";
 
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
@@ -24,6 +25,7 @@ export default class Routes extends Component {
           <Route path="/Register" component={Signup} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
+          <Route path="/ListEmails" component={ListEmails} />
           <PrivateRoute path="/Profile" component={Profile} />
           <PrivateRoute path="/CreatePosts" component={CreatePosts} />
 
