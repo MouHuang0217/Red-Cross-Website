@@ -106,13 +106,13 @@ export default function Signup() {
                     <>
                         <center>
                             <a href="/">
-                                <img alt="logo" src={Logo} className="logo" />
+                                <img alt="logo" src={Logo} className="logo  logo p-5" />
                             </a>
                         </center>
 
                         <Card>
                             <Card.Body>
-                                <h2 className="text-center mb-4">Sign Up</h2>
+                                <h1 className="text-center mb-4">Sign Up</h1>
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 {success && <Alert variant="success">{success}</Alert>}
 
@@ -137,8 +137,8 @@ export default function Signup() {
                                         <Form.Label>Password Confirmation</Form.Label>
                                         <Form.Control type="password" ref={passwordConfirmRef} required />
                                     </Form.Group>
-                                    <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                        Sign Up
+                                    <Button variant="outline-dark" disabled={loading} className="w-100 mt-4" type="submit">
+                                        <strong classNa="font-weight-bold">Sign Up</strong>
                                     </Button>
                                 </Form>
                             </Card.Body>

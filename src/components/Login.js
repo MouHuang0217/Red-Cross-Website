@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import GoogleSignInButton from "../btn_google_signin_dark_pressed_web.png";
@@ -73,12 +73,13 @@ export default function Login() {
                     <>
                         <center>
                             <a href="/">
-                                <img alt="logo" src={Logo} className="logo" />
+                                <Image className="logo p-5" alt="logo" src={Logo} fluid />
                             </a>
                         </center>
+
                         <Card>
                             <Card.Body>
-                                <h2 className="text-center mb-4">Log In</h2>
+                                <h1 className="text-center mb-4">Log In</h1>
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group id="email">
@@ -90,8 +91,8 @@ export default function Login() {
                                         <Form.Control className="mt-2" type="password" ref={passwordRef} required />
                                     </Form.Group>
 
-                                    <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                        Log In
+                                    <Button variant="outline-dark" disabled={loading} className="w-100 mt-4" type="submit">
+                                        <strong classNa="font-weight-bold">Log In</strong>
                                     </Button>
                                     {/* <button disabled={loading} className="w-100 mt-3" type="submit"><img src={GoogleSignInButton} onClick={handleGoogleSignIn} /></button> */}
                                     {/* <Button disabled={loading} className="w-100 mt-3" type="submit" onClick={handleGoogleSignIn}> </Button> */}
