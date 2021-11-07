@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import firebase from "../firebase"
 import Navigation from './MainNavigation';
+import Logo from "../arc_logo.png";
 
 export default function AdminLogin() {
     const emailRef = useRef()
@@ -85,9 +86,14 @@ export default function AdminLogin() {
             >
                 <div className="w-100">
                     <>
+                        <center>
+                            <a href="/">
+                                <img alt="logo" src={Logo} className="logo  logo p-5" />
+                            </a>
+                        </center>
                         <Card>
                             <Card.Body>
-                                <h2 className="text-center mb-4">Admin Log In</h2>
+                                <h1 className="text-center mb-4">Admin Log In</h1>
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group id="email">
@@ -99,8 +105,8 @@ export default function AdminLogin() {
                                         <Form.Control type="password" ref={passwordRef} required />
                                     </Form.Group>
 
-                                    <Button disabled={loading} className="w-100" type="submit">
-                                        Log In
+                                    <Button variant="outline-dark" wdisabled={loading} className="w-100 mt-4" type="submit">
+                                        <strong classNa="font-weight-bold">Log In</strong>
                                     </Button>
                                 </Form>
                             </Card.Body>

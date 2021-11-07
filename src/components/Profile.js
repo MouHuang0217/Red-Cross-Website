@@ -8,7 +8,7 @@ import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
 import Navigation from './MainNavigation';
-
+import ListEvents from './ListEvents';
 export default () => {
     //current user info
     const { logout, currentUser } = useAuth()
@@ -143,6 +143,14 @@ export default () => {
                         </div>
                     </div>
                 </body>
+                <span>&nbsp;
+                    <span>&nbsp;
+
+                        <div>
+                            <ListEvents></ListEvents>
+                        </div>
+                    </span>
+                </span>
             </React.Fragment>
         </div>
     )
