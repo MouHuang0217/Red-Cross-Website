@@ -1,15 +1,16 @@
+import '../App.css';
 import React, { Component, useState, useEffect } from "react";
 import { Table, Navbar, NavItem, Button } from "react-bootstrap";
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-
 // import { useFirestore } from '../contexts/FireStoreContext'
 import { fs } from "../firebase"
 //import { collection, getDocs } from 'firebase/firestore'
 
 import ProfilePic from '../profileDefaultPic.png';
 import { Card, Form, Container, Alert } from 'react-bootstrap'
+import App from "./ListEvents";
 
 export default function Posts() {
   const { currentUser } = useAuth()
@@ -122,37 +123,39 @@ export default function Posts() {
 
   return (
     <div>
-      <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Upcoming Events</h1>
-            <p class="lead text-muted">Come join us and meet us at our events!</p>
+      <section className="py-5 text-center container">
+        <div className="row py-lg-5">
+          <div className="col-lg-6 col-md-8 mx-auto">
+            <h1 className="fw-light">Upcoming Events</h1>
+            <p className="lead text-muted">Come join us and meet us at our events!</p>
           </div>
         </div>
       </section>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div className="album py-5 bg-light">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
             {posts.map(post => (
-              <div>
-                <div class="col">
-                  <Card key={post.name} style={{ width: '16rem', margin: 'auto' }}>
-                    <Card.Img variant="top" src={post.pic} />
-                    <Card.Body style={{ margin: 'auto' }}>
-                      <Card.Title>{post.name}</Card.Title>
-                      <Card.Text>Date: {post.date}</Card.Text>
-                      <Card.Text>Description: {post.description}</Card.Text>
-                      <Card.Text>Time: {post.time}</Card.Text>
-                      <Card.Text>Link: {post.link}</Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                  </Card>
+              <div className="h-100">
+                <div className="col ">
+                  <div class="card-group">
+                    <Card className="" key={post.name} style={{ width: '16rem', margin: 'auto' }}>
+                      <Card.Img variant="top" src={post.pic} />
+                      <Card.Body style={{ margin: 'auto' }}>
+                        <Card.Title>{post.name}</Card.Title>
+                        <Card.Text>Date: {post.date}</Card.Text>
+                        <Card.Text>Description: {post.description}</Card.Text>
+                        <Card.Text>Time: {post.time}</Card.Text>
+                        <Card.Text>Link: {post.link}</Card.Text>
+                        <Card.Text>Location: {post.location}</Card.Text>
+                        <Button variant="primary">Go somewhere</Button>
+                      </Card.Body>
+                    </Card>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
       </div>
 
