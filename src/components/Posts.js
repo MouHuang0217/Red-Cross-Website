@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Navbar, NavItem, Button } from "react-bootstrap";
+import { Table, Navbar, NavItem, Button } from "react-bootstrap";
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
@@ -7,6 +7,9 @@ import { Link, useHistory } from 'react-router-dom'
 // import { useFirestore } from '../contexts/FireStoreContext'
 import { fs } from "../firebase"
 //import { collection, getDocs } from 'firebase/firestore'
+
+import ProfilePic from '../profileDefaultPic.png';
+import { Card, Form, Container, Alert } from 'react-bootstrap'
 
 export default function Posts() {
   const { currentUser } = useAuth()
@@ -64,48 +67,164 @@ export default function Posts() {
   //   }
 
   useEffect(() => {
-    // fs.collection("posts").where("isEvent", "==", true).get()
-    fs.collection("events").get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          //doc.data() is never undefined for query doc snapshots
-          var list = document.createElement("ul");
+    const fetchPosts = async () => {
+      const data = await fs.collection("events").get();
+      setPosts(data.docs.map(doc => doc.data()))
+    }
+    fetchPosts()
+  }, [])
+    //   console.log(data);
+    //   // setPosts(data.docs.map(doc => doc.data()));
+    // }
+    // fetchPosts()
 
-          var name = document.createElement("li");
-          var nameCell = document.createTextNode(doc.data().name);
-          name.appendChild(nameCell);
+    // React.useEffect(() => {
+    //   const fetchData = async () => {
+    //     const db = firebase.firestore()
+    //     const data = await db.collection("users").get()
+    //     setSpells(data.docs.map(doc => doc.data()))
+    //   }
+    //   fetchData()
+    // }, [])
+    
+    // fs.collection("events").get()
+    //   .then(function(querySnapshot)
+    //     {querySnapshot.forEach(function(doc) {
+    //     //doc.data() is never undefined for query doc snapshots
+    //     var list = document.createElement("ul");
+      
+    //     var name = document.createElement("li");
+    //     var nameCell = document.createTextNode(doc.data().name);
+    //     name.appendChild(nameCell);
 
-          var date = document.createElement("li");
-          var dateCell = document.createTextNode(doc.data().date);
-          date.appendChild(dateCell);
+    //     var date = document.createElement("li");
+    //     var dateCell = document.createTextNode(doc.data().date);
+    //     date.appendChild(dateCell);
 
-          var type = document.createElement("li");
-          var typeCell = document.createTextNode(doc.data().type);
-          type.appendChild(typeCell);
+    //     var type = document.createElement("li");
+    //     var typeCell = document.createTextNode(doc.data().type);
+    //     type.appendChild(typeCell);
 
-          var pic = document.createElement("li"); //refactor
-          var img = document.createElement("img"); //refactor
-          img.src = doc.data().pic; //refactor
-          pic.appendChild(img); //refactor
+    //     var pic = document.createElement("li"); //refactor
+    //     var img = document.createElement("img"); //refactor
+    //     img.src = doc.data().pic; //refactor
+    //     pic.appendChild(img); //refactor
 
-          list.appendChild(name);
-          list.appendChild(date);
-          list.appendChild(type);
-          list.appendChild(pic); //refactor
-          document.getElementById("postsList").appendChild(list);
-        })
-      })
-  })
+    //     list.appendChild(name);
+    //     list.appendChild(date);
+    //     list.appendChild(type);
+    //     list.appendChild(pic); //refactor
+    //     document.getElementById("postsList").appendChild(list);
+    //   })
+    // })
+//  })
+  // }), [])
 
   return (
     <div>
-      {/* {(currentUser && <div>{currentUser.email}</div>)} */}
-      <div>
+      {(currentUser && <div>{currentUser.email}</div>)}
+      {/* <div> */}
         {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
           Show Posts
       </Button> */}
         <div id="postsList">
         </div>
+
+        {/* <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
+          <Card.Body background={ProfilePic} >Hello This is testing background image.</Card.Body>
+        </Card> */}
+
+          {posts.map(post => (
+                
+              <Card key={post.name} style={{ width: '16rem', margin: 'auto'}}>
+                <Card.Img variant="top" src={post.pic} style={{width: "30%", height: "30%", margin: "auto"}}/>
+                  <Card.Body style={{margin: 'auto'}}>
+                    <Card.Title>{post.name}</Card.Title>
+                    <Card.Text>Date: {post.date}</Card.Text>
+                    <Card.Text>Type: {post.type}</Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+              </Card>
+          ))}
+
+{/* can do background image overlay */}
+        {/* <Card style={{ width: '16rem', margin: 'auto'}}>
+          <Card.Img variant="top" src={ProfilePic} style={{width: '10rem', margin: 'auto' }}/>
+          <Card.Body>
+            <Card.Title>Card Title</Card.Title>
+            <Card.Text>
+              Date: 11/1/21
+            </Card.Text>
+            <Card.Text>
+              Type: Some more text
+            </Card.Text>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card> */}
+
+        {/* <Card className="bg-dark text-white" style={{ margin: 'auto'}}>
+          <Card.Img src={ProfilePic} alt="Post Image" style={{width: '10rem', margin: 'auto' }}/>
+          <Card.ImgOverlay>
+            <Card.Title>Card title</Card.Title>
+            <Card.Text>
+              This is a wider card with supporting text below as a natural lead-in to
+              additional content. This content is a little bit longer.
+            </Card.Text>
+            <Card.Text>Last updated 3 mins ago</Card.Text>
+          </Card.ImgOverlay>
+        </Card> */}
+
+        {/* <Table striped bordered hover>
+      
+          <thead>
+            <div>
+              <h1>Posts List</h1>
+            </div>
+            <tr>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Picture</th>
+            </tr>
+          </thead>
+          <tbody>
+          {posts.map(post => (
+                
+                <tr key={post.name}>
+                      <td>{post.name}</td>
+                      <td>{post.date}</td>
+                      <td>{post.type}</td>
+                      <td><img src={post.pic} style={{width: "30%", height: "30%", margin: "auto"}} /></td>
+                    </tr>
+              ))}
+          </tbody>
+      </Table> */}
+        {/* {
+          posts.map(post => (
+            <li key = {post.name}>{post.name}</li>
+          ))
+        } */}
+        {/* <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      posts.map(post => (
+        <tr key = {post.name}>
+          <td>{post.name}</td>
+          <td>{post.date}</td>
+          <td>{post.type}</td>
+        </tr>        
+      ))
+    }
+
+  </tbody>
+</Table> */}
 
         {/* {posts !== [] ? (
         <div>
@@ -124,7 +243,7 @@ export default function Posts() {
         )} */}
 
 
-      </div>
+      {/* </div> */}
     </div>
 
 
