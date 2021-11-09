@@ -4,6 +4,7 @@ import Home from "./Home";
 import AdminHome from "./AdminHome";
 
 import { About } from "./About";
+import { AdminAbout } from "./AdminAbout";
 
 import Signup from './Signup';
 import Login from './Login';
@@ -11,6 +12,7 @@ import ChangePassword from './ChangePassword';
 import AdminLogin from "./AdminLogin";
 
 import Profile from "./Profile";
+
 // import EditProfile from "./EditProfile";
 
 import CreatePosts from "./CreatePosts";
@@ -32,7 +34,7 @@ export default class Routes extends Component {
           <Route path="/ListEmails" component={ListEmails} />
           <PrivateRoute path="/Profile" component={Profile} />
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
-
+          <PrivateRoute path="/AdminAbout" component={AdminAbout} />
           <PrivateRoute path="/CreatePosts" component={CreatePosts} />
           <PrivateRoute path="/AdminHome" component={AdminHome} />
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import Navigation from './MainNavigation';
+import AdminNavigation from './AdminNavagationBar';
 
-export const About = () => (
+export const AdminAbout = () => (
     <div>
-        <Navigation />
+        <AdminNavigation />
         <React.Fragment>
             <main>
 
@@ -13,8 +13,8 @@ export const About = () => (
                             <h1 class="fw-light">About Red Cross CSULB</h1>
                             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
                             <p>
-                                <a href="/" class="btn btn-primary mx-2">Check Events</a>
-                                <a href="/Login" class="btn btn-secondary my-2">Log In to Register for Events</a>
+                                <a href="#" class="btn btn-primary mx-2">Check Events</a>
+                                <a href="#" class="btn btn-secondary my-2">Log In to Register for Events</a>
                             </p>
                         </div>
                     </div>
@@ -30,6 +30,7 @@ export const About = () => (
 
                                     <div class="card-body">
                                         <p class="card-text">Abbas</p>
+
                                     </div>
                                 </div>
                             </div>
@@ -39,6 +40,9 @@ export const About = () => (
 
                                     <div class="card-body">
                                         <p class="card-text">Abbas</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

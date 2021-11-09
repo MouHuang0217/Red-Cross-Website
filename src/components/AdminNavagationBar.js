@@ -30,6 +30,8 @@ export default function AdminNavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto pr-5">
             <Nav.Link href="/AdminHome">Home</Nav.Link>
+            <Nav.Link href="/AdminAbout">About Us</Nav.Link>
+
             {/* <Nav.Link href="/About">About Us</Nav.Link> */}
             <NavDropdown title="Admin Functionalities" id="basic-nav-dropdown">
               <NavDropdown.Item href="/CreatePosts">Create Post</NavDropdown.Item>

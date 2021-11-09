@@ -14,16 +14,14 @@ function App() {
             const data = await db.collection("events").get()
             // setEvents(data.docs.map(doc => doc.data()))
             setEvents(data.docs.map(doc => { return { ...doc.data(), id: doc.id } }));
-
         }
         fetchData()
     }, [])
 
     return (
         <div className="formbody">
-            <Table striped bordered hover>
-
-                <thead>
+            <Table striped bordered hover >
+                <thead variant="dark">
 
                     <div>
                         <h1>List Of Events</h1>
@@ -31,7 +29,6 @@ function App() {
                     <tr>
                         {/* <th>#</th> */}
                         <th>ID</th>
-
                         <th>Event Name</th>
                         <th>Time</th>
                         <th>Location</th>
