@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 
 import { useHistory } from 'react-router-dom'
 
@@ -73,7 +73,8 @@ export default function Signup() {
     async function clearPic(e) {
         e.preventDefault();
         document.getElementById("pic").value = "";
-        document.getElementById("profile-pic").src = ProfilePic;
+        // document.getElementById("profile-pic").src = ProfilePic;
+        document.getElementById("profile-pic").src = "";
     }
 
     async function previewPic(event) {
@@ -181,7 +182,7 @@ export default function Signup() {
             className="d-flex align-items-center justify-content-center"
             style={{ minHeight: "100vh" }}
         >
-            <div className="w-100">
+            <div className="w-50">
                 <>
                     <center>
                         <a href="/">
@@ -225,9 +226,18 @@ export default function Signup() {
                                     <Form.Label>Post Type</Form.Label>
                                     <Form.Control type="text" ref={postTypeRef} required />
                                 </Form.Group>
-{/* refactor */}                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
-{/* refactor */}                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture."/>
-{/* refactor */}                <button onClick={clearPic}>Clear</button>
+                                <Form.Group controlId="formFile" className="mb-5">
+                                    {/* <Form.Label>Post Image</Form.Label> */}
+                                    <Image style={{width: "30%", height: "30%", margin: "auto"}} id="profile-pic" alt="Post Image" />
+                                    <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*//>                                    
+                                    <Button onClick={clearPic}>Clear</Button>
+                                </Form.Group>
+                                {/* <Form.Label>Post Image</Form.Label>
+                                <Image style={{width: "25%", height: "25%", margin: "auto"}} src={ProfilePic} id="profile-pic" alt="Profile Face" /> */}
+{/* refactor                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "50%", height: "50%", margin: "auto"}}></img> */}
+{/* refactor                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture."/> */}
+{/* refactor                <button onClick={clearPic}>Clear</button> */}
+
                                 {/* <Form.Group controlId="formFile" className="mb-3">
                                     <Form.Label>Choose graphic for post</Form.Label>
                                     <Form.Control type="file" allow="image/*" ref={postPicRef} />
@@ -243,9 +253,9 @@ export default function Signup() {
                                     Create Post
                                 </Button>
                             </Form>
-                            <Button onClick={Testing} className="w-100" type="submit">
+                            {/* <Button onClick={Testing} className="w-100" type="submit">
                                 Testing
-                            </Button>
+                            </Button> */}
                         </Card.Body>
                     </Card>
                 </>
