@@ -73,82 +73,91 @@ export default function Posts() {
     }
     fetchPosts()
   }, [])
-    //   console.log(data);
-    //   // setPosts(data.docs.map(doc => doc.data()));
-    // }
-    // fetchPosts()
+  //   console.log(data);
+  //   // setPosts(data.docs.map(doc => doc.data()));
+  // }
+  // fetchPosts()
 
-    // React.useEffect(() => {
-    //   const fetchData = async () => {
-    //     const db = firebase.firestore()
-    //     const data = await db.collection("users").get()
-    //     setSpells(data.docs.map(doc => doc.data()))
-    //   }
-    //   fetchData()
-    // }, [])
-    
-    // fs.collection("events").get()
-    //   .then(function(querySnapshot)
-    //     {querySnapshot.forEach(function(doc) {
-    //     //doc.data() is never undefined for query doc snapshots
-    //     var list = document.createElement("ul");
-      
-    //     var name = document.createElement("li");
-    //     var nameCell = document.createTextNode(doc.data().name);
-    //     name.appendChild(nameCell);
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     const db = firebase.firestore()
+  //     const data = await db.collection("users").get()
+  //     setSpells(data.docs.map(doc => doc.data()))
+  //   }
+  //   fetchData()
+  // }, [])
 
-    //     var date = document.createElement("li");
-    //     var dateCell = document.createTextNode(doc.data().date);
-    //     date.appendChild(dateCell);
+  // fs.collection("events").get()
+  //   .then(function(querySnapshot)
+  //     {querySnapshot.forEach(function(doc) {
+  //     //doc.data() is never undefined for query doc snapshots
+  //     var list = document.createElement("ul");
 
-    //     var type = document.createElement("li");
-    //     var typeCell = document.createTextNode(doc.data().type);
-    //     type.appendChild(typeCell);
+  //     var name = document.createElement("li");
+  //     var nameCell = document.createTextNode(doc.data().name);
+  //     name.appendChild(nameCell);
 
-    //     var pic = document.createElement("li"); //refactor
-    //     var img = document.createElement("img"); //refactor
-    //     img.src = doc.data().pic; //refactor
-    //     pic.appendChild(img); //refactor
+  //     var date = document.createElement("li");
+  //     var dateCell = document.createTextNode(doc.data().date);
+  //     date.appendChild(dateCell);
 
-    //     list.appendChild(name);
-    //     list.appendChild(date);
-    //     list.appendChild(type);
-    //     list.appendChild(pic); //refactor
-    //     document.getElementById("postsList").appendChild(list);
-    //   })
-    // })
-//  })
+  //     var type = document.createElement("li");
+  //     var typeCell = document.createTextNode(doc.data().type);
+  //     type.appendChild(typeCell);
+
+  //     var pic = document.createElement("li"); //refactor
+  //     var img = document.createElement("img"); //refactor
+  //     img.src = doc.data().pic; //refactor
+  //     pic.appendChild(img); //refactor
+
+  //     list.appendChild(name);
+  //     list.appendChild(date);
+  //     list.appendChild(type);
+  //     list.appendChild(pic); //refactor
+  //     document.getElementById("postsList").appendChild(list);
+  //   })
+  // })
+  //  })
   // }), [])
 
   return (
     <div>
-      {(currentUser && <div>{currentUser.email}</div>)}
-      {/* <div> */}
-        {/* <Button disabled={loading} className="w-20" type="submit" onClick={showPosts}>
-          Show Posts
-      </Button> */}
-        <div id="postsList">
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Upcoming Events</h1>
+            <p class="lead text-muted">Come join us and meet us at our events!</p>
+          </div>
         </div>
+      </section>
 
-        {/* <Card shadow={0} style={{width: '320px', height: '320px', margin: 'auto'}}>
-          <Card.Body background={ProfilePic} >Hello This is testing background image.</Card.Body>
-        </Card> */}
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {posts.map(post => (
+              <div>
+                <div class="col">
+                  <Card key={post.name} style={{ width: '16rem', margin: 'auto' }}>
+                    <Card.Img variant="top" src={post.pic} />
+                    <Card.Body style={{ margin: 'auto' }}>
+                      <Card.Title>{post.name}</Card.Title>
+                      <Card.Text>Date: {post.date}</Card.Text>
+                      <Card.Text>Description: {post.description}</Card.Text>
+                      <Card.Text>Time: {post.time}</Card.Text>
+                      <Card.Text>Link: {post.link}</Card.Text>
+                      <Button variant="primary">Go somewhere</Button>
+                    </Card.Body>
+                  </Card>
+                </div>
+              </div>
+            ))}
+          </div>
 
-          {posts.map(post => (
-                
-              <Card key={post.name} style={{ width: '16rem', margin: 'auto'}}>
-                <Card.Img variant="top" src={post.pic} style={{width: "30%", height: "30%", margin: "auto"}}/>
-                  <Card.Body style={{margin: 'auto'}}>
-                    <Card.Title>{post.name}</Card.Title>
-                    <Card.Text>Date: {post.date}</Card.Text>
-                    <Card.Text>Type: {post.type}</Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-              </Card>
-          ))}
+        </div>
+      </div>
 
-{/* can do background image overlay */}
-        {/* <Card style={{ width: '16rem', margin: 'auto'}}>
+      {/* can do background image overlay */}
+      {/* <Card style={{ width: '16rem', margin: 'auto'}}>
           <Card.Img variant="top" src={ProfilePic} style={{width: '10rem', margin: 'auto' }}/>
           <Card.Body>
             <Card.Title>Card Title</Card.Title>
@@ -162,7 +171,7 @@ export default function Posts() {
           </Card.Body>
         </Card> */}
 
-        {/* <Card className="bg-dark text-white" style={{ margin: 'auto'}}>
+      {/* <Card className="bg-dark text-white" style={{ margin: 'auto'}}>
           <Card.Img src={ProfilePic} alt="Post Image" style={{width: '10rem', margin: 'auto' }}/>
           <Card.ImgOverlay>
             <Card.Title>Card title</Card.Title>
@@ -174,7 +183,7 @@ export default function Posts() {
           </Card.ImgOverlay>
         </Card> */}
 
-        {/* <Table striped bordered hover>
+      {/* <Table striped bordered hover>
       
           <thead>
             <div>
@@ -199,12 +208,12 @@ export default function Posts() {
               ))}
           </tbody>
       </Table> */}
-        {/* {
+      {/* {
           posts.map(post => (
             <li key = {post.name}>{post.name}</li>
           ))
         } */}
-        {/* <Table striped bordered hover>
+      {/* <Table striped bordered hover>
   <thead>
     <tr>
       <th>Name</th>
@@ -226,7 +235,7 @@ export default function Posts() {
   </tbody>
 </Table> */}
 
-        {/* {posts !== [] ? (
+      {/* {posts !== [] ? (
         <div>
           {posts.map((post) => {
             return <div>
@@ -244,7 +253,7 @@ export default function Posts() {
 
 
       {/* </div> */}
-    </div>
+    </div >
 
 
   )
