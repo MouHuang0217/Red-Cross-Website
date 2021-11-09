@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 
 import { useHistory } from 'react-router-dom'
 
@@ -9,7 +9,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
 import ProfilePic from '../profileDefaultPic.png';
-import AdminNavigation from './AdminNavagationBar';
 
 import { fs } from "../firebase"
 // import { storage } from "../firebase"
@@ -74,13 +73,14 @@ export default function Signup() {
     async function clearPic(e) {
         e.preventDefault();
         document.getElementById("pic").value = "";
-        document.getElementById("profile-pic").src = ProfilePic;
+        // document.getElementById("profile-pic").src = ProfilePic;
+        document.getElementById("profile-pic").src = "";
     }
 
     async function previewPic(event) {
         var pic = event.target; //get image from target event triggered by onChange
         var fileRead = new FileReader();
-        fileRead.onload = function () {
+        fileRead.onload = function(){
             document.getElementById("profile-pic").src = fileRead.result;
         };
         fileRead.readAsDataURL(pic.files[0]); //show preview of image
@@ -178,82 +178,88 @@ export default function Signup() {
     }
 
     return (
-        <div>
-            <AdminNavigation />
-            <Container
-                className="d-flex align-items-center justify-content-center"
-                style={{ minHeight: "100vh" }}
-            >
-                <div className="w-100">
-                    <>
-                        <center>
-                            <a href="/">
-                                <img alt="logo" src={Logo} className="logo" />
-                            </a>
-                        </center>
+        <Container
+            className="d-flex align-items-center justify-content-center"
+            style={{ minHeight: "100vh" }}
+        >
+            <div className="w-50">
+                <>
+                    <center>
+                        <a href="/">
+                            <img alt="logo" src={Logo} className="logo" />
+                        </a>
+                    </center>
 
-                        <Card>
-                            <Card.Body>
-                                <h2 className="text-center mb-4">Create Post</h2>
-                                {error && <Alert variant="danger">{error}</Alert>}
-                                {success && <Alert variant="success">{success}</Alert>}
+                    <Card>
+                        <Card.Body>
+                            <h2 className="text-center mb-4">Create Post</h2>
+                            {error && <Alert variant="danger">{error}</Alert>}
+                            {success && <Alert variant="success">{success}</Alert>}
 
-                                <Form onSubmit={handleSubmit}>
-                                    <Form.Group id="name">
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" ref={postNameRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="date">
-                                        <Form.Label>Date</Form.Label>
-                                        <Form.Control type="date" ref={postDateRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="time">
-                                        <Form.Label>Time</Form.Label>
-                                        <Form.Control type="time" ref={postTimeRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="location">
-                                        <Form.Label>Location</Form.Label>
-                                        <Form.Control type="text" ref={postLocationRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="link">
-                                        <Form.Label>Link</Form.Label>
-                                        <Form.Control type="text" ref={postLinkRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="description">
-                                        <Form.Label>Description</Form.Label>
-                                        {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
-                                        <Form.Control as="textarea" rows={3} ref={postDescriptionRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="type">
-                                        <Form.Label>Post Type</Form.Label>
-                                        <Form.Control type="text" ref={postTypeRef} required />
-                                    </Form.Group>
-                                    {/* refactor */}                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{ width: "30%", height: "30%", margin: "auto" }}></img>
-                                    {/* refactor */}                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture." />
-                                    {/* refactor */}                <button onClick={clearPic}>Clear</button>
-                                    {/* <Form.Group controlId="formFile" className="mb-3">
+                            <Form onSubmit={handleSubmit}>
+                                <Form.Group id="name">
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control type="text" ref={postNameRef} required />
+                                </Form.Group>
+                                <Form.Group id="date">
+                                    <Form.Label>Date</Form.Label>
+                                    <Form.Control type="date" ref={postDateRef} required />
+                                </Form.Group>
+                                <Form.Group id="time">
+                                    <Form.Label>Time</Form.Label>
+                                    <Form.Control type="time" ref={postTimeRef} required />
+                                </Form.Group>
+                                <Form.Group id="location">
+                                    <Form.Label>Location</Form.Label>
+                                    <Form.Control type="text" ref={postLocationRef} required />
+                                </Form.Group>
+                                <Form.Group id="link">
+                                    <Form.Label>Link</Form.Label>
+                                    <Form.Control type="text" ref={postLinkRef} required />
+                                </Form.Group>
+                                <Form.Group id="description">
+                                    <Form.Label>Description</Form.Label>
+                                    {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
+                                    <Form.Control as="textarea" rows={3} ref={postDescriptionRef} required />
+                                </Form.Group>
+                                <Form.Group id="type">
+                                    <Form.Label>Post Type</Form.Label>
+                                    <Form.Control type="text" ref={postTypeRef} required />
+                                </Form.Group>
+                                <Form.Group controlId="formFile" className="mb-5">
+                                    {/* <Form.Label>Post Image</Form.Label> */}
+                                    <Image style={{width: "30%", height: "30%", margin: "auto"}} id="profile-pic" alt="Post Image" />
+                                    <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*//>                                    
+                                    <Button onClick={clearPic}>Clear</Button>
+                                </Form.Group>
+                                {/* <Form.Label>Post Image</Form.Label>
+                                <Image style={{width: "25%", height: "25%", margin: "auto"}} src={ProfilePic} id="profile-pic" alt="Profile Face" /> */}
+{/* refactor                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "50%", height: "50%", margin: "auto"}}></img> */}
+{/* refactor                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture."/> */}
+{/* refactor                <button onClick={clearPic}>Clear</button> */}
+
+                                {/* <Form.Group controlId="formFile" className="mb-3">
                                     <Form.Label>Choose graphic for post</Form.Label>
                                     <Form.Control type="file" allow="image/*" ref={postPicRef} />
                                 </Form.Group> */}
 
-                                    {/* <Form.Group id="graphic">
+                                {/* <Form.Group id="graphic">
                                     <Form.Label>Picture</Form.Label>
                                     <Form.Control type="file" accept="image/*" ref={postPicRef}/>
                                 </Form.Group> */}
-                                    {/* <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
+                                {/* <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
                         <input type="file" id="pic" accept='image/*' onChange={this.previewPic} innerHTML="Choose profile picture."/> */}
-                                    <Button disabled={loading} className="w-100" type="submit">
-                                        Create Post
-                                    </Button>
-                                </Form>
-                                <Button onClick={Testing} className="w-100" type="submit">
-                                    Testing
+                                <Button disabled={loading} className="w-100" type="submit">
+                                    Create Post
                                 </Button>
-                            </Card.Body>
-                        </Card>
-                    </>
-                </div>
-            </Container>
-        </div>
+                            </Form>
+                            {/* <Button onClick={Testing} className="w-100" type="submit">
+                                Testing
+                            </Button> */}
+                        </Card.Body>
+                    </Card>
+                </>
+            </div>
+        </Container>
     )
 }
