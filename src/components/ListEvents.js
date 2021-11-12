@@ -62,7 +62,7 @@ function App() {
                 <thead variant="dark">
 
                     <div>
-                        <h1>List Of Events</h1>
+                        <h1>List Of RSVP'd Events</h1>
                     </div>
                     <tr>
                         {/* <th>#</th> */}

@@ -132,15 +132,15 @@ export default () => {
                             {/* <Button href="/EditProfile">Edit</Button> */}
                         </div>
                     </div>
-                </body>
-                <span>&nbsp;
                     <span>&nbsp;
-
-                        <div>
-                            <ListEvents></ListEvents>
-                        </div>
+                        <span>&nbsp;
+                            <div>
+                                <ListEvents></ListEvents>
+                            </div>
+                        </span>
                     </span>
-                </span>
+                </body>
+
             </React.Fragment>
         </div>
     )
