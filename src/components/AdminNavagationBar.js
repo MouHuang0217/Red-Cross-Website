@@ -20,7 +20,7 @@ export default function AdminNavigationBar() {
   }
   return (
 
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+    <Navbar bg="danger" variant="dark" expand="lg" sticky="top">
       {/* <a class="navbar-brand" href="#">
             <img src={logo} alt="..." height="36"></img>
           </a> */}
@@ -58,7 +58,6 @@ export default function AdminNavigationBar() {
         </Navbar.Collapse>
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/Login"><strong>Login</strong></a>)}
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/register"><strong>Register</strong></a>)}
-        {(currentUser && currentUser.emailVerified && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/AdminProfile"><strong>Profile</strong></a>)}
         {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" onClick={handleLogOut}><strong>Log Out</strong></a>)}
       </Container>
     </Navbar >

@@ -1,14 +1,12 @@
 import React, { useRef, useState, useEffect, } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
-import { EditText, EditTextarea } from 'react-edit-text';
+import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
 import AdminNavigation from './AdminNavagationBar';
-import ListEvents from './ListEvents';
+
 export default () => {
     //current user info
     const { logout, currentUser } = useAuth()
@@ -43,18 +41,14 @@ export default () => {
                             setfirstName(firstName)
                             setlastName(lastName)
 
-                            console.log(doc.data().firstName);
                             setnickname(doc.data().nickname);
 
-                            console.log(doc.data().nickname);
 
-                            console.log("docId", doc.id);
                             setdocumentID(doc.id);
                         }
                     })
                 })
         }
-        console.log("done");
 
     }
     const onNameChange = (event) => {
@@ -102,6 +96,7 @@ export default () => {
         <div>
             <React.Fragment>
                 <AdminNavigation />
+                {/* <div>{currentUser.uid}</div> */}
                 <center>
                     <a href="/">
                         <img alt="logo" src={Logo} className="logo" />
@@ -141,15 +136,9 @@ export default () => {
                         </div>
                     </div>
                 </body>
-                <span>&nbsp;
-                    <span>&nbsp;
 
-                        <div>
-                            <ListEvents></ListEvents>
-                        </div>
-                    </span>
-                </span>
             </React.Fragment>
+
         </div>
     )
 }

@@ -166,7 +166,8 @@ export default function Signup() {
             description: postDescriptionRef.current.value,
             type: postTypeRef.current.value,
             pic: imgSrc, //refactor,
-            id: nextInt
+            id: nextInt,
+            attendees: []
         }
         try {
             setError("")
