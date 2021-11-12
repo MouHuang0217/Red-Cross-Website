@@ -21,7 +21,6 @@ import AdminRoute from './AdminRoute';
 import Navigation from './MainNavigation';
 
 import ListEmails from "./ListEmails";
-import AdminProfile from "./AdminProfile";
 
 import EditEvent from "./EditEvent"
 import UserPage from "./UserPage"
@@ -46,7 +45,6 @@ export default class Routes extends Component {
           <AdminRoute path="/CreatePosts" component={CreatePosts} />
           <AdminRoute path="/AdminHome" component={AdminHome} />
           <AdminRoute path="/ListEmails" component={ListEmails} />
-          <AdminRoute path="/AdminProfile" component={AdminProfile} />
           <Route path="/EditEvent/:docID" component={EditEvent} />
 
           {/* <Route path="/Events" component={Events} /> */}
