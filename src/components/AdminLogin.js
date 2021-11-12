@@ -64,7 +64,6 @@ export default function AdminLogin() {
                 await login(emailRef.current.value, passwordRef.current.value);
                 console.log("Logged In");
                 setSuccess("Logged In")
-
                 setLoggedIn(true);
             }
             else if (isadmin == false) {

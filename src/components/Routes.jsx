@@ -24,6 +24,8 @@ import ListEmails from "./ListEmails";
 import AdminProfile from "./AdminProfile";
 
 import EditEvent from "./EditEvent"
+import UserPage from "./UserPage"
+
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
   render() {
@@ -37,6 +39,8 @@ export default class Routes extends Component {
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
           <PrivateRoute path="/Profile" component={Profile} />
+          <PrivateRoute path="/user/:docID" component={UserPage} />
+
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
           <AdminRoute path="/AdminAbout" component={AdminAbout} />
           <AdminRoute path="/CreatePosts" component={CreatePosts} />

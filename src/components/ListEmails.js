@@ -3,9 +3,9 @@ import React, { useRef, useState, useEffect, } from 'react'
 import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
 import AdminNavigation from './AdminNavagationBar';
-import { Button, RadioButton, Alert } from 'react-bootstrap'
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import { fs } from "../firebase"
+import { Link, useHistory } from 'react-router-dom'
 
 function App() {
   const [spells, setSpells] = React.useState([])
@@ -82,7 +82,9 @@ function App() {
             <tr key={spell.id}>
               <td>{spell.firstName}</td>
               <td>{spell.lastName}</td>
-              <td>{spell.email}</td>
+              <td>
+                <Link to={`/user/${spell.id}`}>{spell.email}</Link>
+              </td>
               <td >{spell.isAdmin}
                 <BootstrapSwitchButton
                   data-width="100"
@@ -96,7 +98,7 @@ function App() {
           ))}
         </tbody>
       </Table>
-    </div>
+    </div >
 
   );
 }
