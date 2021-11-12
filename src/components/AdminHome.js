@@ -11,7 +11,7 @@
 import React, { Component, useRef, useState } from 'react'
 // import TextingForm from './TextingForm';
 import AdminNavigation from './AdminNavagationBar';
-import Posts from './Posts';
+import AdminPosts from './AdminPosts';
 import { Alert } from 'react-bootstrap'
 import ErrorMessage from './VerifyEmailError';
 /*Homepage, what everyone sees when they open the website*/
@@ -21,9 +21,8 @@ export default class AdminHome extends Component {
       <div className="formbody">
         <AdminNavigation /> {/*calling the navigation component to display*/}
         <ErrorMessage />
-        <Posts /> {/*show posts from database*/}
+        <AdminPosts /> {/*show posts from database*/}
         {/* <TextingForm /> calling the texting form component to display */}
-        <center><a href="/about">About Page</a></center>
         <center><a href="/CreatePosts">Create Post</a></center>
       </div>
     );

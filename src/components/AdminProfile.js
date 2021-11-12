@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
-import Navigation from './MainNavigation';
+import AdminNavigation from './AdminNavagationBar';
 import ListEvents from './ListEvents';
 export default () => {
     //current user info
@@ -72,7 +72,6 @@ export default () => {
         // setnickname(event);
     };
 
-
     async function updateUserData() {
         console.log("docID", documentID);
         // console.log(firstName);
@@ -102,7 +101,7 @@ export default () => {
     return (
         <div>
             <React.Fragment>
-                <Navigation />
+                <AdminNavigation />
                 <center>
                     <a href="/">
                         <img alt="logo" src={Logo} className="logo" />
