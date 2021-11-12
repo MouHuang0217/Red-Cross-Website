@@ -8,10 +8,13 @@
 //     </p>
 //     </React.Fragment>
 // )
+import Footer from './Footer';
+
 import React, { Component, useRef, useState } from 'react'
 // import TextingForm from './TextingForm';
 import Navigation from './MainNavigation';
 import Posts from './Posts';
+
 import { Alert } from 'react-bootstrap'
 import ErrorMessage from './VerifyEmailError';
 /*Homepage, what everyone sees when they open the website*/
@@ -21,7 +24,8 @@ export default class Home extends Component {
       <div className="formbody">
         <Navigation /> {/*calling the navigation component to display*/}
         <ErrorMessage />
-        <Posts /> {/*show posts from database*/}
+        <Posts />
+        <Footer />
         {/* <TextingForm /> calling the texting form component to display */}
       </div>
     );

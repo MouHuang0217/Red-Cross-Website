@@ -10,8 +10,10 @@ import Logo from "../arc_logo.png";
 export default function AdminLogin() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login, signInWithGoogle, getUID, currentUser } = useAuth()
+    const { login, signInWithGoogle, getUID, currentUser, logout } = useAuth()
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
 
@@ -46,6 +48,11 @@ export default function AdminLogin() {
         // const users = await firebase.firestore.collection("users");
         // console.log(users);
     }
+    function goToAdminHome() {
+        history.push({
+            pathname: "/AdminHome",
+        })
+    }
     async function handleSubmit(e) {
         e.preventDefault()
         var isadmin = await checkIfAdmin();
@@ -54,17 +61,15 @@ export default function AdminLogin() {
             setError("")
             setLoading(true)
             if (isadmin == true) {
-                await login(emailRef.current.value, passwordRef.current.value)
+                await login(emailRef.current.value, passwordRef.current.value);
                 console.log("Logged In");
-                history.push({
-                    pathname: "/AdminHome",
-                    state: { isLoggedIn: loggedIn }
-                })
+                setSuccess("Logged In")
                 setLoggedIn(true);
             }
             else if (isadmin == false) {
                 setError("Not an ADMIN account");
                 console.log("Not Admin");
+                logout()
             }
             // const db = firebase.firestore()
             // const data = await db.collection("users").get();
@@ -74,6 +79,7 @@ export default function AdminLogin() {
         } catch {
             setError("Failed to Log in")
         }
+
         setLoading(false)
     }
 
@@ -95,20 +101,26 @@ export default function AdminLogin() {
                             <Card.Body>
                                 <h1 className="text-center mb-4">Admin Log In</h1>
                                 {error && <Alert variant="danger">{error}</Alert>}
+                                {success && <Alert variant="success">{success}</Alert>}
+
                                 <Form onSubmit={handleSubmit}>
-                                    <Form.Group id="email">
+                                    {(!loggedIn && <Form.Group id="email">
                                         <Form.Label>Email</Form.Label>
                                         <Form.Control type="email" ref={emailRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="password">
+                                    </Form.Group>)}
+                                    {(!loggedIn && <Form.Group id="password">
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" ref={passwordRef} required />
-                                    </Form.Group>
+                                    </Form.Group>)}
 
-                                    <Button variant="outline-dark" wdisabled={loading} className="w-100 mt-4" type="submit">
+                                    {(!loggedIn && <Button variant="outline-dark" wdisabled={loading} className="w-100 mt-4" type="submit">
                                         <strong classNa="font-weight-bold">Log In</strong>
-                                    </Button>
+                                    </Button>)}
+
                                 </Form>
+                                {(loggedIn && <Button variant="outline-dark" wdisabled={loading} className="w-100 mt-4" type="submit" onClick={goToAdminHome}>
+                                    <strong classNa="font-weight-bold">Press this to continue to Admin Home</strong>
+                                </Button>)}
                             </Card.Body>
                         </Card>
                         <div className="w-100 text-center mt-2">

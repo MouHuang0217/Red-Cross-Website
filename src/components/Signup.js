@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 
 import { useHistory } from 'react-router-dom'
@@ -21,7 +21,13 @@ export default function Signup() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
-
+    useEffect(() => {
+        if (currentUser) {
+            history.push({
+                pathname: "/",
+            })
+        }
+    }, [])
     async function handleSubmit(e) {
         e.preventDefault()
         //if password and confirmation is different set an error

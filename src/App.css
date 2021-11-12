@@ -1,9 +1,11 @@
-.col-md-4 {
-  flex: 0 0 33.3333333%;
-  max-width: 33.3333333%;
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  display: flex;
+.fw-light {
+  font-weight: 600!important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.navbar-header {
+  background-color: #F16E10;
 }

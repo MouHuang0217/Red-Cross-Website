@@ -17,7 +17,13 @@ import Profile from "./Profile";
 
 import CreatePosts from "./CreatePosts";
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
+import Navigation from './MainNavigation';
+
 import ListEmails from "./ListEmails";
+
+import EditEvent from "./EditEvent"
+import UserPage from "./UserPage"
 
 /*class to route to other components and link them to pages*/
 export default class Routes extends Component {
@@ -31,15 +37,19 @@ export default class Routes extends Component {
           <Route path="/Register" component={Signup} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
-          <Route path="/ListEmails" component={ListEmails} />
           <PrivateRoute path="/Profile" component={Profile} />
+          <PrivateRoute path="/user/:docID" component={UserPage} />
+
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
-          <PrivateRoute path="/AdminAbout" component={AdminAbout} />
-          <PrivateRoute path="/CreatePosts" component={CreatePosts} />
-          <PrivateRoute path="/AdminHome" component={AdminHome} />
+          <AdminRoute path="/AdminAbout" component={AdminAbout} />
+          <AdminRoute path="/CreatePosts" component={CreatePosts} />
+          <AdminRoute path="/AdminHome" component={AdminHome} />
+          <AdminRoute path="/ListEmails" component={ListEmails} />
+          <Route path="/EditEvent/:docID" component={EditEvent} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>
+
       </BrowserRouter>
     );
   }
