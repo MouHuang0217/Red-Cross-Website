@@ -1,4 +1,3 @@
-import '../App.css';
 import React, { Component, useState, useEffect } from "react";
 import { Table, Navbar, NavItem, Button } from "react-bootstrap";
 import Logo from "../arc_logo.png";
@@ -7,10 +6,13 @@ import { Link, useHistory } from 'react-router-dom'
 // import { useFirestore } from '../contexts/FireStoreContext'
 import { fs } from "../firebase"
 //import { collection, getDocs } from 'firebase/firestore'
-
 import ProfilePic from '../profileDefaultPic.png';
+
 import { Card, Form, Container, Alert } from 'react-bootstrap'
 import App from "./ListEvents";
+
+import "../cardcss.scss"
+import "../App.css"
 
 export default function Posts() {
   const { currentUser } = useAuth()
@@ -69,8 +71,9 @@ export default function Posts() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const data = await fs.collection("events").get();
+      const data = await fs.collection("events").orderBy("id", "desc").get();
       setPosts(data.docs.map(doc => doc.data()))
+      console.log(posts);
     }
     fetchPosts()
   }, [])
@@ -121,143 +124,55 @@ export default function Posts() {
   //  })
   // }), [])
 
+  //   return (
+  //     <div className="card">
+  //       <div className="card">
+  //         <div className="card__body">
+  //           <img src="" class="card__image" />
+  //           <h2 className="card__title">asdasdasd</h2>
+  //           <p className="card__description">asdsadasd</p>
+  //         </div>
+  //         <button className="card__btn">View Recipe</button>
+  //       </div>
+  //     </div>
+  //   )
+
   return (
     <div>
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
-            <h1 className="fw-light">Upcoming Events</h1>
+            <h1 className="fw-light" ><strong>Upcoming Events</strong></h1>
             <p className="lead text-muted">Come join us and meet us at our events!</p>
           </div>
         </div>
       </section>
 
       <div className="album py-5 bg-light">
-        <div className="container">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 ">
+        <div className="container mt-4 wr">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {posts.map(post => (
-              <div className="h-100">
-                <div className="col ">
-                  <div class="card-group">
-                    <Card className="" key={post.name} style={{ width: '16rem', margin: 'auto' }}>
-                      <Card.Img variant="top" src={post.pic} />
-                      <Card.Body style={{ margin: 'auto' }}>
-                        <Card.Title>{post.name}</Card.Title>
-                        <Card.Text>Date: {post.date}</Card.Text>
-                        <Card.Text>Description: {post.description}</Card.Text>
-                        <Card.Text>Time: {post.time}</Card.Text>
-                        <Card.Text>Link: {post.link}</Card.Text>
-                        <Card.Text>Location: {post.location}</Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                      </Card.Body>
-                    </Card>
+              <div className="wrapper">
+                <div className="card">
+                  <div className="card__body ">
+                    <img src={post.pic} className="card__image" />
+                    <h2 className="card__title"><strong>{post.name}</strong></h2>
+                    <div>
+                      <p className="card__description"><strong>Description:</strong> {post.description} </p>
+                      <p className="card__description"><strong>Time:</strong> {post.time}</p>
+                      <p className="card__description"> <strong>Date:</strong> {post.date}</p>
+                      <p className="card__description"><strong>Location:</strong> {post.location}</p>
+                      <p className="card__description"><strong>Link:</strong> {post.link}</p>
+
+                    </div>
                   </div>
+                  <button className="card__btn">RSVP</button>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* can do background image overlay */}
-      {/* <Card style={{ width: '16rem', margin: 'auto'}}>
-          <Card.Img variant="top" src={ProfilePic} style={{width: '10rem', margin: 'auto' }}/>
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Date: 11/1/21
-            </Card.Text>
-            <Card.Text>
-              Type: Some more text
-            </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card> */}
-
-      {/* <Card className="bg-dark text-white" style={{ margin: 'auto'}}>
-          <Card.Img src={ProfilePic} alt="Post Image" style={{width: '10rem', margin: 'auto' }}/>
-          <Card.ImgOverlay>
-            <Card.Title>Card title</Card.Title>
-            <Card.Text>
-              This is a wider card with supporting text below as a natural lead-in to
-              additional content. This content is a little bit longer.
-            </Card.Text>
-            <Card.Text>Last updated 3 mins ago</Card.Text>
-          </Card.ImgOverlay>
-        </Card> */}
-
-      {/* <Table striped bordered hover>
-      
-          <thead>
-            <div>
-              <h1>Posts List</h1>
-            </div>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Picture</th>
-            </tr>
-          </thead>
-          <tbody>
-          {posts.map(post => (
-                
-                <tr key={post.name}>
-                      <td>{post.name}</td>
-                      <td>{post.date}</td>
-                      <td>{post.type}</td>
-                      <td><img src={post.pic} style={{width: "30%", height: "30%", margin: "auto"}} /></td>
-                    </tr>
-              ))}
-          </tbody>
-      </Table> */}
-      {/* {
-          posts.map(post => (
-            <li key = {post.name}>{post.name}</li>
-          ))
-        } */}
-      {/* <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Date</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      posts.map(post => (
-        <tr key = {post.name}>
-          <td>{post.name}</td>
-          <td>{post.date}</td>
-          <td>{post.type}</td>
-        </tr>        
-      ))
-    }
-
-  </tbody>
-</Table> */}
-
-      {/* {posts !== [] ? (
-        <div>
-          {posts.map((post) => {
-            return <div>
-              <h1>Name: {post.name}</h1>
-              <h1>Dates: {post.dates}</h1>
-            </div>
-          })}
-        </div>
-
-        ) : (
-        <Button disabled={loading} className="w-100" type="submit" onClick={showPosts}>
-          Show Posts
-        </Button>
-        )} */}
-
-
-      {/* </div> */}
-    </div >
-
-
+    </div>
   )
 }
