@@ -4,6 +4,7 @@ import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import { fs } from "../firebase"
+import { Table } from 'react-bootstrap'
 
 import ProfilePic from '../profileDefaultPic.png';
 import { Card, Form, Container, Alert } from 'react-bootstrap'
@@ -130,7 +131,7 @@ export default function AdminPosts() {
           </div>
         </div>
       </div>
-            {/* {trigger ? (
+      {/* {trigger ? (
                           <div className="popup">
                           <div className="popup-inner">
                             <button className="close-btn" onClick={() => setTrigger(!trigger)}>Close</button>
@@ -143,16 +144,31 @@ export default function AdminPosts() {
                         </div>
             ) : "" } */}
 
-              <Popup trigger = {buttonPopup} setTrigger={setButtonPopup}>
-                <div>
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        {/* <div>
                   <h3>Who's Going</h3>
                   <ol id="attendeeList">
                     {attendees.map(attendee => (
                       <li>{attendee}</li>
                     ))}
                   </ol>
-                </div>
-              </Popup>
+                </div> */
+        }
+        <Table striped bordered hover>
+          <thead>
+            <div>
+              <h3>Who's Going</h3>
+            </div>
+          </thead>
+          <tbody>
+            <ol id="attendeeList">
+              {attendees.map(attendee => (
+                <li>{attendee}</li>
+              ))}
+            </ol>
+          </tbody>
+        </Table>
+      </Popup>
     </div>
   )
 }
