@@ -163,7 +163,9 @@ export default function AdminPosts() {
           <tbody>
             <ol id="attendeeList">
               {attendees.map(attendee => (
-                <li>{attendee}</li>
+                <div>
+                  <li>{attendee}</li>
+                </div>
               ))}
             </ol>
           </tbody>
