@@ -31,6 +31,7 @@ export default function MainNavigation() {
           <Nav className="mx-auto pr-5">
             <Nav.Link href="/"><strong>Home</strong></Nav.Link>
             <Nav.Link href="/About"><strong>About Us</strong></Nav.Link>
+            <Nav.Link href="/Surveys"><strong>Surveys</strong></Nav.Link>
             <NavDropdown className="d-md-block d-lg-none" title="Account" id="basic-nav-dropdown">
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login">Login </NavDropdown.Item>)}
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Register">Register </NavDropdown.Item>)}

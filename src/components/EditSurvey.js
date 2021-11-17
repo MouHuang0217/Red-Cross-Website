@@ -8,8 +8,8 @@ import { useHistory } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
-import { withRouter } from 'react-router-dom'
 import AdminNavigation from './AdminNavagationBar';
+
 
 import { fs } from "../firebase"
 // import { storage } from "../firebase"
@@ -18,12 +18,16 @@ export default function Signup() {
     const postNameRef = useRef()
     const postDateRef = useRef()
     const postTimeRef = useRef()
-
+    // const postModeRef = useRef()
+    const postTypeRef = useRef()
+    // const isEventRef = useRef()
+    // const isSurveyRef = useRef()
     const postLocationRef = useRef()
     const postLinkRef = useRef()
     const postDescriptionRef = useRef()
     const postPicRef = useRef()
 
+    // const { signup, currentUser, sendVerificationEmail } = useAuth()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
@@ -35,24 +39,26 @@ export default function Signup() {
     const [location, setLocation] = useState();
     const [link, setLink] = useState();
     const [description, setDescription] = useState();
+    const [postType, setPostType] = useState();
     const [picture, setPicture] = useState();
     const [isEditing, setisEditing] = useState(true);
-    const { currentUser } = useAuth()
-
     const history = useHistory();
+
+    const { currentUser } = useAuth()
 
     useEffect(() => {
         const fetchData = async () => {
-            if (isEditing) {
-                const data = await fs.collection("events").doc(docID).get();
-                setEventName(data.data()['name']);
-                setDate(data.data()['date']);
-                setTime(data.data()['time']);
-                setLocation(data.data()['location']);
-                setLink(data.data()['link']);
-                setDescription(data.data()['description']);
-                setPicture(data.data()['pic']);
-            }
+            // if (isEditing) {
+            //     const data = await fs.collection("events").doc(docID).get();
+            //     setEventName(data.data()['name']);
+            //     setDate(data.data()['date']);
+            //     setTime(data.data()['time']);
+            //     setLocation(data.data()['location']);
+            //     setLink(data.data()['link']);
+            //     setDescription(data.data()['description']);
+            //     setPostType(data.data()['type']);
+            //     setPicture(data.data()['pic']);
+            // }
             var isadmin = await checkIfAdmin();
             if (isadmin == false) {
                 history.push({
@@ -60,6 +66,7 @@ export default function Signup() {
                 })
             }
         }
+
         fetchData()
     }, [])
     async function checkIfAdmin() {
@@ -121,6 +128,11 @@ export default function Signup() {
         console.log(event.target.value);
         setDescription(event.target.value);
     };
+    const onPostTypeChange = (event) => {
+        setisEditing(false);
+        console.log(event.target.value);
+        setPostType(event.target.value);
+    };
 
 
     async function clearPic(e) {
@@ -161,7 +173,9 @@ export default function Signup() {
             return setError("Post must have a description")
         }
         //if event has no mode set an error
-
+        if (postTypeRef.current.value === null) {
+            return setError("Post must be event or a survey")
+        }
         var imgSrc = document.getElementById("profile-pic").src //refactor
         //loading is to tell user that it is currently loading
         const postDetails = {
@@ -171,11 +185,17 @@ export default function Signup() {
             location: postLocationRef.current.value,
             link: postLinkRef.current.value,
             description: postDescriptionRef.current.value,
+            type: postTypeRef.current.value,
             pic: imgSrc //refactor
         }
         try {
             setError("")
             setLoading(true)
+            console.log(postDetails)
+            // console.log(postDetails["type"])
+            // console.log(postDetails["date"])
+            // console.log(postDetails["name"])
+            // await createPost(postDetails)
             const collection = fs.collection("events").doc(docID)
             collection.update(postDetails);
         }
@@ -185,7 +205,14 @@ export default function Signup() {
         }
         setLoading(false)
         setSuccess("Post has been updated.")
-
+        postNameRef.current.value = "";
+        postDateRef.current.value = "";
+        postTimeRef.current.value = "";
+        postLocationRef.current.value = "";
+        postLinkRef.current.value = "";
+        postDescriptionRef.current.value = "";
+        postTypeRef.current.value = "";
+        imgSrc = ""; //refactor
     }
     return (
         <div>
@@ -196,6 +223,7 @@ export default function Signup() {
                 style={{ minHeight: "100vh" }}
             >
                 <div className="w-50">
+                    <div>{docID}</div>
                     <center>
                         <a href="/">
                             <img alt="logo" src={Logo} className="logo" />
@@ -214,11 +242,11 @@ export default function Signup() {
                                 </Form.Group>
                                 <Form.Group id="date">
                                     <Form.Label>Date</Form.Label>
-                                    <Form.Control type="text" ref={postDateRef} value={date} onChange={onDateChange} required />
+                                    <Form.Control type="date" ref={postDateRef} value={date} onChange={onDateChange} required />
                                 </Form.Group>
                                 <Form.Group id="time">
                                     <Form.Label>Time</Form.Label>
-                                    <Form.Control type="text" ref={postTimeRef} value={time} onChange={onTimeChange} required />
+                                    <Form.Control type="time" ref={postTimeRef} value={time} onChange={onTimeChange} required />
                                 </Form.Group>
                                 <Form.Group id="location">
                                     <Form.Label>Location</Form.Label>
@@ -226,14 +254,17 @@ export default function Signup() {
                                 </Form.Group>
                                 <Form.Group id="link">
                                     <Form.Label>Link</Form.Label>
-                                    <Form.Control type="text" ref={postLinkRef} value={link} onChange={onLinkChange} />
+                                    <Form.Control type="text" ref={postLinkRef} value={link} onChange={onLinkChange} required />
                                 </Form.Group>
                                 <Form.Group id="description">
                                     <Form.Label>Description </Form.Label>
                                     {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
                                     <Form.Control as="textarea" rows={3} ref={postDescriptionRef} value={description} onChange={onDescriptionChange} required />
                                 </Form.Group>
-
+                                <Form.Group id="type">
+                                    <Form.Label>Post Type</Form.Label>
+                                    <Form.Control type="text" ref={postTypeRef} value={postType} onChange={onPostTypeChange} required />
+                                </Form.Group>
                                 <Form.Group className="mb-5">
                                     {/* <Form.Label>Post Image</Form.Label> */}
                                     <Image style={{ width: "30%", height: "30%", margin: "auto" }} id="profile-pic" alt="Post Image" src={picture} />
@@ -245,9 +276,6 @@ export default function Signup() {
                                     Save
                                 </Button>
                             </Form>
-                            {/* <Button onClick={Testing} className="w-100" type="submit">
-                                Testing
-                            </Button> */}
                         </Card.Body>
                     </Card>
                 </div>

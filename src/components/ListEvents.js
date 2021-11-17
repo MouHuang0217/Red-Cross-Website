@@ -10,7 +10,6 @@ function App() {
     const [events, setEvents] = React.useState([])
     const { currentUser } = useAuth()
     const db = firebase.firestore()
-    var temp = [];
 
     React.useEffect(() => {
         const fetchData = async () => {

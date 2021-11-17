@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 
 import { useHistory } from 'react-router-dom'
@@ -27,6 +27,9 @@ export default function Signup() {
     const postDescriptionRef = useRef()
     const postPicRef = useRef()
 
+    const toNameRef = useRef()
+    const subjectLineRef = useRef()
+    const EmailRef = useRef()
 
     // const { signup, currentUser, sendVerificationEmail } = useAuth()
     const [error, setError] = useState('')
@@ -34,43 +37,30 @@ export default function Signup() {
     const [loading, setLoading] = useState(false)
     const history = useHistory(); //using for redirection
     const { getUID, currentUser } = useAuth()
-    const [lastID, setlastID] = useState(1);
+    const [lastID, setlastID] = useState();
     const [posts, setPosts] = useState([]);
-
-    // async function createPost(e, postDetails) {
-    //     // e.preventDefault()
-    //     // console.log(firebase);
-    //     var postType = postDetails["type"];
-    //     //const db = firebase.firestore()
-    //     //const data = await db.collection("users").get()
-    //     // console.log(data.docs.map(doc => doc.data()));
-    //     // console.log(data.docs.map(doc => doc.data()["UID"]));
-    //     //const data2 = data.docs.map(doc => doc.data());
-    //     // console.log(data2);
-    //     fs.collection(postType).add(postDetails)
-    //     .catch(e => {console.log("Error adding document: ", e);});
-
-    //     // for (var i = 0; i < data.size; i++) {
-    //     //     // console.log(data2[i]);
-    //     //     // console.log(currentUser.getUID);
-    //     //     // console.log(data2[i]['email']);
-    //     //     var email = data2[i]['email'];
-    //     //     if (email == emailRef.current.value) {
-    //     //         console.log(data2[i]['email']);
-    //     //         console.log(emailRef.current.value);
-    //     //         console.log("Email is the same");
-    //     //         console.log(data2[i]["isAdmin"]);
-    //     //         if (data2[i]["isAdmin"] == true) {
-    //     //             console.log(email + " is Admin");
-    //     //             return true;
-    //     //         }
-    //     //     }
-    //     // }
-    //     // return false;
-    //     // // const users = await firebase.firestore.collection("users");
-    //     // // console.log(users);
-    // }
-
+    const [createdEvent, setCreatedEvent] = useState(false);
+    useEffect(() => {
+        const fetchID = async () => {
+            getLastID();
+        }
+        fetchID()
+    }, [])
+    async function getLastID() {
+        try {
+            fs.collection("events").orderBy("id").onSnapshot((snapshot) => {
+                snapshot.forEach(
+                    doc => {
+                        var newData = doc.data().id;
+                        setlastID(newData);
+                        // console.log(newData);
+                    }
+                )
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     async function clearPic(e) {
         e.preventDefault();
@@ -88,24 +78,6 @@ export default function Signup() {
         fileRead.readAsDataURL(pic.files[0]); //show preview of image
     }
 
-
-
-    async function Testing(e) {
-        // fs.collection("posts").where("isEvent", "==", true).get()
-        fs.collection("users").get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    //doc.data() is never undefined for query doc snapshots
-                    // console.log(currentUser.uid)
-                    // console.log(currentUser.uid)
-
-                    if (doc.data()['UID'] == currentUser.uid) {
-                        console.log(doc.id)
-                        console.log(doc.data())
-                    }
-                })
-            })
-    }
     async function handleSubmit(e) {
         e.preventDefault()
         //if event has no name set an error
@@ -122,41 +94,19 @@ export default function Signup() {
         if (postLocationRef.current.value === null) {
             return setError("Post must have a location")
         }
-        if (postLinkRef.current.value === null) {
-            return setError("Post must have a link")
-        }
         if (postDescriptionRef.current.value === null) {
             return setError("Post must have a description")
         }
-        //if event has no mode set an error
-        if (postTypeRef.current.value === null) {
-            return setError("Post must be event or a survey")
-        }
+
         var imgSrc = document.getElementById("profile-pic").src //refactor
         //loading is to tell user that it is currently loading
 
-        try {
-            fs.collection("events").orderBy("id").onSnapshot((snapshot) => {
-                snapshot.forEach(
-                    doc => {
-                        var newData = doc.data().id;
-                        setlastID(newData);
-                    }
-                )
-            });
-            // console.log(data2);
-
-        } catch (error) {
-            console.log(error);
-
-        }
-        finally {
-            console.log(lastID);
-        }
-        console.log("lastID" + lastID);
+        console.log(lastID);
         var nextInt = lastID + 1;
-        // setlastID(lastID);
-        console.log("nextInt" + nextInt);
+        setlastID(nextInt);
+        // console.log("nextInt" + nextInt);
+
+        console.log(postTimeRef.current.value);
         const postDetails = {
             name: postNameRef.current.value,
             date: postDateRef.current.value,
@@ -164,11 +114,46 @@ export default function Signup() {
             location: postLocationRef.current.value,
             link: postLinkRef.current.value,
             description: postDescriptionRef.current.value,
-            type: postTypeRef.current.value,
             pic: imgSrc, //refactor,
             id: nextInt,
             attendees: []
         }
+
+        addToFirebase(postDetails, lastID);
+
+        // console.log("lastID" + lastID);
+        var senders = await getAllEmails();
+
+
+        setLoading(false)
+        setSuccess("Created Post Success. Scroll down for your email template.");
+        setCreatedEvent(true);
+        toNameRef.current.value = senders;
+        subjectLineRef.current.value = "CSULB New event: " + postNameRef.current.value
+        EmailRef.current.value = "Dear CSULB Members,\n\n" + "\tWe have a new event: " + postNameRef.current.value + "\n\nFrom, \n\tCSULB Red Cross"
+        postNameRef.current.value = "";
+        postDateRef.current.value = "";
+        postTimeRef.current.value = "";
+        postLocationRef.current.value = "";
+        postLinkRef.current.value = "";
+        postDescriptionRef.current.value = "";
+        imgSrc = ""; //refactor
+
+    }
+    async function getAllEmails() {
+        const data = await fs.collection('users').get();
+        // console.log(data.docs.map(doc => doc.data()));
+        // console.log(data.docs.map(doc => doc.data()["UID"]));
+        const data2 = data.docs.map(doc => doc.data());
+        // console.log(data2);
+        var senders = ""
+        for (var i = 0; i < data.size; i++) {
+            var email = data2[i]['email'];
+            senders += email + ",";
+        }
+        return senders;
+    }
+    async function addToFirebase(postDetails, lastID) {
         try {
             setError("")
             setLoading(true)
@@ -177,115 +162,113 @@ export default function Signup() {
             const collection = fs.collection("events")
             collection.add(postDetails)
                 .then(function (docRef) {
-                    console.log("Document written with ID: ", docRef.id);
+                    console.log("Document written with docID: ", docRef.id, " and id" + lastID);
                 })
-                // fs.collection("events").add(postDetails)
-                //     .then(function (docRef) {
-                //         console.log("Document written with ID: ", docRef.id);
-                //     })
                 .catch(e => { console.log("Error adding document: ", e); });
         }
         catch (error) {
             console.log(error);
         }
-        setLoading(false)
-        setSuccess("Post has been created.")
-        postNameRef.current.value = "";
-        postDateRef.current.value = "";
-        postTimeRef.current.value = "";
-        postLocationRef.current.value = "";
-        postLinkRef.current.value = "";
-        postDescriptionRef.current.value = "";
-        postTypeRef.current.value = "";
-        imgSrc = ""; //refactor
     }
-
     return (
         <div>
-            <AdminNavigation />
+            <body>
+                <div>
+                    <AdminNavigation />
+                    <Container
+                        className="d-flex align-items-center justify-content-center"
+                        style={{ minHeight: "100vh" }}
+                    >
+                        <div className="w-50">
+                            <>
+                                <center>
+                                    <a href="/">
+                                        <img alt="logo" src={Logo} className="logo" />
+                                    </a>
+                                </center>
 
-            <Container
-                className="d-flex align-items-center justify-content-center"
-                style={{ minHeight: "100vh" }}
-            >
-                <div className="w-50">
-                    <>
-                        <center>
-                            <a href="/">
-                                <img alt="logo" src={Logo} className="logo" />
-                            </a>
-                        </center>
+                                <div className="p-4 block-example border border-dark">
 
-                        <Card>
-                            <Card.Body>
-                                <h2 className="text-center mb-4">Create Post</h2>
-                                {error && <Alert variant="danger">{error}</Alert>}
-                                {success && <Alert variant="success">{success}</Alert>}
-                                <Form onSubmit={handleSubmit}>
-                                    <Form.Group id="name">
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" ref={postNameRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="date">
-                                        <Form.Label>Date</Form.Label>
-                                        <Form.Control type="date" ref={postDateRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="time">
-                                        <Form.Label>Time</Form.Label>
-                                        <Form.Control type="time" ref={postTimeRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="location">
-                                        <Form.Label>Location</Form.Label>
-                                        <Form.Control type="text" ref={postLocationRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="link">
-                                        <Form.Label>Link</Form.Label>
-                                        <Form.Control type="text" ref={postLinkRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="description">
-                                        <Form.Label>Description</Form.Label>
-                                        {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
-                                        <Form.Control as="textarea" rows={3} ref={postDescriptionRef} required />
-                                    </Form.Group>
-                                    <Form.Group id="type">
-                                        <Form.Label>Post Type</Form.Label>
-                                        <Form.Control type="text" ref={postTypeRef} required />
-                                    </Form.Group>
-                                    <Form.Group className="mb-5">
-                                        {/* <Form.Label>Post Image</Form.Label> */}
-                                        <Image style={{ width: "30%", height: "30%", margin: "auto" }} id="profile-pic" alt="Post Image" />
-                                        <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*/ />
-                                        <Button onClick={clearPic}>Clear</Button>
-                                    </Form.Group>
-                                    {/* <Form.Label>Post Image</Form.Label>
-                                <Image style={{width: "25%", height: "25%", margin: "auto"}} src={ProfilePic} id="profile-pic" alt="Profile Face" /> */}
-                                    {/* refactor                <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "50%", height: "50%", margin: "auto"}}></img> */}
-                                    {/* refactor                <input type="file" id="pic" accept='image/*' onChange={previewPic} innerHTML="Choose profile picture."/> */}
-                                    {/* refactor                <button onClick={clearPic}>Clear</button> */}
+                                    <h2 className="text-center mb-4">Create Post</h2>
+                                    {error && <Alert variant="danger">{error}</Alert>}
+                                    {success && <Alert variant="success">{success}</Alert>}
+                                    <Form onSubmit={handleSubmit}>
+                                        <Form.Group id="name">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="text" ref={postNameRef} required />
+                                        </Form.Group>
+                                        <Form.Group id="date">
+                                            <Form.Label>Date</Form.Label>
+                                            <Form.Control type="text" ref={postDateRef} required />
+                                        </Form.Group>
+                                        <Form.Group id="time">
+                                            <Form.Label>Time</Form.Label>
+                                            <Form.Control type="text" ref={postTimeRef} required />
+                                        </Form.Group>
+                                        <Form.Group id="location">
+                                            <Form.Label>Location</Form.Label>
+                                            <Form.Control type="text" ref={postLocationRef} required />
+                                        </Form.Group>
+                                        <Form.Group id="link">
+                                            <Form.Label>Link</Form.Label>
+                                            <Form.Control type="text" ref={postLinkRef} />
+                                        </Form.Group>
+                                        <Form.Group id="description">
+                                            <Form.Label>Description</Form.Label>
+                                            {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
+                                            <Form.Control as="textarea" rows={3} ref={postDescriptionRef} required />
+                                        </Form.Group>
+                                        <Form.Group className="mb-5">
+                                            {/* <Form.Label>Post Image</Form.Label> */}
+                                            <Image style={{ width: "30%", height: "30%", margin: "auto" }} id="profile-pic" alt="Post Image" />
+                                            <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*/ />
+                                            <Button onClick={clearPic}>Clear</Button>
+                                        </Form.Group>
+                                        <Button disabled={loading} className="w-100" type="submit">
+                                            Create Post
+                                        </Button>
+                                    </Form>
 
-                                    {/* <Form.Group controlId="formFile" className="mb-3">
-                                    <Form.Label>Choose graphic for post</Form.Label>
-                                    <Form.Control type="file" allow="image/*" ref={postPicRef} />
-                                </Form.Group> */}
+                                </div>
+                            </>
+                        </div>
+                    </Container>
+                </div >
+            </body>
+            {(createdEvent &&
+                <body>
+                    <div>
+                        <Container
+                            className="d-flex align-items-center justify-content-center"
+                            style={{ minHeight: "100vh" }}
+                        >
+                            <div className="w-50">
+                                <>
+                                    <div className="p-4 block-example border border-dark">
 
-                                    {/* <Form.Group id="graphic">
-                                    <Form.Label>Picture</Form.Label>
-                                    <Form.Control type="file" accept="image/*" ref={postPicRef}/>
-                                </Form.Group> */}
-                                    {/* <img src={ProfilePic} id="profile-pic" alt="Profile Face" style={{width: "30%", height: "30%", margin: "auto"}}></img>
-                        <input type="file" id="pic" accept='image/*' onChange={this.previewPic} innerHTML="Choose profile picture."/> */}
-                                    <Button disabled={loading} className="w-100" type="submit">
-                                        Create Post
-                                    </Button>
-                                </Form>
-                                {/* <Button onClick={Testing} className="w-100" type="submit">
-                                Testing
-                            </Button> */}
-                            </Card.Body>
-                        </Card>
-                    </>
-                </div>
-            </Container>
+                                        <h2 className="text-center mb-4">Email Template</h2>
+                                        <Form onSubmit={handleSubmit}>
+                                            <Form.Group id="To">
+                                                <Form.Label>To</Form.Label>
+                                                <Form.Control type="text" ref={toNameRef} required />
+                                            </Form.Group>
+                                            <Form.Group id="Subject Line">
+                                                <Form.Label>Subject Line</Form.Label>
+                                                <Form.Control type="text" ref={subjectLineRef} required />
+                                            </Form.Group>
+                                            <Form.Group id="description">
+                                                <Form.Label>Email</Form.Label>
+                                                {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
+                                                <Form.Control as="textarea" rows={10} ref={EmailRef} required />
+                                            </Form.Group>
+                                        </Form>
+                                    </div>
+                                </>
+                            </div>
+                        </Container>
+                    </div >
+                </body>
+            )}
         </div>
     )
 }

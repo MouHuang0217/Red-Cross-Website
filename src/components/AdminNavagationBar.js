@@ -4,6 +4,7 @@ import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import logo from '../../src/Logo_Landscape.jpg';
+
 export default function AdminNavigationBar() {
   const { logout, currentUser } = useAuth()
   const [error, setError] = useState('')
@@ -31,18 +32,18 @@ export default function AdminNavigationBar() {
           <Nav className="mx-auto pr-5">
             <Nav.Link href="/AdminHome"><strong>Home</strong></Nav.Link>
             <Nav.Link href="/AdminAbout"><strong>About Us</strong></Nav.Link>
+            <Nav.Link href="/AdminSurveys"><strong>Surveys</strong></Nav.Link>
 
             {/* <Nav.Link href="/About">About Us</Nav.Link> */}
             <NavDropdown title="Admin Functionalities" id="basic-nav-dropdown">
               <NavDropdown.Item href="/CreatePosts">Create Post</NavDropdown.Item>
+              <NavDropdown.Item href="/CreateSurveys">Create Survey</NavDropdown.Item>
               <NavDropdown.Item href="/ListEmails">Email List</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider className="d-sm-none" />
             </NavDropdown>
             <NavDropdown className="d-md-block d-lg-none" title="Account" id="basic-nav-dropdown">
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login"><strong>Login</strong> </NavDropdown.Item>)}
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Register"><strong>Register</strong> </NavDropdown.Item>)}
-              {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/AdminProfile"><strong>Profile</strong> </NavDropdown.Item>)}
               {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" onClick={handleLogOut}><strong>Logout</strong> </NavDropdown.Item>)}
               {/* <NavDropdown.Item href="/">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
