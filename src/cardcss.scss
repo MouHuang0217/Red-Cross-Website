@@ -35,7 +35,15 @@ body {
   gap: rem;
   justify-content: center;
 }
-
+.footer {
+  height: var(--footer-height);
+  position: sticky;
+  top: calc(100vh - var(--footer-height));
+  bottom: 0;
+}
+body {
+  min-height: calc(100vh - 600px);
+}
 .card {
   overflow: hidden;
   box-shadow: 0 2px 20px $clr-gray300;
@@ -94,13 +102,4 @@ body {
     border-radius: $radius;
     transition: background 200ms ease-in, color 200ms ease-in;
   }
-
-  .footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 114px;
-  }
-
 }

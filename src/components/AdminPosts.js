@@ -89,6 +89,7 @@ export default function AdminPosts() {
     }
 
   }
+
   return (
     <div>
       <section className="py-5 text-center container">
@@ -121,6 +122,7 @@ export default function AdminPosts() {
                   <LinkContainer to={`/EditEvent/${post.id}`}>
                     <Button type="button" className="btn blue  card__edit__btn">Edit</Button>
                   </LinkContainer>
+
                   <Button variant="danger" type="button" className="card__edit__btn" onClick={e => deleteData(post.id)}>Delete</Button>
                 </div>
               </div>

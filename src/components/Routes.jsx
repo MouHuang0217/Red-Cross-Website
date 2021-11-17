@@ -19,10 +19,14 @@ import CreatePosts from "./CreatePosts";
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import Navigation from './MainNavigation';
+import Surveys from './Surveys'
+import AdminSurveys from './AdminSurveys'
 
 import ListEmails from "./ListEmails";
 
 import EditEvent from "./EditEvent"
+import EditSurvey from "./EditSurvey"
+
 import UserPage from "./UserPage"
 
 /*class to route to other components and link them to pages*/
@@ -34,6 +38,8 @@ export default class Routes extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/Login" component={Login} />
+          <Route path="/Surveys" component={Surveys} />
+
           <Route path="/Register" component={Signup} />
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
@@ -44,8 +50,11 @@ export default class Routes extends Component {
           <AdminRoute path="/AdminAbout" component={AdminAbout} />
           <AdminRoute path="/CreatePosts" component={CreatePosts} />
           <AdminRoute path="/AdminHome" component={AdminHome} />
+          <AdminRoute path="/AdminSurveys" component={AdminSurveys} />
+
           <AdminRoute path="/ListEmails" component={ListEmails} />
           <Route path="/EditEvent/:docID" component={EditEvent} />
+          <Route path="/EditSurvey/:docID" component={EditSurvey} />
 
           {/* <Route path="/Events" component={Events} /> */}
         </div>
