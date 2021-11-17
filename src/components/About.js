@@ -29,6 +29,7 @@ export const About = () => (
                                         <div class="card-body">
                                             <p class="card-text">Abbas</p>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col">
