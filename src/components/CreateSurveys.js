@@ -13,29 +13,15 @@ export default function Signup() {
     const postNameRef = useRef()
     const postStartDateRef = useRef()
     const postEndDateRef = useRef()
-    const postTimeRef = useRef()
-    const postTypeRef = useRef()
-    const postLocationRef = useRef()
     const postLinkRef = useRef()
-    const postDescriptionRef = useRef()
-    const postPicRef = useRef()
-
 
     // const { signup, currentUser, sendVerificationEmail } = useAuth()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
-    const history = useHistory(); //using for redirection
-    const { getUID, currentUser } = useAuth()
+    const { currentUser } = useAuth()
     const [lastID, setlastID] = useState(1);
     const [posts, setPosts] = useState([]);
-
-
-    async function clearPic(e) {
-        e.preventDefault();
-        document.getElementById("pic").value = "";
-        document.getElementById("profile-pic").src = "";
-    }
 
     async function previewPic(event) {
         var pic = event.target; //get image from target event triggered by onChange
@@ -46,22 +32,6 @@ export default function Signup() {
         fileRead.readAsDataURL(pic.files[0]); //show preview of image
     }
 
-    async function Testing(e) {
-        // fs.collection("posts").where("isEvent", "==", true).get()
-        fs.collection("users").get()
-            .then(function (querySnapshot) {
-                querySnapshot.forEach(function (doc) {
-                    //doc.data() is never undefined for query doc snapshots
-                    // console.log(currentUser.uid)
-                    // console.log(currentUser.uid)
-
-                    if (doc.data()['UID'] == currentUser.uid) {
-                        console.log(doc.id)
-                        console.log(doc.data())
-                    }
-                })
-            })
-    }
     async function handleSubmit(e) {
         e.preventDefault()
         //if survey has no name set an error
@@ -104,7 +74,7 @@ export default function Signup() {
         const postDetails = {
             name: postNameRef.current.value,
             startDate: postStartDateRef.current.value,
-            endDate: postEndDateRef.current.value,            
+            endDate: postEndDateRef.current.value,
             link: postLinkRef.current.value,
             id: nextInt,
         }
@@ -171,7 +141,7 @@ export default function Signup() {
                                     <Form.Group id="link" className="mb-5">
                                         <Form.Label>Link</Form.Label>
                                         <Form.Control type="text" ref={postLinkRef} required />
-                                    </Form.Group>                                    
+                                    </Form.Group>
                                     <Button disabled={loading} className="w-100" type="submit">
                                         Create Survey
                                     </Button>
