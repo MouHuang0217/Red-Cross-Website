@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -20,18 +20,28 @@ export default function Signup() {
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
     const { currentUser } = useAuth()
-    const [lastID, setlastID] = useState(1);
-    const [posts, setPosts] = useState([]);
-
-    async function previewPic(event) {
-        var pic = event.target; //get image from target event triggered by onChange
-        var fileRead = new FileReader();
-        fileRead.onload = function () {
-            document.getElementById("profile-pic").src = fileRead.result;
-        };
-        fileRead.readAsDataURL(pic.files[0]); //show preview of image
+    const [lastsurveyID, setlastsurveyID] = useState(1);
+    useEffect(() => {
+        const fetchID = async () => {
+            getLastID();
+        }
+        fetchID()
+    }, [])
+    async function getLastID() {
+        try {
+            fs.collection("surveys").orderBy("ID").onSnapshot((snapshot) => {
+                snapshot.forEach(
+                    doc => {
+                        var newData = doc.data().ID;
+                        setlastsurveyID(newData);
+                        // console.log(newData);
+                    }
+                )
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
-
     async function handleSubmit(e) {
         e.preventDefault()
         //if survey has no name set an error
@@ -54,30 +64,27 @@ export default function Signup() {
                 snapshot.forEach(
                     doc => {
                         var newData = doc.data().id;
-                        setlastID(newData);
+                        setlastsurveyID(newData);
                     }
                 )
             });
-            // console.log(data2);
-
         } catch (error) {
             console.log(error);
 
         }
         finally {
-            console.log(lastID);
+            console.log(lastsurveyID);
         }
-        console.log("lastID" + lastID);
-        var nextInt = lastID + 1;
+        console.log("lastID" + lastsurveyID);
+        var nextInt = lastsurveyID + 1;
         // setlastID(lastID);
         console.log("nextInt" + nextInt);
         const postDetails = {
             name: postNameRef.current.value,
             dateStarted: postStartDateRef.current.value,
-            dateEnded: postEndDateRef.current.value,            
+            dateEnded: postEndDateRef.current.value,
             url: postLinkRef.current.value,
             ID: nextInt,
-
         }
         try {
             setError("")
@@ -100,10 +107,10 @@ export default function Signup() {
         }
         setLoading(false)
         setSuccess("Survey has been created.")
-        postNameRef.current.value = "";
-        postStartDateRef.current.value = "";
-        postEndDateRef.current.value = "";
-        postLinkRef.current.value = "";
+        // postNameRef.current.value = "";
+        // postStartDateRef.current.value = "";
+        // postEndDateRef.current.value = "";
+        // postLinkRef.current.value = "";
     }
 
     return (
