@@ -76,7 +76,7 @@ export default function Signup() {
             nickname: "n/a",
             uid: uid,
             isAdmin: false,
-            bio: ""
+            bio: "Click here to change your bio"
         }
         try {
             setError("")
