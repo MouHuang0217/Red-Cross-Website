@@ -23,7 +23,6 @@ export default class AdminHome extends Component {
         <ErrorMessage />
         <AdminPosts /> {/*show posts from database*/}
         {/* <TextingForm /> calling the texting form component to display */}
-        <center><a href="/CreatePosts">Create Post</a></center>
       </div>
     );
   }

@@ -33,8 +33,8 @@ export default () => {
         setfirstName(data.data().firstName);
         setlastName(data.data().lastName);
         setname(firstName + " " + lastName);
-        setbio(data.data.bio);
-        setnickname(data.data.nickname);
+        setbio(data.data().bio);
+        setnickname(data.data().nickname);
         setEmail(data.data().email);
     }
 
