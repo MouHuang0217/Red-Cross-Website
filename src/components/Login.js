@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from 'react'
 import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
-import GoogleSignInButton from "../btn_google_signin_dark_pressed_web.png";
 
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'

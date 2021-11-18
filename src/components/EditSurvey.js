@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, } from 'react'
-import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
+import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import { useParams } from "react-router";
 import firebase from "../firebase"
 

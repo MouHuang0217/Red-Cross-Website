@@ -1,11 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Alert } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
-import Logo from "../arc_logo.png";
-import GoogleSignInButton from "../btn_google_signin_dark_pressed_web.png";
 
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
 
 
 export default function ErrorMessage() {

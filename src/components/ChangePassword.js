@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import Navigation from './MainNavigation';
 import MainNavigation from './MainNavigation';
 
 export default function ChangePassword() {

@@ -1,9 +1,7 @@
-import React, { useRef, useState, useEffect, } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import React, { useState, useEffect, } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
 import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
@@ -11,7 +9,7 @@ import Navigation from './MainNavigation';
 import ListEvents from './ListEvents';
 export default () => {
     //current user info
-    const { logout, currentUser } = useAuth()
+    const { currentUser } = useAuth()
     const [firstName, setfirstName] = useState();
     const [lastName, setlastName] = useState();
     const [name, setname] = useState();
@@ -41,28 +39,21 @@ export default () => {
                             setname(name);
                             setfirstName(firstName)
                             setlastName(lastName)
-
                             setnickname(doc.data().nickname);
-
-
                             setdocumentID(doc.id);
                         }
                     })
                 })
         }
-
     }
     const onNameChange = (event) => {
         setisEditing(false);
-        // setfirstName(event);
         setname(event);
     };
 
     const onNickNameChange = (event) => {
         setisEditing(false);
         setnickname(event);
-
-        // setnickname(event);
     };
 
 
