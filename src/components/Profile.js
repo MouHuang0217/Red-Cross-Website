@@ -15,7 +15,7 @@ export default () => {
     const [name, setname] = useState();
 
     const [nickname, setnickname] = useState();
-    const [bio, setbio] = useState("");
+    const [bio, setbio] = useState();
 
     const [documentID, setdocumentID] = useState();
     const [isEditing, setisEditing] = useState(true);
@@ -40,6 +40,7 @@ export default () => {
                             setfirstName(firstName)
                             setlastName(lastName)
                             setnickname(doc.data().nickname);
+                            //setbio(doc.data().bio);
                             setdocumentID(doc.id);
                         }
                     })
@@ -51,6 +52,13 @@ export default () => {
         setname(event);
     };
 
+    const onBioChange = (event) => {
+        setisEditing(false);
+        setbio(event);
+
+        // setnickname(event);
+    };
+    
     const onNickNameChange = (event) => {
         setisEditing(false);
         setnickname(event);
@@ -98,9 +106,9 @@ export default () => {
                                     <div class="card-block text-center text-white">
                                         <i class="fas fa-user-tie fa-7x mt-5"></i>
                                         {/* <EditText readonly="true" name="Name" type="name" style={{ width: '200px' }} defaultValue="First Name Last Name" inline /> */}
-                                        <h4><EditText readonly="true" name="Bio" type="Bio" style={{ width: '200px' }} defaultValue={"n/a"} value={name} onChange={onNameChange} onSave={updateUserData} inline /></h4>
+                                        <h4><EditText readonly="true" name="Bio" type="Bio" style={{ width: '200px' }} defaultValue={"n/a"} value={firstName} onChange={onNameChange} onSave={updateUserData} inline /></h4>
 
-                                        {/* <h6><EditText name="Bio" type="Bio" style={{ width: '200px' }} defaultValue={"n/a"} value={firstName} onChange={onNameChange} onSave={updateUserData} inline /></h6> */}
+                                        {<h6><EditText name="Bio" type="Bio" style={{ width: '200px' }} defaultValue={"n/a"} value={bio} onChange={onBioChange} onSave={updateUserData} inline /></h6> }
                                         <i class="far fa-edit fa-2x mb-4"></i>
                                     </div>
                                 </div>
