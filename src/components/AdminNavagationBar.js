@@ -36,6 +36,7 @@ export default function AdminNavigationBar() {
 
             {/* <Nav.Link href="/About">About Us</Nav.Link> */}
             <NavDropdown title="Admin Functionalities" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/CreateSurveys">Create Survey</NavDropdown.Item>
               <NavDropdown.Item href="/CreatePosts">Create Post</NavDropdown.Item>
               <NavDropdown.Item href="/CreateSurveys">Create Survey</NavDropdown.Item>
               <NavDropdown.Item href="/ListEmails">Email List</NavDropdown.Item>
