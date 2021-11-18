@@ -201,55 +201,53 @@ export default function Signup() {
                             <img alt="logo" src={Logo} className="logo" />
                         </a>
                     </center>
-                    <Card>
-                        <Card.Body>
-                            <h2 className="text-center mb-4">Editing Post</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
-                            {success && <Alert variant="success">{success}</Alert>}
+                    <div className="p-4 block-example border border-dark">
+                        <h2 className="text-center mb-4">Editing Post</h2>
+                        {error && <Alert variant="danger">{error}</Alert>}
+                        {success && <Alert variant="success">{success}</Alert>}
 
-                            <Form onSubmit={handleSubmit}>
-                                <Form.Group id="name">
-                                    <Form.Label>Name</Form.Label>
-                                    <Form.Control type="text" ref={postNameRef} value={eventName} onChange={onEventChange} />
-                                </Form.Group>
-                                <Form.Group id="date">
-                                    <Form.Label>Date</Form.Label>
-                                    <Form.Control type="text" ref={postDateRef} value={date} onChange={onDateChange} required />
-                                </Form.Group>
-                                <Form.Group id="time">
-                                    <Form.Label>Time</Form.Label>
-                                    <Form.Control type="text" ref={postTimeRef} value={time} onChange={onTimeChange} required />
-                                </Form.Group>
-                                <Form.Group id="location">
-                                    <Form.Label>Location</Form.Label>
-                                    <Form.Control type="text" ref={postLocationRef} value={location} onChange={onLocationChange} required />
-                                </Form.Group>
-                                <Form.Group id="link">
-                                    <Form.Label>Link</Form.Label>
-                                    <Form.Control type="text" ref={postLinkRef} value={link} onChange={onLinkChange} />
-                                </Form.Group>
-                                <Form.Group id="description">
-                                    <Form.Label>Description </Form.Label>
-                                    {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
-                                    <Form.Control as="textarea" rows={3} ref={postDescriptionRef} value={description} onChange={onDescriptionChange} required />
-                                </Form.Group>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group id="name">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" ref={postNameRef} value={eventName} onChange={onEventChange} />
+                            </Form.Group>
+                            <Form.Group id="date">
+                                <Form.Label>Date</Form.Label>
+                                <Form.Control type="text" ref={postDateRef} value={date} onChange={onDateChange} required />
+                            </Form.Group>
+                            <Form.Group id="time">
+                                <Form.Label>Time</Form.Label>
+                                <Form.Control type="text" ref={postTimeRef} value={time} onChange={onTimeChange} required />
+                            </Form.Group>
+                            <Form.Group id="location">
+                                <Form.Label>Location</Form.Label>
+                                <Form.Control type="text" ref={postLocationRef} value={location} onChange={onLocationChange} required />
+                            </Form.Group>
+                            <Form.Group id="link">
+                                <Form.Label>Link</Form.Label>
+                                <Form.Control type="text" ref={postLinkRef} value={link} onChange={onLinkChange} />
+                            </Form.Group>
+                            <Form.Group id="description">
+                                <Form.Label>Description </Form.Label>
+                                {/* <Form.Control type="text" ref={postDescriptionRef} required /> */}
+                                <Form.Control as="textarea" rows={3} ref={postDescriptionRef} value={description} onChange={onDescriptionChange} required />
+                            </Form.Group>
 
-                                <Form.Group className="mb-5">
-                                    {/* <Form.Label>Post Image</Form.Label> */}
-                                    <Image style={{ width: "30%", height: "30%", margin: "auto" }} id="profile-pic" alt="Post Image" src={picture} />
-                                    <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*/ />
-                                    <Button onClick={clearPic} variant="danger">Delete Pic</Button>
-                                </Form.Group>
+                            <Form.Group className="mb-5">
+                                {/* <Form.Label>Post Image</Form.Label> */}
+                                <Image style={{ width: "30%", height: "30%", margin: "auto" }} id="profile-pic" alt="Post Image" src={picture} />
+                                <Form.Control id="pic" type="file" /*id="pic"*/ accept='image/*' onChange={previewPic} /*innerHTML="Choose image for post"*/ />
+                                <Button onClick={clearPic} variant="danger">Delete Pic</Button>
+                            </Form.Group>
 
-                                <Button disabled={loading} className="w-100" type="submit">
-                                    Save
-                                </Button>
-                            </Form>
-                            {/* <Button onClick={Testing} className="w-100" type="submit">
+                            <Button disabled={loading} className="w-100" type="submit">
+                                Save
+                            </Button>
+                        </Form>
+                        {/* <Button onClick={Testing} className="w-100" type="submit">
                                 Testing
                             </Button> */}
-                        </Card.Body>
-                    </Card>
+                    </div>
                 </div>
             </Container>
         </div>

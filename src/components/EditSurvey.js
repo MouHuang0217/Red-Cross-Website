@@ -75,7 +75,7 @@ export default function Signup() {
         setEndDate(event.target.value);
     };
     const onLinkChange = (event) => {
-        setEndDate(false);
+        setisEditing(false);
         console.log(event.target.value);
         setLink(event.target.value);
     };
