@@ -3,9 +3,8 @@ import { Button } from "react-bootstrap";
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-// import { useFirestore } from '../contexts/FireStoreContext'
 import { fs } from "../firebase"
-//import { collection, getDocs } from 'firebase/firestore'
+import { Table } from 'react-bootstrap'
 
 import ProfilePic from '../profileDefaultPic.png';
 import { Card, Form, Container, Alert } from 'react-bootstrap'
@@ -13,6 +12,7 @@ import App from "./ListEvents";
 import { LinkContainer } from 'react-router-bootstrap';
 import '../App.css';
 
+import Popup from './Popup'
 
 export default function AdminPosts() {
   const { currentUser } = useAuth()
@@ -24,25 +24,61 @@ export default function AdminPosts() {
   const [loading, setLoading] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [attendees, setAttendees] = useState([]);
+  // const [trigger, setTrigger] = useState(false);
+
   useEffect(() => {
     const fetchPosts = async () => {
       getData();
     }
     fetchPosts()
   }, [])
+
   async function getData() {
     fs.collection('events').orderBy("id", "desc").onSnapshot((snapshot) => {
       const tempTasks = [];
+      // const rsvpList = [];
       snapshot.forEach(
         doc => {
           var newData = doc.data();
           newData.id = doc.id;
           tempTasks.push(newData);
+          console.log(tempTasks);
+          // for(var attendee of doc.data().attendees){
+          //   rsvpList.push(attendee);
+          //   console.log("Attendee: " + attendee);
+          // }
         }
       )
       setPosts(tempTasks);
     });
   }
+
+  async function displayUsers(docID) {
+    const data = await fs.collection("events").doc(docID).get();
+    const data2 = await fs.collection('users').get();
+    const users = data2.docs.map(doc => doc.data());
+    // console.log(users);
+    const array = [];
+    const members = data.data()['attendees'];
+    // console.log(attendees);
+    for (var i = 0; i < members.length; i++) {
+      // console.log("CHECKING" + attendees[i]);
+      for (var j = 0; j < users.length; j++) {
+        if (members[i] === users[j]['uid']) {
+          array.push(users[j]['firstName'] + " " + users[j]['lastName']);
+          console.log("NAME FOR " + members[i] + " is " + users[j]['firstName']);
+        }
+      }
+    }
+    // console.log(array);
+    // console.log(members);
+    setAttendees(array);
+    console.log(attendees);
+    setButtonPopup(true);
+  }
+
   async function deleteData(docID) {
     console.log(docID);
     if (window.confirm('Are you sure to delete this event?')) {
@@ -54,6 +90,7 @@ export default function AdminPosts() {
     }
 
   }
+
   return (
     <div>
       <section className="py-5 text-center container">
@@ -72,7 +109,7 @@ export default function AdminPosts() {
               <div className="card">
                 <div className="card">
                   <div className="card__body">
-                    <img src={post.pic} class="card__image" />
+                    <img src={post.pic} className="card__image" />
                     <h2 className="card__title">{post.name}</h2>
                     <div>
                       <p className="card__description">Description: {post.description} </p>
@@ -81,9 +118,12 @@ export default function AdminPosts() {
                       <p className="card__description">Location: {post.location}</p>
                     </div>
                   </div>
+                  <Button variant="light" className="card__edit__btn" onClick={e => displayUsers(post.id)}>Show Attendees</Button>
+                  {/* <Button variant="light" className="card__btn" onClick={() => setButtonPopup(true)}>Show Attendees</Button> */}
                   <LinkContainer to={`/EditEvent/${post.id}`}>
                     <Button type="button" className="btn blue  card__edit__btn">Edit</Button>
                   </LinkContainer>
+
                   <Button variant="danger" type="button" className="card__edit__btn" onClick={e => deleteData(post.id)}>Delete</Button>
                 </div>
               </div>
@@ -91,6 +131,46 @@ export default function AdminPosts() {
           </div>
         </div>
       </div>
+      {/* {trigger ? (
+                          <div className="popup">
+                          <div className="popup-inner">
+                            <button className="close-btn" onClick={() => setTrigger(!trigger)}>Close</button>
+                            <ol id="attendeeList">
+                            {attendees.map(attendee => (
+                              <li>{attendee}</li>
+                            ))}
+                          </ol>
+                          </div>
+                        </div>
+            ) : "" } */}
+
+      <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+        {/* <div>
+                  <h3>Who's Going</h3>
+                  <ol id="attendeeList">
+                    {attendees.map(attendee => (
+                      <li>{attendee}</li>
+                    ))}
+                  </ol>
+                </div> */
+        }
+        <Table striped bordered hover>
+          <thead>
+            <div>
+              <h3>Who's Going</h3>
+            </div>
+          </thead>
+          <tbody>
+            <ol id="attendeeList">
+              {attendees.map(attendee => (
+                <div>
+                  <li>{attendee}</li>
+                </div>
+              ))}
+            </ol>
+          </tbody>
+        </Table>
+      </Popup>
     </div>
   )
 }

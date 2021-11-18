@@ -1,4 +1,6 @@
 import React from "react"
+import "../cardcss.scss"
+
 const Footer = () =>
     <footer class="bg-danger text-center text-white">
         <div class="container p-4">
@@ -12,11 +14,6 @@ const Footer = () =>
                 ><text>LinkedIn</text></a>
             </section>
 
-            <section class="mb-4">
-                <p>
-                    California State University Long Beach has served ......
-                </p>
-            </section>
 
         </div>
     </footer>
