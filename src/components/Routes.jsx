@@ -19,7 +19,7 @@ import CreatePosts from "./CreatePosts";
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import Navigation from './MainNavigation';
-
+import CreateSurveys from "./CreateSurveys";
 import ListEmails from "./ListEmails";
 
 import EditEvent from "./EditEvent"
@@ -43,6 +43,7 @@ export default class Routes extends Component {
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
           <AdminRoute path="/AdminAbout" component={AdminAbout} />
           <AdminRoute path="/CreatePosts" component={CreatePosts} />
+          <AdminRoute path="/CreateSurveys" component={CreateSurveys} />
           <AdminRoute path="/AdminHome" component={AdminHome} />
           <AdminRoute path="/ListEmails" component={ListEmails} />
           <Route path="/EditEvent/:docID" component={EditEvent} />
