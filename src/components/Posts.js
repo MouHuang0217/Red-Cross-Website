@@ -12,7 +12,6 @@ export default function Posts() {
   const { currentUser } = useAuth()
   // const { getPosts } = useFirestore()
   const [posts, setPosts] = useState([]);
-  const history = useHistory()
   const [success, setSuccess] = useState('')
 
   const [loading, setLoading] = useState(false);
@@ -77,16 +76,7 @@ export default function Posts() {
       }
     }
   }
-  function formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-  }
+
   async function checkIfArrayContainsUser(docID) {
     try {
       const data = await fs.collection("events").doc(docID).get();

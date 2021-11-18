@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, } from 'react'
-import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
+import { Form, Button, Container, Alert, Image } from 'react-bootstrap'
 import { useParams } from "react-router";
 import firebase from "../firebase"
 
@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
-import { withRouter } from 'react-router-dom'
 import AdminNavigation from './AdminNavagationBar';
 
 import { fs } from "../firebase"

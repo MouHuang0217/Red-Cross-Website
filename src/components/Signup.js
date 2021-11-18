@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
-import { auth, fs } from "../firebase"
+import { fs } from "../firebase"
 import Navigation from './MainNavigation';
 
 export default function Signup() {

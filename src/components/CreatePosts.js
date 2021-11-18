@@ -1,15 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
+import { Form, Button, Container, Alert, Image } from 'react-bootstrap'
 
 import { useHistory } from 'react-router-dom'
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
-import { Link } from 'react-router-dom'
 import AdminNavigation from './AdminNavagationBar';
-
-import ProfilePic from '../profileDefaultPic.png';
 
 import { fs } from "../firebase"
 // import { storage } from "../firebase"

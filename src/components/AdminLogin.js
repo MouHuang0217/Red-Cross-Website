@@ -10,7 +10,7 @@ import Logo from "../arc_logo.png";
 export default function AdminLogin() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const { login, signInWithGoogle, getUID, currentUser, logout } = useAuth()
+    const { login, logout } = useAuth()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 

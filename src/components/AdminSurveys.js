@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from '../contexts/AuthContext'
-import { useHistory } from 'react-router-dom'
 import { fs } from "../firebase"
 import AdminNavigation from './AdminNavagationBar';
 import { Table, Button, Alert } from 'react-bootstrap'
@@ -10,7 +9,6 @@ import "../App.css"
 import Footer from './Footer';
 
 export default function AdminSurveys() {
-    const { currentUser } = useAuth()
     // const { getPosts } = useFirestore()
     const [surveys, setSurveys] = useState([]);
     const [success, setSuccess] = useState('')

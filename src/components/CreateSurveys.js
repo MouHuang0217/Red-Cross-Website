@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Card, Form, Button, Container, Alert, Image } from 'react-bootstrap'
-import { useHistory } from 'react-router-dom'
+import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
 import { useAuth } from '../contexts/AuthContext'
@@ -15,11 +14,9 @@ export default function Signup() {
     const postEndDateRef = useRef()
     const postLinkRef = useRef()
 
-    // const { signup, currentUser, sendVerificationEmail } = useAuth()
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
-    const { currentUser } = useAuth()
     const [lastsurveyID, setlastsurveyID] = useState(1);
     useEffect(() => {
         const fetchID = async () => {

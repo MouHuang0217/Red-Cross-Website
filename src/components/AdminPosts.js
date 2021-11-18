@@ -1,28 +1,16 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-import Logo from "../arc_logo.png";
-import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
 import { fs } from "../firebase"
 import { Table } from 'react-bootstrap'
 
-import ProfilePic from '../profileDefaultPic.png';
-import { Card, Form, Container, Alert } from 'react-bootstrap'
-import App from "./ListEvents";
 import { LinkContainer } from 'react-router-bootstrap';
 import '../App.css';
 
 import Popup from './Popup'
 
 export default function AdminPosts() {
-  const { currentUser } = useAuth()
   // const { getPosts } = useFirestore()
-  const [error, setError] = useState('');
   const [posts, setPosts] = useState([]);
-  const history = useHistory()
-
-  const [loading, setLoading] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [attendees, setAttendees] = useState([]);
@@ -118,13 +106,13 @@ export default function AdminPosts() {
                       <p className="card__description">Location: {post.location}</p>
                     </div>
                   </div>
-                  <Button variant="light" className="card__edit__btn" onClick={e => displayUsers(post.id)}>Show Attendees</Button>
+                  <Button variant="light" className="card__edit__btn" onClick={() => displayUsers(post.id)}>Show Attendees</Button>
                   {/* <Button variant="light" className="card__btn" onClick={() => setButtonPopup(true)}>Show Attendees</Button> */}
                   <LinkContainer to={`/EditEvent/${post.id}`}>
                     <Button type="button" className="btn blue  card__edit__btn">Edit</Button>
                   </LinkContainer>
 
-                  <Button variant="danger" type="button" className="card__edit__btn" onClick={e => deleteData(post.id)}>Delete</Button>
+                  <Button variant="danger" type="button" className="card__edit__btn" onClick={() => deleteData(post.id)}>Delete</Button>
                 </div>
               </div>
             ))}

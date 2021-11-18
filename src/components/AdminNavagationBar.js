@@ -1,14 +1,10 @@
-import React, { Component, useState } from "react";
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap'
-import Logo from "../arc_logo.png";
+import React, { useState } from "react";
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
-import logo from '../../src/Logo_Landscape.jpg';
 
 export default function AdminNavigationBar() {
   const { logout, currentUser } = useAuth()
   const [error, setError] = useState('')
-  const history = useHistory()
   async function handleLogOut() {
     setError('')
     try {

@@ -1,11 +1,10 @@
-import { database } from 'firebase'
-import React, { useRef, useState, useEffect, } from 'react'
+import React, { useState, useEffect, } from 'react'
 import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
 import AdminNavigation from './AdminNavagationBar';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import { fs } from "../firebase"
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function App() {
   const [spells, setSpells] = React.useState([])

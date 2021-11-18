@@ -1,9 +1,6 @@
-import { database } from 'firebase'
 import React from 'react'
 import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
-import AdminNavigation from './AdminNavagationBar';
-import { Button, RadioButton } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 
 function App() {

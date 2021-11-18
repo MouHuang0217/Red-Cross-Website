@@ -1,10 +1,8 @@
-import React, { useRef, useState, useEffect, } from 'react'
-import { Card, Form, Button, Container, Alert } from 'react-bootstrap'
+import React, { useState, useEffect, } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import Logo from "../arc_logo.png";
-import { useAuth } from '../contexts/AuthContext'
 import { useParams } from "react-router";
-import { EditText, EditTextarea } from 'react-edit-text';
+import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
 import Navigation from './MainNavigation';
@@ -17,8 +15,6 @@ export default () => {
 
     const [nickname, setnickname] = useState();
     const [bio, setbio] = useState("");
-
-    const [documentID, setdocumentID] = useState();
 
     const { docID } = useParams();
 
