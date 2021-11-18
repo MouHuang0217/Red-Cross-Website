@@ -103,10 +103,10 @@ export default function Signup() {
         console.log("nextInt" + nextInt);
         const postDetails = {
             name: postNameRef.current.value,
-            startDate: postStartDateRef.current.value,
-            endDate: postEndDateRef.current.value,            
-            link: postLinkRef.current.value,
-            id: nextInt,
+            dateStarted: postStartDateRef.current.value,
+            dateEnded: postEndDateRef.current.value,            
+            url: postLinkRef.current.value,
+            ID: nextInt,
         }
         try {
             setError("")
