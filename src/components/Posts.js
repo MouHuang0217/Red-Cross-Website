@@ -51,7 +51,10 @@ export default function Posts() {
   }
 
   async function RSVPEvent(docID, attendees) {
-    if (currentUser.emailVerified == false) {
+    if (!currentUser) {
+      alert("Please log in first");
+    }
+    else if (currentUser.emailVerified == false) {
       alert("Please verify your email first");
     }
     else {
