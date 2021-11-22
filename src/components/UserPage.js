@@ -6,6 +6,9 @@ import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
 import Navigation from './MainNavigation';
+
+import ListUserEvents from './ListUserEvents';
+
 export default () => {
     //current user info
     const [firstName, setfirstName] = useState();
@@ -76,7 +79,15 @@ export default () => {
                             {/* <Button href="/EditProfile">Edit</Button> */}
                         </div>
                     </div>
+                    <span>&nbsp;
+                        <span>&nbsp;
+                            <div>
+                                <ListUserEvents docID={docID}></ListUserEvents>
+                            </div>
+                        </span>
+                    </span>
                 </body>
+
             </React.Fragment>
         </div>
     )

@@ -112,7 +112,6 @@ export default () => {
                                         <i class="far fa-edit fa-2x mb-4"></i>
                                     </div>
                                 </div>
-
                                 <div class="col-sm-8 bg-white rounded-right">
                                     <h3 class="mt-3 text-center">Information</h3>
                                     <hr class="badge-primary mt-0 w-30"></hr>
