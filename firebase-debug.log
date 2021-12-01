@@ -1,0 +1,29 @@
+[debug] [2021-11-25T01:42:16.544Z] ----------------------------------------------------------------------
+[debug] [2021-11-25T01:42:16.548Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js projects:list
+[debug] [2021-11-25T01:42:16.549Z] CLI Version:   9.23.0
+[debug] [2021-11-25T01:42:16.549Z] Platform:      win32
+[debug] [2021-11-25T01:42:16.550Z] Node Version:  v12.13.0
+[debug] [2021-11-25T01:42:16.551Z] Time:          Wed Nov 24 2021 17:42:16 GMT-0800 (Pacific Standard Time)
+[debug] [2021-11-25T01:42:16.552Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-25T01:42:16.650Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-25T01:42:16.650Z] > authorizing via signed-in user (jamilk808@gmail.com)
+[debug] [2021-11-25T01:42:16.661Z] > refreshing access token with scopes: []
+[debug] [2021-11-25T01:42:16.662Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-25T01:42:16.817Z] <<< HTTP RESPONSE 400 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","date":"Thu, 25 Nov 2021 01:42:16 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-25T01:42:16.824Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2021-11-25T01:42:16.954Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 401
+[debug] [2021-11-25T01:42:16.955Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2021-11-25T01:42:16.957Z] HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+[debug] [2021-11-25T01:42:17.084Z] FirebaseError: HTTP Error: 401, Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.
+    at module.exports (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Client.doRequest (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:241:23)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async Client.request (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:96:20)
+    at async getProjectPage (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:233:17)
+    at async getFirebaseProjectPage (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:250:23)
+    at async Object.listFirebaseProjects (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:281:29)
+    at async Command.actionFn (C:\Users\jam\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\projects-list.js:50:20)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.

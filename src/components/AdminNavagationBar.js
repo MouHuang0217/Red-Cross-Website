@@ -18,9 +18,6 @@ export default function AdminNavigationBar() {
   return (
 
     <Navbar bg="danger" variant="dark" expand="lg" sticky="top">
-      {/* <a class="navbar-brand" href="#">
-            <img src={logo} alt="..." height="36"></img>
-          </a> */}
       <Navbar.Brand className="px-2" href="/AdminHome"><strong>Red Cross CSULB</strong></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Container>
