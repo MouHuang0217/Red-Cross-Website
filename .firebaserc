@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "default": "red-cross-2a6f7"
+  }
+}

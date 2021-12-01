@@ -46,7 +46,7 @@ export const About = () => (
                                         <img src={abbas} className="card__image" />
                                         {/* <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Club" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Club member photo</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Club member photo</text></svg> */}
                                         <div class="card-body">
-                                            <p class="card-text"><strong>Name:</strong> President</p>
+                                            <p class="card-text"><strong>Name:</strong> Abbas Abdulhasan</p>
                                             <p class="card-text"><strong>Position:</strong> President</p>
                                             <p class="card-text"><strong>Major:</strong> Molecular Cell Biology</p>
                                             <p class="card-text"><strong>School year:</strong> Senior</p>
@@ -65,7 +65,7 @@ export const About = () => (
                                             <p class="card-text"><strong>Position:</strong> Vice President</p>
                                             <p class="card-text"><strong>Major:</strong> Molecular Cell Biology</p>
                                             <p class="card-text"><strong>School year:</strong> Freshman</p>
-                                            <p class="card-text"><strong>Future Plans:</strong> EMT liscence & Trauma Surgery PA</p>
+                                            <p class="card-text"><strong>Future Plans:</strong> EMT license & Trauma Surgery PA</p>
                                             <p class="card-text"><strong>Email:</strong> anamaria.bautistaardila@student.csulb.edu</p>
 
                                         </div>
@@ -131,7 +131,7 @@ export const About = () => (
                                         {/* <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Club" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Club member photo</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Club member photo</text></svg> */}
                                         <div class="card-body">
                                             <p class="card-text"><strong>Name:</strong> Youstina Girgis</p>
-                                            <p class="card-text"><strong>Position:</strong> Publicitiy Officer</p>
+                                            <p class="card-text"><strong>Position:</strong> Publicity Officer</p>
                                             <p class="card-text"><strong>Major:</strong> Biology</p>
                                             <p class="card-text"><strong>School year:</strong> Sophmore</p>
                                             <p class="card-text"><strong>Future Plans:</strong> Dentist</p>
