@@ -17,9 +17,6 @@ export default function MainNavigation() {
   return (
 
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top" bg="danger">
-      {/* <a class="navbar-brand" href="#">
-            <img src={logo} alt="..." height="36"></img>
-          </a> */}
       <Navbar.Brand className="px-2" href="/"><strong>Red Cross CSULB</strong></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Container>

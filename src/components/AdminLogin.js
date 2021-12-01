@@ -93,9 +93,17 @@ export default function AdminLogin() {
                 <div className="w-100">
                     <>
                         <center>
+                        {(loggedIn ? 
+                            (<a href="/AdminHome">
+                                <img alt="logo" src={Logo} className="logo  logo p-5" />
+                            </a>)
+                            :
+                            (
                             <a href="/">
                                 <img alt="logo" src={Logo} className="logo  logo p-5" />
                             </a>
+                            )
+                        )}
                         </center>
                         <Card>
                             <Card.Body>
