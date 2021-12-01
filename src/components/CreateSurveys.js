@@ -121,7 +121,7 @@ export default function Signup() {
                 <div className="w-50">
                     <>
                         <center>
-                            <a href="/">
+                            <a href="/AdminHome">
                                 <img alt="logo" src={Logo} className="logo" />
                             </a>
                         </center>
