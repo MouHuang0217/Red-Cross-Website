@@ -35,9 +35,9 @@ export const About = () => (
 
                     <div class="album py-5 bg-light">
 
-                        <section class="py-5 text-center container">
+                        <div class="py-2 text-center container">
                             <h1 class="fw-light">Red Cross CSULB Members</h1>
-                        </section>
+                        </div>
                         <div class="container">
 
                             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -98,7 +98,7 @@ export const About = () => (
                                         <img src={Dang} className="card__image" />
                                         {/* <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Club" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Club member photo</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Club member photo</text></svg> */}
                                         <div class="card-body">
-                                            <p class="card-text"><strong>Name:</strong> President</p>
+                                            <p class="card-text"><strong>Name:</strong> Dang Duong</p>
                                             <p class="card-text"><strong>Position:</strong> President</p>
                                             <p class="card-text"><strong>Major:</strong> Molecular Cell Biology</p>
                                             <p class="card-text"><strong>School year:</strong> Senior</p>
