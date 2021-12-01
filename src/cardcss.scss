@@ -26,7 +26,6 @@ $radius: 0.2rem;
 
 body {
   font-family: Oxygen, sans-serif;
-  margin: 2rem;
 }
 
 .wrapper {
@@ -97,8 +96,8 @@ body {
     font-size: 1rem;
     margin: 1rem;
     border: 2px solid red;
-    background: transparent;
-    color: $clr-gray200;
+    // background: transparent;
+    // color: $clr-gray200;
     border-radius: $radius;
     transition: background 200ms ease-in, color 200ms ease-in;
   }
