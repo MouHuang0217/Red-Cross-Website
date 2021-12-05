@@ -13,7 +13,7 @@ import AdminNavigation from './AdminNavagationBar';
 import { fs } from "../firebase"
 // import { storage } from "../firebase"
 
-export default function Signup() {
+export default function EditEvent() {
     const postNameRef = useRef()
     const postDateRef = useRef()
     const postTimeRef = useRef()

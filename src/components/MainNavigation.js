@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
+
 export default function MainNavigation() {
   const { logout, currentUser } = useAuth()
   const [error, setError] = useState('')
@@ -28,7 +29,7 @@ export default function MainNavigation() {
             <NavDropdown className="d-md-block d-lg-none" title="Account" id="basic-nav-dropdown">
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Login">Login </NavDropdown.Item>)}
               {(!currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Register">Register </NavDropdown.Item>)}
-              {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/profile">Profile </NavDropdown.Item>)}
+              {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" href="/Profile">Profile </NavDropdown.Item>)}
               {(currentUser && <NavDropdown.Item className="d-md-block d-lg-none" onClick={handleLogOut}>Logout </NavDropdown.Item>)}
               {/* <NavDropdown.Item href="/">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -44,7 +45,7 @@ export default function MainNavigation() {
         </Navbar.Collapse>
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/Login"><strong>Login</strong></a>)}
         {(!currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/register"><strong>Register</strong></a>)}
-        {(currentUser && currentUser.emailVerified && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/profile"><strong>Profile</strong></a>)}
+        {(currentUser && currentUser.emailVerified && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" href="/Profile"><strong>Profile</strong></a>)}
         {(currentUser && <a class="btn btn-light ms-3 d-none d-lg-inline" role="button" onClick={handleLogOut}><strong>Log Out</strong></a>)}
       </Container>
     </Navbar >

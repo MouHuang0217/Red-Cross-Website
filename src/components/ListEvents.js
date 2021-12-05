@@ -3,7 +3,7 @@ import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 
-function App() {
+function ListEvents() {
     const [events, setEvents] = React.useState([])
     const { currentUser } = useAuth()
     const db = firebase.firestore()
@@ -86,4 +86,4 @@ function App() {
 
     );
 }
-export default App;
+export default ListEvents;

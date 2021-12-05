@@ -6,7 +6,7 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import { fs } from "../firebase"
 import { Link } from 'react-router-dom'
 
-function App() {
+function ListEmails() {
   const [spells, setSpells] = React.useState([])
   const [isLoading, setLoading] = useState(true);
   React.useEffect(() => {
@@ -101,7 +101,7 @@ function App() {
 
   );
 }
-export default App;
+export default ListEmails;
 
 
 
@@ -164,24 +164,6 @@ export default App;
   // }
 
   // export default Test;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -289,63 +271,6 @@ export default App;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // // Import Firestore database
   // import { fs } from "../firebase"
   // // import { useState } from 'react';
@@ -416,75 +341,6 @@ export default App;
   // }
 
   // export default Read;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -607,25 +463,6 @@ export default App;
   // // }
 
   // export default ListEmails;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

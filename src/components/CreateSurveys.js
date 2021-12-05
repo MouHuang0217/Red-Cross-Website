@@ -8,7 +8,7 @@ import AdminNavigation from './AdminNavagationBar';
 import { fs } from "../firebase"
 // import { storage } from "../firebase"
 
-export default function Signup() {
+export default function CreateSurveys() {
     const postNameRef = useRef()
     const postStartDateRef = useRef()
     const postEndDateRef = useRef()

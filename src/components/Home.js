@@ -17,6 +17,7 @@ import Posts from './Posts';
 
 import ErrorMessage from './VerifyEmailError';
 /*Homepage, what everyone sees when they open the website*/
+
 export default class Home extends Component {
   render() {
     return (

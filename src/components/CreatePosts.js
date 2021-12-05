@@ -11,7 +11,7 @@ import AdminNavigation from './AdminNavagationBar';
 import { fs } from "../firebase"
 // import { storage } from "../firebase"
 
-export default function Signup() {
+export default function CreatePosts() {
     const postNameRef = useRef()
     const postDateRef = useRef()
     const postTimeRef = useRef()
@@ -146,7 +146,8 @@ export default function Signup() {
         var senders = ""
         for (var i = 0; i < data.size; i++) {
             var email = data2[i]['email'];
-            senders += email + ",";
+            if(i == data.size-1) senders += email;
+            else senders += email + ",";
         }
         return senders;
     }
@@ -196,11 +197,11 @@ export default function Signup() {
                                         </Form.Group>
                                         <Form.Group id="date">
                                             <Form.Label>Date</Form.Label>
-                                            <Form.Control type="text" ref={postDateRef} required />
+                                            <Form.Control type="date" ref={postDateRef} required />
                                         </Form.Group>
                                         <Form.Group id="time">
                                             <Form.Label>Time</Form.Label>
-                                            <Form.Control type="text" ref={postTimeRef} required />
+                                            <Form.Control type="time" ref={postTimeRef} required />
                                         </Form.Group>
                                         <Form.Group id="location">
                                             <Form.Label>Location</Form.Label>
@@ -208,7 +209,7 @@ export default function Signup() {
                                         </Form.Group>
                                         <Form.Group id="link">
                                             <Form.Label>Link</Form.Label>
-                                            <Form.Control type="text" ref={postLinkRef} />
+                                            <Form.Control type="text" placeholder="optional" ref={postLinkRef} />
                                         </Form.Group>
                                         <Form.Group id="description">
                                             <Form.Label>Description</Form.Label>

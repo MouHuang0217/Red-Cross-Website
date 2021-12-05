@@ -6,8 +6,8 @@ const Footer = () =>
         <div class="container p-3">
             <section class="mb-4">
                 <p>Social Media Links </p>
-                <a className="btn btn-outline-light m-1" href="https://www.instagram.com/csulbrcclub/"
-                ><text>Instagram</text></a>
+                <a className="btn btn-outline-light m-1" href="https://www.instagram.com/csulbrcclub/">
+                <text>Instagram</text></a>
             </section>
         </div>
     </footer>
