@@ -136,13 +136,13 @@ export default function AdminPosts() {
             ) : "" } */}
 
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                  <h3>Who's Going</h3>
+                  {/* <h3>Who's Going</h3>
                   <ol id="attendeeList">
                     {attendees.map(attendee => (
                       <li key={attendee}>{attendee}</li>
                     ))}
-                  </ol>
-        {/* <Table striped bordered hover>
+                  </ol> */}
+        <Table striped bordered hover>
           <thead>
             <div>
               <h3>Who's Going</h3>
@@ -157,7 +157,7 @@ export default function AdminPosts() {
               ))}
             </ol>
           </tbody>
-        </Table> */}
+        </Table>
       </Popup>
     </div>
   )
