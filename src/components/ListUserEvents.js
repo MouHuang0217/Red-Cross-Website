@@ -3,7 +3,7 @@ import firebase from "../firebase"
 import { Table } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 
-function App(props) {
+function ListUserEvents(props) {
     const [events, setEvents] = React.useState([])
     // const [user, setUser] = React.useState([])
     // const [UID, setUID] = React.useState([])
@@ -99,4 +99,4 @@ function App(props) {
 
     );
 }
-export default App;
+export default ListUserEvents;

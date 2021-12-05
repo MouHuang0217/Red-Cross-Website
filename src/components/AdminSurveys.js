@@ -45,7 +45,7 @@ export default function AdminSurveys() {
     }
     return (
         <div>
-            <AdminNavigation></AdminNavigation>
+            <AdminNavigation />
             {success && <Alert variant="success" role="alert">
                 <p>
                     {success}
@@ -59,7 +59,7 @@ export default function AdminSurveys() {
                 <div className="row py-lg-5">
                     <div className="col-lg-6 col-md-10 mx-auto">
                         <h1 className="fw-light" ><strong>Surveys</strong></h1>
-                        <p className="lead text-muted">Please fill out these surveys if you'd like!!</p>
+                        <p className="lead text-muted">Manage your organization's surveys here!!</p>
                     </div>
                 </div>
             </section>
@@ -103,7 +103,7 @@ export default function AdminSurveys() {
                     </div>
                 </div>
             </body >
-            <Footer></Footer>
+            <Footer />
         </div >
     )
 }

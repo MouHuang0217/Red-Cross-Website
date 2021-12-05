@@ -7,6 +7,7 @@ import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
 import Navigation from './MainNavigation';
 import ListEvents from './ListEvents';
+
 export default () => {
     //current user info
     const { currentUser } = useAuth()

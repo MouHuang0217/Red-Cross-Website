@@ -8,6 +8,7 @@ import Dang from '../images/Dang.png'
 import Lauren from '../images/Lauren.png'
 import Youstina from '../images/Youstina.png'
 import ppt from '../files/Tutorial.pptx'
+
 export const About = () => (
     <div>
         <Navigation />
@@ -23,7 +24,7 @@ export const About = () => (
                                 the nation and to develop better human relations by worldwide services</p>
                             <p>
                                 <a href="/" class="btn btn-danger mx-2">Check Events</a>
-                                <a href="/Login" class="btn btn-secondary my-2">Log In to Register for Events</a>
+                                <a href="/Login" class="btn btn-secondary my-2">Register for Events</a>
                             </p>
                         </div>
                         <div>

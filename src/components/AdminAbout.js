@@ -8,6 +8,7 @@ import Dang from '../images/Dang.png'
 import Lauren from '../images/Lauren.png'
 import Youstina from '../images/Youstina.png'
 import ppt from '../files/Tutorial.pptx'
+
 export const AdminAbout = () => (
     <div>
         <AdminNavigation />
@@ -22,8 +23,7 @@ export const AdminAbout = () => (
                                 To facilitate the cooperation of our membership; to promote unity of action in projects and to discover the needs for and stimulate service to our school, community,
                                 the nation and to develop better human relations by worldwide services</p>
                             <p>
-                                <a href="/" class="btn btn-danger mx-2">Check Events</a>
-                                <a href="/Login" class="btn btn-secondary my-2">Log In to Register for Events</a>
+                                <a href="/AdminHome" class="btn btn-danger mx-2">Check Events</a>
                             </p>
                         </div>
                         <div>
@@ -145,9 +145,9 @@ export const AdminAbout = () => (
                         </div>
                     </div>
                 </body>
-                <Footer />
             </main>
         </React.Fragment>
+        <Footer />
 
     </div >
 )

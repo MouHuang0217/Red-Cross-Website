@@ -7,7 +7,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import Navigation from './MainNavigation';
 
-
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()

@@ -131,9 +131,12 @@ export default function AdminLogin() {
                                 </Button>)}
                             </Card.Body>
                         </Card>
-                        <div className="w-100 text-center mt-2">
-                            Not an Admin? <Link to='/Login'>Login </Link>
-                        </div>
+                        {(!loggedIn && 
+                            <div className="w-100 text-center mt-2">
+                                Not an Admin? <Link to='/Login'>Login </Link>
+                            </div>
+                        )}
+                        
                         {/* <Button disabled={loading} className="w-100" type="submit" onClick={checkIfAdmin}>
                         Testing
                     </Button> */}

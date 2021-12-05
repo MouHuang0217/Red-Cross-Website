@@ -55,15 +55,18 @@ export default function AdminPosts() {
       // console.log("CHECKING" + attendees[i]);
       for (var j = 0; j < users.length; j++) {
         if (members[i] === users[j]['uid']) {
-          array.push(users[j]['firstName'] + " " + users[j]['lastName']);
+          console.log(array);
+          array.push("" + users[j]['firstName'] + " " + users[j]['lastName']);
+          console.log(array);
           console.log("NAME FOR " + members[i] + " is " + users[j]['firstName']);
         }
       }
     }
     // console.log(array);
     // console.log(members);
+    console.log("Array: " + array);
     setAttendees(array);
-    console.log(attendees);
+    console.log("Attendees: " + attendees);
     setButtonPopup(true);
   }
 
@@ -96,7 +99,7 @@ export default function AdminPosts() {
             {posts.map(post => (
               <div className="card">
                 <div className="card">
-                  <div className="card__body">
+                  <div className="card__body" key={post.id}>
                     <img src={post.pic} className="card__image" />
                     <h2 className="card__title">{post.name}</h2>
                     <div>
@@ -133,15 +136,12 @@ export default function AdminPosts() {
             ) : "" } */}
 
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-        {/* <div>
-                  <h3>Who's Going</h3>
+                  {/* <h3>Who's Going</h3>
                   <ol id="attendeeList">
                     {attendees.map(attendee => (
-                      <li>{attendee}</li>
+                      <li key={attendee}>{attendee}</li>
                     ))}
-                  </ol>
-                </div> */
-        }
+                  </ol> */}
         <Table striped bordered hover>
           <thead>
             <div>
