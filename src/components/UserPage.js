@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import { EditText } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 import { fs } from "../firebase"
-import Navigation from './MainNavigation';
+import AdminNavigation from './AdminNavagationBar';
 
 import ListUserEvents from './ListUserEvents';
 
@@ -40,9 +40,9 @@ export default () => {
     return (
         <div>
             <React.Fragment>
-                <Navigation />
+                <AdminNavigation />
                 <center>
-                    <a href="/">
+                    <a href="/AdminHome">
                         <img alt="logo" src={Logo} className="logo" />
                     </a>
                 </center>
