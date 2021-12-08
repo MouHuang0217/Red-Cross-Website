@@ -66,7 +66,6 @@ function ListUserEvents(props) {
     }
     return (
         <div className="formbody">
-            <div>{props.docID}</div>
             <Table striped bordered hover >
                 <thead variant="dark">
 
