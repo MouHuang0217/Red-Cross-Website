@@ -47,14 +47,14 @@ export default class Routes extends Component {
           <Route path="/ChangePassword" component={ChangePassword} />
           <Route path="/Admin" component={AdminLogin} />
           <PrivateRoute path="/Profile" component={Profile} />
-          <PrivateRoute path="/user/:docID" component={UserPage} />
-
+          
           {/* <PrivateRoute path="/EditProfile" component={EditProfile} /> */}
           <AdminRoute path="/AdminAbout" component={AdminAbout} />
           <AdminRoute path="/CreatePosts" component={CreatePosts} />
           <AdminRoute path="/CreateSurveys" component={CreateSurveys} />
           <AdminRoute path="/AdminHome" component={AdminHome} />
           <AdminRoute path="/AdminSurveys" component={AdminSurveys} />
+          <AdminRoute path="/user/:docID" component={UserPage} />
 
           <AdminRoute path="/ListEmails" component={ListEmails} />
           <Route path="/EditEvent/:docID" component={EditEvent} />
