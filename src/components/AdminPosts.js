@@ -14,7 +14,6 @@ export default function AdminPosts() {
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [attendees, setAttendees] = useState([]);
-  // const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,17 +25,12 @@ export default function AdminPosts() {
   async function getData() {
     fs.collection('events').orderBy("id", "desc").onSnapshot((snapshot) => {
       const tempTasks = [];
-      // const rsvpList = [];
       snapshot.forEach(
         doc => {
           var newData = doc.data();
           newData.id = doc.id;
           tempTasks.push(newData);
           console.log(tempTasks);
-          // for(var attendee of doc.data().attendees){
-          //   rsvpList.push(attendee);
-          //   console.log("Attendee: " + attendee);
-          // }
         }
       )
       setPosts(tempTasks);
@@ -47,12 +41,9 @@ export default function AdminPosts() {
     const data = await fs.collection("events").doc(docID).get();
     const data2 = await fs.collection('users').get();
     const users = data2.docs.map(doc => doc.data());
-    // console.log(users);
     const array = [];
     const members = data.data()['attendees'];
-    // console.log(attendees);
     for (var i = 0; i < members.length; i++) {
-      // console.log("CHECKING" + attendees[i]);
       for (var j = 0; j < users.length; j++) {
         if (members[i] === users[j]['uid']) {
           console.log(array);
@@ -62,8 +53,6 @@ export default function AdminPosts() {
         }
       }
     }
-    // console.log(array);
-    // console.log(members);
     console.log("Array: " + array);
     setAttendees(array);
     console.log("Attendees: " + attendees);
@@ -122,26 +111,9 @@ export default function AdminPosts() {
           </div>
         </div>
       </div>
-      {/* {trigger ? (
-                          <div className="popup">
-                          <div className="popup-inner">
-                            <button className="close-btn" onClick={() => setTrigger(!trigger)}>Close</button>
-                            <ol id="attendeeList">
-                            {attendees.map(attendee => (
-                              <li>{attendee}</li>
-                            ))}
-                          </ol>
-                          </div>
-                        </div>
-            ) : "" } */}
 
       <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                  {/* <h3>Who's Going</h3>
-                  <ol id="attendeeList">
-                    {attendees.map(attendee => (
-                      <li key={attendee}>{attendee}</li>
-                    ))}
-                  </ol> */}
+
         <Table striped bordered hover>
           <thead>
             <div>
@@ -162,6 +134,3 @@ export default function AdminPosts() {
     </div>
   )
 }
-//<Button variant="primary">Edit</Button>
-
-//<Button variant="danger" onClick={e => deleteData(post.id)}>Delete</Button>

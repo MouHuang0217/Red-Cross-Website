@@ -20,18 +20,10 @@ export default function AdminLogin() {
     const history = useHistory();
 
     async function checkIfAdmin(e) {
-        // e.preventDefault()
-        // console.log(firebase);
         const db = firebase.firestore()
         const data = await db.collection("users").get()
-        // console.log(data.docs.map(doc => doc.data()));
-        // console.log(data.docs.map(doc => doc.data()["UID"]));
         const data2 = data.docs.map(doc => doc.data());
-        // console.log(data2);
         for (var i = 0; i < data.size; i++) {
-            // console.log(data2[i]);
-            // console.log(currentUser.getUID);
-            // console.log(data2[i]['email']);
             var email = data2[i]['email'];
             if (email == emailRef.current.value) {
                 console.log(data2[i]['email']);
@@ -45,8 +37,6 @@ export default function AdminLogin() {
             }
         }
         return false;
-        // const users = await firebase.firestore.collection("users");
-        // console.log(users);
     }
     function goToAdminHome() {
         history.push({
@@ -71,11 +61,6 @@ export default function AdminLogin() {
                 console.log("Not Admin");
                 logout()
             }
-            // const db = firebase.firestore()
-            // const data = await db.collection("users").get();
-            // const data2 = data.docs.map(doc => doc.data());
-
-
         } catch {
             setError("Failed to Log in")
         }
@@ -93,17 +78,17 @@ export default function AdminLogin() {
                 <div className="w-100">
                     <>
                         <center>
-                        {(loggedIn ? 
-                            (<a href="/AdminHome">
-                                <img alt="logo" src={Logo} className="logo  logo p-5" />
-                            </a>)
-                            :
-                            (
-                            <a href="/">
-                                <img alt="logo" src={Logo} className="logo  logo p-5" />
-                            </a>
-                            )
-                        )}
+                            {(loggedIn ?
+                                (<a href="/AdminHome">
+                                    <img alt="logo" src={Logo} className="logo  logo p-5" />
+                                </a>)
+                                :
+                                (
+                                    <a href="/">
+                                        <img alt="logo" src={Logo} className="logo  logo p-5" />
+                                    </a>
+                                )
+                            )}
                         </center>
                         <Card>
                             <Card.Body>
@@ -131,15 +116,12 @@ export default function AdminLogin() {
                                 </Button>)}
                             </Card.Body>
                         </Card>
-                        {(!loggedIn && 
+                        {(!loggedIn &&
                             <div className="w-100 text-center mt-2">
                                 Not an Admin? <Link to='/Login'>Login </Link>
                             </div>
                         )}
-                        
-                        {/* <Button disabled={loading} className="w-100" type="submit" onClick={checkIfAdmin}>
-                        Testing
-                    </Button> */}
+
                     </>
                 </div>
             </Container>
